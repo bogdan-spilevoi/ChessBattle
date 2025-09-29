@@ -13,10 +13,13 @@ public class BookPieceUI : MonoBehaviour
     private EntityData thisEntity;
     public GameObject Overlay;
     public float fitTo;
-
+    private PlayerBehaviour player;
 
     public void Create(EntityData data)
     {
+        player = FindAnyObjectByType<PlayerBehaviour>();
+        player.OnGetPiece += RefreshOnPlayerGetPiece;
+
         thisEntity = data;
         T_Type.text = $"<b><i>{thisEntity.PieceType}</i></b>";
         T_Type.color = GameColors.GetColorByType(data.PieceType);
@@ -32,21 +35,20 @@ public class BookPieceUI : MonoBehaviour
         S_Luck.value = data.Luck;
 
         GetIcon();
+        Overlay.SetActive(!player.pieceFoundData.PiecesFound.Contains(thisEntity.Variant + "/" + thisEntity.PieceType));
     }
 
+    public void RefreshOnPlayerGetPiece(EntityData e)
+    {
+        if(e.Variant == thisEntity.Variant && e.PieceType == thisEntity.PieceType)
+            Overlay.SetActive(false);
+    }
 
     public void GetIcon()
     {
         Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
 
         Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
-        FitImageToSize(Icon, fitTo);
-    }
-    public void FitImageToSize(Image img, float size)
-    {
-        img.SetNativeSize();
-        float max = Mathf.Max(img.rectTransform.sizeDelta.x, img.rectTransform.sizeDelta.y);
-        float rate = max / size;
-        img.rectTransform.sizeDelta = new Vector2(img.rectTransform.sizeDelta.x / rate, img.rectTransform.sizeDelta.y / rate);
+        Helper.FitImageToSize(Icon, fitTo);
     }
 }

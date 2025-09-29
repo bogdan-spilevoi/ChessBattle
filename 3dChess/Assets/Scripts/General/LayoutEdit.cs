@@ -98,7 +98,7 @@ public class LayoutEdit : MonoBehaviour
         }
         RefreshListPiecesUI();
         UpdateLimit();
-        player.SavePieces();
+        player.SaveManager.SaveGame();
     }
 
     public void RefreshListPiecesUI(int sortMethod = -1)
@@ -205,7 +205,7 @@ public class LayoutEdit : MonoBehaviour
         Tab_Layout.alpha = 0;
         Tab_Layout.interactable = false;
         Tab_Layout.blocksRaycasts = false;
-        player.SavePieces();
+        player.SaveManager.SaveGame();
     }
 
 

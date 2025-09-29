@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Variants
+[ExecuteInEditMode]
+public class Variants : MonoBehaviour
 {
     public static List<EntityData> PiecesVariants = new()
     {
@@ -103,14 +104,26 @@ public class Variants
             return null;
 
         var chosen = candidates[Random.Range(0, candidates.Count)];
-        chosen.Moves.Add(MovePool.GetRandomMove());
+        for(int i =0; i< 4; i++)
+        {
+            chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType));
+        }
+        
         return chosen;
     }
 
     public static EntityData GetRandom()
     {
         var chosen = PiecesVariants[Random.Range(0, PiecesVariants.Count)];
-        chosen.Moves.Add(MovePool.GetRandomMove());
+        for (int i = 0; i < 4; i++)
+        {
+            chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType));
+        }
         return chosen;
     }
+    private void Awake()
+    {
+        VisualizeVariants = PiecesVariants;
+    }
+    public List<EntityData> VisualizeVariants = new();
 }

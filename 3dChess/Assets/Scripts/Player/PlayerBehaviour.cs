@@ -1,11 +1,15 @@
+using Newtonsoft.Json;
+using Pixelplacement.TweenSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public SaveManager SaveManager;
+    public PieceFoundData pieceFoundData;
     public List<EntityData> PiecesInventory = new();
     [HideInInspector]
     public Trainer TrainerInRange;
@@ -13,20 +17,14 @@ public class PlayerBehaviour : MonoBehaviour
     [HideInInspector]
     public LayoutEdit LayoutEdit;
 
-    private void Awake()
-    {
-        LoadPieces();
-    }
+    public Action<EntityData> OnGetPiece;
+
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T) && !Movement.IsPaused)
         {
-            SavePieces();
-        }
-        if(Input.GetKeyDown(KeyCode.G) && !Movement.IsPaused)
-        {
-            GiveLoadout();
+            SaveManager.SaveGame();
         }
 
         if (TrainerInRange != null)
@@ -34,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
             UI.ShowBattleTrainerButton(TrainerInRange.Name);
             if(Input.GetKeyDown(KeyCode.Space) &&!Movement.IsPaused)
             {
-                PlayerPrefs.SetString("trainer", TrainerInRange.PiecesJson);
+                PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(TrainerInRange, Formatting.Indented));
                 SceneManager.LoadScene("Chess");
             }            
         }
@@ -42,41 +40,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             UI.HideBattleTrainerBUtton();
         }
-    }
-
-    public void LoadPieces()
-    {
-        string piecesJson = PlayerPrefs.GetString("pieces");
-        print(piecesJson);
-        InventoryData data = JsonConvert.DeserializeObject<InventoryData>(piecesJson);
-        PiecesInventory = data == null ? new() : data.Inventory;
-
-        if(PiecesInventory == null)
-            PiecesInventory = new();
-    }
-
-    public void GiveLoadout()
-    {
-        PiecesInventory.Clear();
-        EntityData p1 = new("MyKing", EntityData.Type.King, 1, 250, 250, 5, 3, 6, 10, "basic", MovePool.GetRandomMove());
-        EntityData p2 = new("MyPawn", EntityData.Type.Pawn, 2, 200, 200, 3, 7, 7, 5, "basic", MovePool.GetRandomMove());
-        EntityData p3 = new("MyRook", EntityData.Type.Rook, 3, 500, 500, 4, 2, 3, 40, "basic", MovePool.GetRandomMove());
-
-        PiecesInventory.Add(p1);
-        PiecesInventory.Add(p2);
-        PiecesInventory.Add(p3);
-        print("Added");
-    }
-
-    public void SavePieces()
-    {
-        InventoryData data = new()
-        {
-            Inventory = PiecesInventory
-        };
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-        print(json);
-        PlayerPrefs.SetString("pieces", json);
     }
 
     public void ChangePiecePosition(int oldPos, int newPos)
@@ -94,18 +57,24 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if(other.CompareTag("test"))
         {
-            var piece = Variants.GetRandom();
-            PiecesInventory.Add(piece);
-            SavePieces();
-            LayoutEdit.RefreshListPiecesUI();
+            GetPiece(Variants.GetRandom());
         }
         if (other.CompareTag("test2"))
         {
-            var piece = Variants.GetRandomOfType(EntityData.Type.King);
-            PiecesInventory.Add(piece);
-            SavePieces();
-            LayoutEdit.RefreshListPiecesUI();
+            GetPiece(Variants.GetRandomOfType(EntityData.Type.King));
         }
+    }
+
+    public void GetPiece(EntityData e)
+    {
+        string p = e.Variant + "/" + e.PieceType;
+        if(!pieceFoundData.PiecesFound.Contains(p))
+            pieceFoundData.PiecesFound.Add(p);
+
+        PiecesInventory.Add(e);
+        SaveManager.SaveGame();
+        LayoutEdit.RefreshListPiecesUI();
+        OnGetPiece?.Invoke(e);
     }
 
     private void OnTriggerExit(Collider other)
@@ -114,5 +83,12 @@ public class PlayerBehaviour : MonoBehaviour
         {
             TrainerInRange = null;
         }
+    }
+
+    public void ChangePlayerPos(Vector3 pos)
+    {
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = pos;
+        GetComponent<CharacterController>().enabled = true;
     }
 }

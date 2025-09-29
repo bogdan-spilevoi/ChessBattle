@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trainer : MonoBehaviour
+public class TrainerData
 {
     public string Name;
     public List<EntityData> Inventory;
     public bool Defeated;
 
-    public void Create(TrainerData data)
+    public TrainerData() { }
+
+    public TrainerData(Trainer t)
     {
-        Inventory = data.Inventory;
-        Name = data.Name;
-        Defeated = data.Defeated;
+        Inventory = t.Inventory;
+        Defeated = t.Defeated;
+        Name = t.Name;
     }
 }

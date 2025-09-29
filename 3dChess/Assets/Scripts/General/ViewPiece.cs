@@ -77,12 +77,13 @@ public class ViewPiece : MonoBehaviour
         }
         CurrentMoves.Clear();
 
-        foreach(var m in e.Moves)
+        for(int i = 0; i < e.Moves.Count; i++)
         {
+            var m = e.Moves[i];
             var newMoveUI = Instantiate(OriginalMoveUI, MovesParent.transform);
             CurrentMoves.Add(newMoveUI);
             newMoveUI.gameObject.SetActive(true);
-            newMoveUI.Create(m);           
+            newMoveUI.Create(m, Move.MoveIndToLvlRequired(i) > e.Level, Move.MoveIndToLvlRequired(i)) ;           
         }
 
         S_Health.maxValue = e.MaxHealth;
@@ -127,7 +128,7 @@ public class ViewPiece : MonoBehaviour
         thisEntity.Name = In_Name.text;
         Tab_ChangeName.SetActive(false);
         T_Name.text = thisEntity.Name;
-        FindAnyObjectByType<PlayerBehaviour>().SavePieces();
+        FindAnyObjectByType<PlayerBehaviour>().SaveManager.SaveGame();
         FindObjectOfType<LayoutEdit>().RefreshListPiecesUI();
         
     }

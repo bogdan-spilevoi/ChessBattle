@@ -69,13 +69,6 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
         Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
 
         Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic"); ;
-        FitImageToSize(Icon, fitTo);
-    }
-    public void FitImageToSize(Image img, float size)
-    {
-        img.SetNativeSize();
-        float max = Mathf.Max(img.rectTransform.sizeDelta.x, img.rectTransform.sizeDelta.y);
-        float rate = max / size;
-        img.rectTransform.sizeDelta = new Vector2(img.rectTransform.sizeDelta.x / rate, img.rectTransform.sizeDelta.y / rate);
+        Helper.FitImageToSize(Icon, fitTo);
     }
 }

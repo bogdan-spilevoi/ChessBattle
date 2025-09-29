@@ -28,7 +28,7 @@ public class ChessManager : MonoBehaviour
         print(black);
 
         InventoryData whiteData = JsonConvert.DeserializeObject<InventoryData>(white);
-        InventoryData blackData = JsonConvert.DeserializeObject<InventoryData>(black);        
+        TrainerData blackData = JsonConvert.DeserializeObject<TrainerData>(black);
 
         foreach(var piece in whiteData.Inventory)
         {

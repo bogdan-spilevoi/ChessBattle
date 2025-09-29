@@ -122,6 +122,132 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1461130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1461131}
+  - component: {fileID: 1461134}
+  - component: {fileID: 1461133}
+  - component: {fileID: 1461132}
+  m_Layer: 5
+  m_Name: Scrollbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1461131
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461130}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 860635647}
+  m_Father: {fileID: 776375304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 418.67725, y: 0.0010223}
+  m_SizeDelta: {x: 16.6457, y: 512.08}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1461132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2008587730}
+  m_HandleRect: {fileID: 2008587729}
+  m_Direction: 2
+  m_Value: 0
+  m_Size: 1
+  m_NumberOfSteps: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1461133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1226b7252263e81459eab44a57bf97fe, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 12
+--- !u!222 &1461134
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461130}
+  m_CullTransparentMesh: 1
 --- !u!1 &24941472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,6 +2125,155 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &264785754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264785755}
+  - component: {fileID: 264785757}
+  - component: {fileID: 264785756}
+  - component: {fileID: 264785758}
+  m_Layer: 5
+  m_Name: T_Info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &264785755
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264785754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1022516934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 325.00003, y: -0.00001525972}
+  m_SizeDelta: {x: 221.64, y: 50}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &264785756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264785754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Requires lvl X
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &264785757
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264785754}
+  m_CullTransparentMesh: 1
+--- !u!114 &264785758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 264785754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &282864214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3934,6 +4209,7 @@ GameObject:
   - component: {fileID: 454809705}
   - component: {fileID: 454809704}
   - component: {fileID: 454809706}
+  - component: {fileID: 454809707}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -4002,6 +4278,811 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
+--- !u!114 &454809707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454809702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f95b5af96720c4b8ca60f690fb9652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisualizeVariants:
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 250
+    MaxHealth: 250
+    Attack: 2
+    Speed: 5
+    Luck: 4
+    Variant: basic
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 275
+    MaxHealth: 275
+    Attack: 3
+    Speed: 4
+    Luck: 3
+    Variant: basic
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 300
+    MaxHealth: 300
+    Attack: 3
+    Speed: 3
+    Luck: 4
+    Variant: basic
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 450
+    MaxHealth: 450
+    Attack: 2
+    Speed: 2
+    Luck: 4
+    Variant: basic
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 300
+    MaxHealth: 300
+    Attack: 5
+    Speed: 1
+    Luck: 2
+    Variant: basic
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 300
+    MaxHealth: 300
+    Attack: 4
+    Speed: 2
+    Luck: 3
+    Variant: basic
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 180
+    MaxHealth: 180
+    Attack: 2
+    Speed: 4
+    Luck: 1
+    Variant: rust
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 250
+    MaxHealth: 250
+    Attack: 3
+    Speed: 4
+    Luck: 2
+    Variant: rust
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 280
+    MaxHealth: 280
+    Attack: 3
+    Speed: 3
+    Luck: 2
+    Variant: rust
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 350
+    MaxHealth: 350
+    Attack: 4
+    Speed: 2
+    Luck: 2
+    Variant: rust
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 300
+    MaxHealth: 300
+    Attack: 4
+    Speed: 3
+    Luck: 1
+    Variant: rust
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 320
+    MaxHealth: 320
+    Attack: 3
+    Speed: 2
+    Luck: 2
+    Variant: rust
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 260
+    MaxHealth: 260
+    Attack: 3
+    Speed: 4
+    Luck: 3
+    Variant: stone
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 380
+    MaxHealth: 380
+    Attack: 4
+    Speed: 4
+    Luck: 4
+    Variant: stone
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 420
+    MaxHealth: 420
+    Attack: 4
+    Speed: 3
+    Luck: 4
+    Variant: stone
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 500
+    MaxHealth: 500
+    Attack: 5
+    Speed: 2
+    Luck: 4
+    Variant: stone
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 480
+    MaxHealth: 480
+    Attack: 5
+    Speed: 3
+    Luck: 4
+    Variant: stone
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 4
+    Speed: 2
+    Luck: 4
+    Variant: stone
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 280
+    MaxHealth: 280
+    Attack: 3
+    Speed: 5
+    Luck: 5
+    Variant: bronze
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 360
+    MaxHealth: 360
+    Attack: 4
+    Speed: 5
+    Luck: 5
+    Variant: bronze
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 400
+    MaxHealth: 400
+    Attack: 4
+    Speed: 4
+    Luck: 6
+    Variant: bronze
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 5
+    Speed: 3
+    Luck: 5
+    Variant: bronze
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 460
+    MaxHealth: 460
+    Attack: 5
+    Speed: 4
+    Luck: 5
+    Variant: bronze
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 500
+    MaxHealth: 500
+    Attack: 4
+    Speed: 3
+    Luck: 5
+    Variant: bronze
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 320
+    MaxHealth: 320
+    Attack: 4
+    Speed: 4
+    Luck: 8
+    Variant: frost
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 5
+    Speed: 4
+    Luck: 6
+    Variant: frost
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 650
+    MaxHealth: 650
+    Attack: 5
+    Speed: 3
+    Luck: 8
+    Variant: frost
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 850
+    MaxHealth: 850
+    Attack: 4
+    Speed: 2
+    Luck: 5
+    Variant: frost
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 700
+    MaxHealth: 700
+    Attack: 5
+    Speed: 3
+    Luck: 6
+    Variant: frost
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 900
+    MaxHealth: 900
+    Attack: 3
+    Speed: 2
+    Luck: 5
+    Variant: frost
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 260
+    MaxHealth: 260
+    Attack: 5
+    Speed: 10
+    Luck: 6
+    Variant: storm
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 320
+    MaxHealth: 320
+    Attack: 6
+    Speed: 10
+    Luck: 5
+    Variant: storm
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 360
+    MaxHealth: 360
+    Attack: 5
+    Speed: 9
+    Luck: 8
+    Variant: storm
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 420
+    MaxHealth: 420
+    Attack: 6
+    Speed: 7
+    Luck: 5
+    Variant: storm
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 500
+    MaxHealth: 500
+    Attack: 7
+    Speed: 8
+    Luck: 5
+    Variant: storm
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 480
+    MaxHealth: 480
+    Attack: 6
+    Speed: 6
+    Luck: 5
+    Variant: storm
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 380
+    MaxHealth: 380
+    Attack: 6
+    Speed: 5
+    Luck: 8
+    Variant: terra
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 540
+    MaxHealth: 540
+    Attack: 6
+    Speed: 5
+    Luck: 6
+    Variant: terra
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 620
+    MaxHealth: 620
+    Attack: 6
+    Speed: 4
+    Luck: 7
+    Variant: terra
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 900
+    MaxHealth: 900
+    Attack: 5
+    Speed: 3
+    Luck: 5
+    Variant: terra
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 680
+    MaxHealth: 680
+    Attack: 6
+    Speed: 4
+    Luck: 6
+    Variant: terra
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 800
+    MaxHealth: 800
+    Attack: 4
+    Speed: 3
+    Luck: 6
+    Variant: terra
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 300
+    MaxHealth: 300
+    Attack: 4
+    Speed: 6
+    Luck: 10
+    Variant: aqua
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 380
+    MaxHealth: 380
+    Attack: 5
+    Speed: 6
+    Luck: 9
+    Variant: aqua
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 420
+    MaxHealth: 420
+    Attack: 5
+    Speed: 6
+    Luck: 10
+    Variant: aqua
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 500
+    MaxHealth: 500
+    Attack: 6
+    Speed: 4
+    Luck: 8
+    Variant: aqua
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 560
+    MaxHealth: 560
+    Attack: 6
+    Speed: 6
+    Luck: 8
+    Variant: aqua
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 600
+    MaxHealth: 600
+    Attack: 5
+    Speed: 5
+    Luck: 8
+    Variant: aqua
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 240
+    MaxHealth: 240
+    Attack: 7
+    Speed: 9
+    Luck: 3
+    Variant: inferno
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 320
+    MaxHealth: 320
+    Attack: 8
+    Speed: 8
+    Luck: 4
+    Variant: inferno
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 360
+    MaxHealth: 360
+    Attack: 7
+    Speed: 7
+    Luck: 5
+    Variant: inferno
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 420
+    MaxHealth: 420
+    Attack: 9
+    Speed: 4
+    Luck: 3
+    Variant: inferno
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 8
+    Speed: 6
+    Luck: 4
+    Variant: inferno
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 500
+    MaxHealth: 500
+    Attack: 7
+    Speed: 3
+    Luck: 4
+    Variant: inferno
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 240
+    MaxHealth: 240
+    Attack: 6
+    Speed: 7
+    Luck: 8
+    Variant: void
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 320
+    MaxHealth: 320
+    Attack: 7
+    Speed: 7
+    Luck: 8
+    Variant: void
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 360
+    MaxHealth: 360
+    Attack: 7
+    Speed: 6
+    Luck: 9
+    Variant: void
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 420
+    MaxHealth: 420
+    Attack: 8
+    Speed: 5
+    Luck: 7
+    Variant: void
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 8
+    Speed: 6
+    Luck: 7
+    Variant: void
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 480
+    MaxHealth: 480
+    Attack: 7
+    Speed: 5
+    Luck: 7
+    Variant: void
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Pawn
+    PieceType: 0
+    Position: -1
+    Health: 260
+    MaxHealth: 260
+    Attack: 3
+    Speed: 10
+    Luck: 9
+    Variant: radiant
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Knight
+    PieceType: 1
+    Position: -1
+    Health: 340
+    MaxHealth: 340
+    Attack: 4
+    Speed: 9
+    Luck: 8
+    Variant: radiant
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Bishop
+    PieceType: 2
+    Position: -1
+    Health: 380
+    MaxHealth: 380
+    Attack: 4
+    Speed: 8
+    Luck: 10
+    Variant: radiant
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Rook
+    PieceType: 3
+    Position: -1
+    Health: 460
+    MaxHealth: 460
+    Attack: 5
+    Speed: 7
+    Luck: 8
+    Variant: radiant
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: Queen
+    PieceType: 4
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 6
+    Speed: 8
+    Luck: 8
+    Variant: radiant
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 520
+    MaxHealth: 520
+    Attack: 5
+    Speed: 7
+    Luck: 8
+    Variant: radiant
+    HiddenStat: 0
+    Exp: 0
+    Moves: []
 --- !u!1 &458288810
 GameObject:
   m_ObjectHideFlags: 0
@@ -5202,8 +6283,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0020141625, y: 0.040985107}
-  m_SizeDelta: {x: 854, y: 40}
+  m_AnchoredPosition: {x: -0.0020141625, y: 0.000030517578}
+  m_SizeDelta: {x: 854, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &542596199
 MonoBehaviour:
@@ -5258,8 +6339,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 20
-    m_Bottom: 20
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 20
   m_ChildForceExpandWidth: 0
@@ -6006,14 +7087,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Trainer Test
-  PiecesJson: "{\r\n  \"Inventory\": [\r\n    {\r\n      \"Name\": \"MyKing\",\r\n     
-    \"PieceType\": 5,\r\n      \"Position\": 1,\r\n      \"Health\": 200,\r\n     
-    \"MaxHealth\": 200,\r\n      \"Attack\": 5,\r\n      \"Speed\": 3,\r\n      \"Luck\":
-    6,\r\n      \"Variant\": \"basic\",\n      \"HiddenStat\": 0,\r\n      \"Exp\":
-    10.0,\r\n      \"Moves\": [\r\n        {\r\n          \"Name\": \"Strike\",\r\n         
-    \"Description\": \"Speed towards the other piece at full speed dealing damage.\",\r\n         
-    \"Type\": 0,\r\n          \"Action\": 50.0\r\n        }\r\n      ],\r\n     
-    \"Level\": 2\r\n    }\r\n  ]\r\n}"
+  Inventory:
+  - Name: King
+    PieceType: 5
+    Position: -1
+    Health: 300
+    MaxHealth: 300
+    Attack: 4
+    Speed: 2
+    Luck: 3
+    Variant: basic
+    HiddenStat: 2
+    Exp: 0
+    Moves: []
   Defeated: 0
 --- !u!1 &591158247
 GameObject:
@@ -7879,6 +8965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c328eeac8b8b2db4ea29a6c472f87990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SaveManager: {fileID: 2068280992}
   PiecesInventory: []
   TrainerInRange: {fileID: 0}
   UI: {fileID: 771378862}
@@ -8145,7 +9232,7 @@ GameObject:
   - component: {fileID: 770725592}
   - component: {fileID: 770725593}
   m_Layer: 5
-  m_Name: PiecesRect
+  m_Name: ListPiecesRect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8229,7 +9316,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 0.1
   m_Viewport: {fileID: 770725589}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1316634973}
@@ -8427,6 +9514,7 @@ GameObject:
   - component: {fileID: 776375306}
   - component: {fileID: 776375305}
   - component: {fileID: 776375307}
+  - component: {fileID: 776375308}
   m_Layer: 5
   m_Name: MovesRect
   m_TagString: Untagged
@@ -8447,6 +9535,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 542596198}
+  - {fileID: 1461131}
   m_Father: {fileID: 577529610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -8506,6 +9595,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!114 &776375308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776375303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 542596198}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 2
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 0.1
+  m_Viewport: {fileID: 776375304}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 1461132}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &784553521
 GameObject:
   m_ObjectHideFlags: 0
@@ -9234,6 +10353,117 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835211318}
+  m_CullTransparentMesh: 1
+--- !u!1 &860635646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 860635647}
+  m_Layer: 5
+  m_Name: Sliding Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &860635647
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860635646}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2008587729}
+  m_Father: {fileID: 1461131}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &863575564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 863575565}
+  - component: {fileID: 863575567}
+  - component: {fileID: 863575566}
+  m_Layer: 5
+  m_Name: I_Lock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &863575565
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863575564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1022516934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -143.4, y: 6}
+  m_SizeDelta: {x: 75.776, y: 104.4452}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &863575566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863575564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 84e61f8350970134fb57b28a579ad671, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &863575567
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863575564}
   m_CullTransparentMesh: 1
 --- !u!1 &878155534
 GameObject:
@@ -10645,6 +11875,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 979176538}
   m_CullTransparentMesh: 1
+--- !u!1 &1022516933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1022516934}
+  - component: {fileID: 1022516936}
+  - component: {fileID: 1022516935}
+  m_Layer: 5
+  m_Name: Overlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1022516934
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022516933}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 863575565}
+  - {fileID: 264785755}
+  m_Father: {fileID: 1636741229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00033569, y: -0.00036621}
+  m_SizeDelta: {x: 808.88, y: 179}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1022516935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022516933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1226b7252263e81459eab44a57bf97fe, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 5
+--- !u!222 &1022516936
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022516933}
+  m_CullTransparentMesh: 1
 --- !u!1 &1027024195
 GameObject:
   m_ObjectHideFlags: 0
@@ -11125,7 +12432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.000030518}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: -0, y: -0.000061035}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1071405102
@@ -11896,6 +13203,81 @@ MonoBehaviour:
   Direction: 0
   Tab_ChangeName: {fileID: 164959938}
   In_Name: {fileID: 1746415585}
+--- !u!1 &1132637305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1132637306}
+  - component: {fileID: 1132637308}
+  - component: {fileID: 1132637307}
+  m_Layer: 5
+  m_Name: I_Rarity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1132637306
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132637305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1636741229}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -15}
+  m_SizeDelta: {x: 65, y: 65}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1132637307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132637305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1132637308
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132637305}
+  m_CullTransparentMesh: 1
 --- !u!1 &1155097676
 GameObject:
   m_ObjectHideFlags: 0
@@ -15868,6 +17250,7 @@ GameObject:
   - component: {fileID: 1545620978}
   - component: {fileID: 1545620980}
   - component: {fileID: 1545620979}
+  - component: {fileID: 1545620981}
   m_Layer: 5
   m_Name: T_Type
   m_TagString: Untagged
@@ -15886,13 +17269,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1997383209}
   m_Father: {fileID: 1636741229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -77.65879, y: -52.926}
-  m_SizeDelta: {x: 100.5176, y: 50}
+  m_AnchoredPosition: {x: -126.706764, y: -52.926}
+  m_SizeDelta: {x: 73.33, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1545620979
 MonoBehaviour:
@@ -15991,6 +17375,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545620977}
   m_CullTransparentMesh: 1
+--- !u!114 &1545620981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545620977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &1565895085
 GameObject:
   m_ObjectHideFlags: 0
@@ -16756,11 +18154,13 @@ RectTransform:
   - {fileID: 1494174149}
   - {fileID: 1545620978}
   - {fileID: 561126204}
+  - {fileID: 1132637306}
+  - {fileID: 1022516934}
   m_Father: {fileID: 542596198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 427, y: -109.50075}
+  m_AnchoredPosition: {x: 427, y: -89.50075}
   m_SizeDelta: {x: 808.8777, y: 179.0015}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636741230
@@ -16792,7 +18192,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 4.95
+  m_PixelsPerUnitMultiplier: 5
 --- !u!222 &1636741231
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16817,6 +18217,10 @@ MonoBehaviour:
   T_Description: {fileID: 1494174150}
   T_Type: {fileID: 1545620979}
   T_Action: {fileID: 561126205}
+  T_LockInfo: {fileID: 264785756}
+  Overlay: {fileID: 1022516933}
+  I_Rarity: {fileID: 1132637307}
+  I_Type: {fileID: 1997383210}
 --- !u!1 &1649924247
 GameObject:
   m_ObjectHideFlags: 0
@@ -20349,6 +21753,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995053164}
   m_CullTransparentMesh: 1
+--- !u!1 &1997383208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997383209}
+  - component: {fileID: 1997383211}
+  - component: {fileID: 1997383210}
+  m_Layer: 5
+  m_Name: I_Type
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1997383209
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997383208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1545620978}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 55.19993, y: 0.000019073486}
+  m_SizeDelta: {x: 40, y: 40}
+  m_Pivot: {x: 1, y: 0.5}
+--- !u!114 &1997383210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997383208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1997383211
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997383208}
+  m_CullTransparentMesh: 1
 --- !u!1 &1999085936
 GameObject:
   m_ObjectHideFlags: 0
@@ -20551,6 +22030,81 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &2008587728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008587729}
+  - component: {fileID: 2008587731}
+  - component: {fileID: 2008587730}
+  m_Layer: 5
+  m_Name: Handle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2008587729
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008587728}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 860635647}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2008587730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008587728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1226b7252263e81459eab44a57bf97fe, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 12
+--- !u!222 &2008587731
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008587728}
+  m_CullTransparentMesh: 1
 --- !u!1 &2024286999
 GameObject:
   m_ObjectHideFlags: 0
@@ -21001,6 +22555,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058058397}
   m_CullTransparentMesh: 1
+--- !u!1 &2068280991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2068280993}
+  - component: {fileID: 2068280992}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2068280992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068280991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46720253dbe25f4b905ce553ab6b97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 758007027}
+--- !u!4 &2068280993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068280991}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2107920405
 GameObject:
   m_ObjectHideFlags: 0
@@ -21424,3 +23023,4 @@ SceneRoots:
   - {fileID: 1649924251}
   - {fileID: 1447206333}
   - {fileID: 1571524396}
+  - {fileID: 2068280993}
