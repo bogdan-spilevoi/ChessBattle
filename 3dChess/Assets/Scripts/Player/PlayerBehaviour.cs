@@ -32,7 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
             UI.ShowBattleTrainerButton(TrainerInRange.Name);
             if(Input.GetKeyDown(KeyCode.Space) &&!Movement.IsPaused)
             {
-                PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(TrainerInRange, Formatting.Indented));
+                PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(new TrainerData(TrainerInRange), Formatting.Indented));
                 SceneManager.LoadScene("Chess");
             }            
         }

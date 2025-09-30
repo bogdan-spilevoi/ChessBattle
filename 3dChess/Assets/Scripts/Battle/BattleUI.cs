@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +13,8 @@ public class BattleUI : MonoBehaviour
 
     public BattleManager BattleManager;
 
-    public GameObject OrgMove;
-    public List<GameObject> MoveUI;
+    public BattleMoveUI OrgMove;
+    public List<BattleMoveUI> MoveUI;
     public GameObject PlayerUIOverlay, AttackUI, DialogueUI;
 
     public GameObject Tab_SwitchPiece;
@@ -44,12 +45,13 @@ public class BattleUI : MonoBehaviour
         }
         MoveUI.Clear();
 
-        foreach(var m in BattleManager.player1.Moves)
+        for(int i = 0; i < BattleManager.player1.Moves.Count; i++)
         {
-            GameObject g = Instantiate(OrgMove, OrgMove.transform.parent);
-            g.GetComponentInChildren<TMP_Text>().text = m.Name;
+            var m = BattleManager.player1.Moves[i];
+            var g = Instantiate(OrgMove, OrgMove.transform.parent);
+            g.gameObject.SetActive(true);
+            g.Create(m, Move.MoveIndToLvlRequired(i) > BattleManager.player1.Level);
             MoveUI.Add(g);
-            g.SetActive(true);
             g.GetComponent<Button>().onClick.AddListener(() => { BattleManager.ProcessMove(m, true); });
         }
         UpdateUI();
@@ -76,7 +78,7 @@ public class BattleUI : MonoBehaviour
         Tab_SwitchPiece.SetActive(b);
         if (!b) return;
 
-        var pieces = Ref.BattleManager.player1Team;
+        var pieces = Ref.BattleManager.player1Team.Where(p => !p.Value.Item2).ToList();
 
         foreach(var p in SwitchPieces)
         {
@@ -84,10 +86,11 @@ public class BattleUI : MonoBehaviour
         }
         SwitchPieces.Clear();
 
-        foreach (var piece in pieces.Keys)
+        foreach (var p in pieces)
         {
+            var piece = p.Key;
             var spg = Instantiate(OriginalPieceGraphic, OriginalPieceGraphic.transform.parent);
-            spg.Create(piece.Name, piece.Level, piece.Health, piece.MaxHealth);
+            spg.Create(piece.Name, piece.Level, piece.Health, piece.MaxHealth, Resources.Load<Sprite>($"Icons/{piece.PieceType}/{piece.Variant}"));
             spg.gameObject.SetActive(true);
             spg.GetComponent<Button>().onClick.AddListener(() =>
             {

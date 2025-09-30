@@ -3406,15 +3406,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2819514e7d6966d448ff3fd0650be16c, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 2819514e7d6966d448ff3fd0650be16c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3431,17 +3431,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4210,6 +4210,7 @@ GameObject:
   - component: {fileID: 454809704}
   - component: {fileID: 454809706}
   - component: {fileID: 454809707}
+  - component: {fileID: 454809708}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -5083,6 +5084,1039 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
+--- !u!114 &454809708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454809702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffcdc409e117574ea4ad2751a496830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VisualizeMoves:
+  - Variants:
+    - basic
+    - bronze
+    - stone
+    - terra
+    - radiant
+    - storm
+    Name: Strike
+    Description: A simple strike with solid force.
+    Type: 0
+    Rarity: 0
+    Action: 40
+  - Variants:
+    - aqua
+    - storm
+    Name: Splash Surge
+    Description: Wave of water crashes into the enemy.
+    Type: 0
+    Rarity: 0
+    Action: 40
+  - Variants:
+    - basic
+    - bronze
+    - stone
+    - radiant
+    - storm
+    - void
+    Name: Riposte
+    Description: Counter-minded strike that punishes aggression.
+    Type: 0
+    Rarity: 0
+    Action: 41
+  - Variants:
+    - frost
+    - stone
+    Name: Ice Shards
+    Description: Shatter a flurry of shards at the foe.
+    Type: 0
+    Rarity: 0
+    Action: 44
+  - Variants:
+    - rust
+    - bronze
+    - stone
+    Name: Rattle Strike
+    Description: A clattering hit that still gets through.
+    Type: 0
+    Rarity: 0
+    Action: 43
+  - Variants:
+    - terra
+    - stone
+    - inferno
+    Name: Earthen Slam
+    Description: A crushing blow from solid ground.
+    Type: 0
+    Rarity: 0
+    Action: 45
+  - Variants:
+    - bronze
+    - stone
+    - rust
+    Name: Metal Bash
+    Description: Solid strike with blunt force.
+    Type: 0
+    Rarity: 0
+    Action: 45
+  - Variants:
+    - terra
+    - stone
+    - inferno
+    Name: Seismic Toss
+    Description: Heave the foe with earthy might.
+    Type: 0
+    Rarity: 0
+    Action: 47
+  - Variants:
+    - aqua
+    - storm
+    Name: Riptide
+    Description: A sweeping surge that pulls the foe off balance.
+    Type: 0
+    Rarity: 1
+    Action: 50
+  - Variants:
+    - storm
+    - radiant
+    - aqua
+    - basic
+    - rust
+    Name: Precision Strike
+    Description: Well-timed hit that lands before slower moves.
+    Type: 0
+    Rarity: 1
+    Action: 52
+  - Variants:
+    - frost
+    - stone
+    Name: Frostbite
+    Description: Cold strike that chills the foe.
+    Type: 0
+    Rarity: 1
+    Action: 52
+  - Variants:
+    - storm
+    - radiant
+    Name: Quickbolt
+    Description: Fast lightning strike.
+    Type: 0
+    Rarity: 1
+    Action: 52
+  - Variants:
+    - radiant
+    - aqua
+    Name: Shockwave
+    Description: A wave of force that rarely misses.
+    Type: 0
+    Rarity: 1
+    Action: 52
+  - Variants:
+    - inferno
+    - storm
+    Name: Scorch
+    Description: A searing blast with solid power.
+    Type: 0
+    Rarity: 1
+    Action: 52
+  - Variants:
+    - void
+    - inferno
+    Name: Void Echo
+    Description: A nihil strike that resonates painfully.
+    Type: 0
+    Rarity: 2
+    Action: 53
+  - Variants:
+    - frost
+    - void
+    Name: Shatter Point
+    Description: Strike brittle spots for bonus effect.
+    Type: 0
+    Rarity: 2
+    Action: 54
+  - Variants:
+    - radiant
+    - storm
+    Name: Smite
+    Description: Holy strike that punishes weakened foes.
+    Type: 0
+    Rarity: 2
+    Action: 55
+  - Variants:
+    - void
+    - inferno
+    Name: Void Slash
+    Description: Strike infused with null energy.
+    Type: 0
+    Rarity: 2
+    Action: 55
+  - Variants:
+    - inferno
+    - radiant
+    Name: Flame Burst
+    Description: Explosive fireball with high damage.
+    Type: 0
+    Rarity: 3
+    Action: 60
+  - Variants:
+    - storm
+    - inferno
+    Name: Overcharge
+    Description: Heavy burst of energy but reckless.
+    Type: 0
+    Rarity: 3
+    Action: 70
+  - Variants:
+    - basic
+    - terra
+    - bronze
+    - stone
+    - frost
+    Name: Steady Breath
+    Description: Center yourself and recover a little health.
+    Type: 1
+    Rarity: 0
+    Action: 30
+  - Variants:
+    - terra
+    - stone
+    - bronze
+    - basic
+    Name: Mend
+    Description: Patch up wounds with steady resolve.
+    Type: 1
+    Rarity: 0
+    Action: 32
+  - Variants:
+    - aqua
+    - frost
+    - terra
+    Name: Quench
+    Description: Cool waters restore minor vitality.
+    Type: 1
+    Rarity: 0
+    Action: 34
+  - Variants:
+    - rust
+    - bronze
+    - inferno
+    Name: Patchwork
+    Description: Rough but serviceable field healing.
+    Type: 1
+    Rarity: 0
+    Action: 28
+  - Variants:
+    - basic
+    - radiant
+    Name: First Aid
+    Description: Basic healing technique learned by many.
+    Type: 1
+    Rarity: 0
+    Action: 35
+  - Variants:
+    - frost
+    - aqua
+    - storm
+    Name: Soothing Chill
+    Description: A calming frost numbs pain, restoring health.
+    Type: 1
+    Rarity: 0
+    Action: 36
+  - Variants:
+    - basic
+    - aqua
+    - terra
+    - radiant
+    Name: Second Wind
+    Description: Recover stamina mid-fight.
+    Type: 1
+    Rarity: 1
+    Action: 40
+  - Variants:
+    - inferno
+    - bronze
+    - basic
+    Name: Cauterize
+    Description: Seal wounds with heat, restoring health.
+    Type: 1
+    Rarity: 1
+    Action: 42
+  - Variants:
+    - radiant
+    - aqua
+    Name: Lustrate
+    Description: A focused heal bathed in light.
+    Type: 1
+    Rarity: 1
+    Action: 44
+  - Variants:
+    - aqua
+    - radiant
+    Name: Purify
+    Description: Cleansing waters wash away injuries.
+    Type: 1
+    Rarity: 1
+    Action: 46
+  - Variants:
+    - void
+    - aqua
+    Name: Entropic Drain
+    Description: Siphon life from the enemy to heal yourself.
+    Type: 1
+    Rarity: 2
+    Action: 52
+  - Variants:
+    - radiant
+    - aqua
+    Name: Blessing
+    Description: Radiant power heals and shields.
+    Type: 1
+    Rarity: 2
+    Action: 55
+  - Variants:
+    - terra
+    - stone
+    - frost
+    Name: Vital Bloom
+    Description: Earthen vitality surges, mending wounds.
+    Type: 1
+    Rarity: 2
+    Action: 50
+  - Variants:
+    - inferno
+    - storm
+    Name: Infernal Renewal
+    Description: Heat-forged regeneration restores health quickly.
+    Type: 1
+    Rarity: 2
+    Action: 58
+  - Variants:
+    - radiant
+    - storm
+    - aqua
+    Name: Prismatic Restoration
+    Description: Blinding light restores immense vitality.
+    Type: 1
+    Rarity: 3
+    Action: 70
+  - Variants:
+    - void
+    - terra
+    - frost
+    Name: Void Rebirth
+    Description: Embrace the void to return from near defeat.
+    Type: 1
+    Rarity: 3
+    Action: 65
+  - Variants:
+    - basic
+    - bronze
+    - stone
+    - radiant
+    - inferno
+    Name: Rally
+    Description: Steady your stance to blunt incoming blows.
+    Type: 3
+    Rarity: 0
+    Action: 12
+  - Variants:
+    - frost
+    - radiant
+    - basic
+    Name: Glaze
+    Description: A thin ice layer hardens defenses briefly.
+    Type: 3
+    Rarity: 0
+    Action: 15
+  - Variants:
+    - terra
+    - stone
+    - bronze
+    - basic
+    Name: Stonewall Guard
+    Description: Layered guard for reliable protection.
+    Type: 3
+    Rarity: 0
+    Action: 16
+  - Variants:
+    - basic
+    - bronze
+    - terra
+    Name: Guard
+    Description: Raise your guard to reduce damage.
+    Type: 3
+    Rarity: 0
+    Action: 18
+  - Variants:
+    - frost
+    - stone
+    - terra
+    Name: Brace
+    Description: Brace against impact with practiced form.
+    Type: 3
+    Rarity: 0
+    Action: 14
+  - Variants:
+    - aqua
+    - radiant
+    - basic
+    Name: Water Screen
+    Description: A thin water film softens incoming force.
+    Type: 3
+    Rarity: 0
+    Action: 16
+  - Variants:
+    - frost
+    - stone
+    - bronze
+    - terra
+    Name: Fortify
+    Description: Hunker down and reinforce your guard.
+    Type: 3
+    Rarity: 1
+    Action: 22
+  - Variants:
+    - aqua
+    - radiant
+    Name: Water Veil
+    Description: Protective veil of water dampens strikes.
+    Type: 3
+    Rarity: 1
+    Action: 22
+  - Variants:
+    - storm
+    - bronze
+    - basic
+    - void
+    Name: Arc Guard
+    Description: Charged guard disperses part of the impact.
+    Type: 3
+    Rarity: 1
+    Action: 23
+  - Variants:
+    - terra
+    - stone
+    - frost
+    - inferno
+    Name: Bulwark
+    Description: Adopt an immovable, reinforced stance.
+    Type: 3
+    Rarity: 1
+    Action: 24
+  - Variants:
+    - frost
+    - terra
+    Name: Glacial Guard
+    Description: Heavy ice plating greatly reduces damage.
+    Type: 3
+    Rarity: 2
+    Action: 35
+  - Variants:
+    - terra
+    - stone
+    Name: Aegis of Terra
+    Description: Earthen shield absorbs powerful blows.
+    Type: 3
+    Rarity: 2
+    Action: 32
+  - Variants:
+    - radiant
+    - aqua
+    - void
+    Name: Radiant Ward
+    Description: A brilliant ward that turns aside harm.
+    Type: 3
+    Rarity: 2
+    Action: 33
+  - Variants:
+    - storm
+    - bronze
+    - basic
+    Name: Storm Barrier
+    Description: Whirling currents deflect incoming force.
+    Type: 3
+    Rarity: 2
+    Action: 32
+  - Variants:
+    - radiant
+    - storm
+    - aqua
+    Name: Prismatic Aegis
+    Description: Multispectral shield that negates most damage.
+    Type: 3
+    Rarity: 3
+    Action: 42
+  - Variants:
+    - void
+    - frost
+    - inferno
+    Name: Null Dome
+    Description: A void field that smothers all impact.
+    Type: 3
+    Rarity: 3
+    Action: 45
+  - Variants:
+    - basic
+    - storm
+    - radiant
+    - aqua
+    - inferno
+    Name: Evasive Stance
+    Description: Adopt a guarded stance to dodge more easily.
+    Type: 6
+    Rarity: 0
+    Action: 12
+  - Variants:
+    - bronze
+    - rust
+    Name: Patina Veil
+    Description: A dull sheen distracts and deflects strikes.
+    Type: 6
+    Rarity: 0
+    Action: 13
+  - Variants:
+    - radiant
+    - basic
+    Name: Light Step
+    Description: A nimble shift makes attacks harder to land.
+    Type: 6
+    Rarity: 0
+    Action: 11
+  - Variants:
+    - aqua
+    - frost
+    Name: Mist Cover
+    Description: Veil yourself in water mist to evade blows.
+    Type: 6
+    Rarity: 0
+    Action: 14
+  - Variants:
+    - terra
+    - stone
+    Name: Dust Cloud
+    Description: Kick up dirt and dust to obscure yourself.
+    Type: 6
+    Rarity: 0
+    Action: 10
+  - Variants:
+    - storm
+    - inferno
+    Name: Flicker
+    Description: A sudden sidestep avoids slower attacks.
+    Type: 6
+    Rarity: 0
+    Action: 12
+  - Variants:
+    - radiant
+    - storm
+    - basic
+    Name: Halo Step
+    Description: Light-guided movement sharpens reflexes.
+    Type: 6
+    Rarity: 1
+    Action: 18
+  - Variants:
+    - inferno
+    - storm
+    Name: Kindle
+    Description: Heat distortions make you harder to target.
+    Type: 6
+    Rarity: 1
+    Action: 19
+  - Variants:
+    - storm
+    - radiant
+    - aqua
+    Name: Afterimage
+    Description: Move so quickly you leave a false trail.
+    Type: 6
+    Rarity: 1
+    Action: 20
+  - Variants:
+    - void
+    - rust
+    - frost
+    Name: Shadow Step
+    Description: Slip partly into shadow to evade.
+    Type: 6
+    Rarity: 1
+    Action: 17
+  - Variants:
+    - void
+    - storm
+    Name: Eventide Step
+    Description: Twilight footwork hides your true position.
+    Type: 6
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - inferno
+    - radiant
+    Name: Burning Veil
+    Description: Heat shimmer bends vision around you.
+    Type: 6
+    Rarity: 2
+    Action: 23
+  - Variants:
+    - radiant
+    - aqua
+    Name: Aurora Dance
+    Description: Radiant steps blur into shifting light.
+    Type: 6
+    Rarity: 2
+    Action: 24
+  - Variants:
+    - frost
+    - aqua
+    - stone
+    Name: Glacial Slip
+    Description: Slide across ice with uncanny avoidance.
+    Type: 6
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - radiant
+    - storm
+    - aqua
+    Name: Prismatic Shift
+    Description: Split into illusions of pure light.
+    Type: 6
+    Rarity: 3
+    Action: 28
+  - Variants:
+    - void
+    - inferno
+    - frost
+    Name: Void Phase
+    Description: Momentarily phase out of reality.
+    Type: 6
+    Rarity: 3
+    Action: 26
+  - Variants:
+    - bronze
+    - stone
+    - terra
+    - basic
+    - inferno
+    Name: Weighted Step
+    Description: "Heavy plating slows the foe\u2019s movement."
+    Type: 5
+    Rarity: 0
+    Action: -12
+  - Variants:
+    - aqua
+    - void
+    - stone
+    Name: Undercurrent
+    Description: A subtle drag of water slows the target.
+    Type: 5
+    Rarity: 0
+    Action: -14
+  - Variants:
+    - terra
+    - aqua
+    Name: Sticky Mud
+    Description: Bog the enemy down with mud.
+    Type: 5
+    Rarity: 0
+    Action: -13
+  - Variants:
+    - frost
+    - stone
+    Name: Frost Chill
+    Description: A numbing cold slows reactions.
+    Type: 5
+    Rarity: 0
+    Action: -12
+  - Variants:
+    - rust
+    - bronze
+    Name: Rust Creep
+    Description: Rust spreads, slowing movements.
+    Type: 5
+    Rarity: 0
+    Action: -11
+  - Variants:
+    - basic
+    - radiant
+    Name: Dull Air
+    Description: A heavy stillness makes actions sluggish.
+    Type: 5
+    Rarity: 0
+    Action: -10
+  - Variants:
+    - terra
+    - aqua
+    Name: Rootbind
+    Description: Entangle the foe, drastically slowing them.
+    Type: 5
+    Rarity: 1
+    Action: -18
+  - Variants:
+    - terra
+    - stone
+    - rust
+    Name: Earthen Grasp
+    Description: Roots seize the enemy and drag them down.
+    Type: 5
+    Rarity: 1
+    Action: -19
+  - Variants:
+    - frost
+    - void
+    Name: Icy Shackles
+    Description: Chains of frost slow the enemy sharply.
+    Type: 5
+    Rarity: 1
+    Action: -18
+  - Variants:
+    - storm
+    - inferno
+    Name: Storm Drag
+    Description: Wind shear hampers enemy movements.
+    Type: 5
+    Rarity: 1
+    Action: -17
+  - Variants:
+    - frost
+    - terra
+    - stone
+    Name: Permafrost Bind
+    Description: Frozen ground locks the foe in place.
+    Type: 5
+    Rarity: 2
+    Action: -22
+  - Variants:
+    - void
+    - rust
+    - radiant
+    Name: Entropic Slow
+    Description: Void energies erode quickness.
+    Type: 5
+    Rarity: 2
+    Action: -23
+  - Variants:
+    - inferno
+    - terra
+    Name: Lava Shackles
+    Description: Molten chains restrict motion severely.
+    Type: 5
+    Rarity: 2
+    Action: -22
+  - Variants:
+    - aqua
+    - storm
+    Name: Crashing Wave
+    Description: A powerful undertow slows the target greatly.
+    Type: 5
+    Rarity: 2
+    Action: -21
+  - Variants:
+    - void
+    - radiant
+    Name: Time Fracture
+    Description: "Reality warps and halts the foe\u2019s speed."
+    Type: 5
+    Rarity: 3
+    Action: -28
+  - Variants:
+    - frost
+    - aqua
+    - terra
+    Name: Glacial Prison
+    Description: A tomb of ice nearly stops the foe cold.
+    Type: 5
+    Rarity: 3
+    Action: -26
+  - Variants:
+    - rust
+    - bronze
+    Name: Oxidize
+    Description: Spread corrosion that saps enemy strength.
+    Type: 4
+    Rarity: 0
+    Action: 11
+  - Variants:
+    - rust
+    - bronze
+    - stone
+    Name: Corrode
+    Description: Erode plating; slightly reduces enemy offense.
+    Type: 4
+    Rarity: 0
+    Action: 11
+  - Variants:
+    - terra
+    - stone
+    - rust
+    Name: Dust Blind
+    Description: Grit clouds reduce the foe's effectiveness.
+    Type: 4
+    Rarity: 0
+    Action: 12
+  - Variants:
+    - frost
+    - stone
+    - basic
+    Name: Chill Draft
+    Description: A numbing breeze dulls striking power.
+    Type: 4
+    Rarity: 0
+    Action: 13
+  - Variants:
+    - storm
+    - bronze
+    Name: Static Field
+    Description: Crackling air disrupts the foe's power.
+    Type: 4
+    Rarity: 0
+    Action: 14
+  - Variants:
+    - aqua
+    - basic
+    - radiant
+    Name: Dampen
+    Description: Saturate and soften, muting force slightly.
+    Type: 4
+    Rarity: 0
+    Action: 14
+  - Variants:
+    - basic
+    - inferno
+    - storm
+    - void
+    Name: Guard Break
+    Description: Target weak points to soften defenses.
+    Type: 4
+    Rarity: 1
+    Action: 18
+  - Variants:
+    - inferno
+    - rust
+    Name: Ember Trap
+    Description: Lingering embers weaken the next attacks.
+    Type: 4
+    Rarity: 1
+    Action: 19
+  - Variants:
+    - frost
+    - void
+    - aqua
+    Name: Chilling Miasma
+    Description: Icy fog seeps in, weakening enemy strikes.
+    Type: 4
+    Rarity: 1
+    Action: 18
+  - Variants:
+    - aqua
+    - void
+    Name: Undertow
+    Description: A dragging pull that saps offensive drive.
+    Type: 4
+    Rarity: 1
+    Action: 18
+  - Variants:
+    - frost
+    - void
+    Name: Permafrost
+    Description: Locking cold suppresses the foe's power.
+    Type: 4
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - void
+    - frost
+    - radiant
+    Name: Null Pulse
+    Description: A null shock dampens hostile force.
+    Type: 4
+    Rarity: 2
+    Action: 23
+  - Variants:
+    - terra
+    - stone
+    - bronze
+    Name: Sunder Armor
+    Description: Crush guard and reduce future damage dealt.
+    Type: 4
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - radiant
+    - aqua
+    Name: Quell
+    Description: A radiant hush that subdues aggression.
+    Type: 4
+    Rarity: 2
+    Action: 24
+  - Variants:
+    - void
+    - frost
+    Name: Null Field
+    Description: A field of nothingness that smothers power.
+    Type: 4
+    Rarity: 3
+    Action: 28
+  - Variants:
+    - void
+    - radiant
+    - inferno
+    Name: Eclipse Hex
+    Description: Half-light curse that heavily weakens attacks.
+    Type: 4
+    Rarity: 3
+    Action: 26
+  - Variants:
+    - basic
+    - void
+    - inferno
+    Name: Vile Drip
+    Description: Persistent droplets of toxin keep sapping health.
+    Type: 2
+    Rarity: 0
+    Action: 10
+  - Variants:
+    - aqua
+    - rust
+    Name: Bilge Water
+    Description: Foul water carries toxins that linger.
+    Type: 2
+    Rarity: 0
+    Action: 11
+  - Variants:
+    - storm
+    - rust
+    - bronze
+    Name: Venom Needle
+    Description: A quick stab that injects venom.
+    Type: 2
+    Rarity: 0
+    Action: 12
+  - Variants:
+    - basic
+    - rust
+    - aqua
+    Name: Gunk Spray
+    Description: A filthy spray that sticks and saps health.
+    Type: 2
+    Rarity: 0
+    Action: 13
+  - Variants:
+    - void
+    - rust
+    - aqua
+    - radiant
+    Name: Envenom
+    Description: Inflict a lingering toxin.
+    Type: 2
+    Rarity: 0
+    Action: 14
+  - Variants:
+    - aqua
+    - void
+    - rust
+    - basic
+    Name: Toxic Mist
+    Description: A choking cloud that poisons over time.
+    Type: 2
+    Rarity: 0
+    Action: 14
+  - Variants:
+    - aqua
+    - frost
+    Name: Acid Rain
+    Description: Irritating acidic droplets that persist.
+    Type: 2
+    Rarity: 1
+    Action: 16
+  - Variants:
+    - terra
+    - void
+    - frost
+    Name: Blight
+    Description: Wither the target with creeping blight.
+    Type: 2
+    Rarity: 1
+    Action: 16
+  - Variants:
+    - stone
+    - rust
+    - void
+    - storm
+    - aqua
+    - frost
+    Name: Septic Slash
+    Description: A filthy cut that festers badly.
+    Type: 2
+    Rarity: 1
+    Action: 18
+  - Variants:
+    - inferno
+    - void
+    - storm
+    Name: Smoldering Toxin
+    Description: Heat-activated toxin burns from within.
+    Type: 2
+    Rarity: 1
+    Action: 19
+  - Variants:
+    - rust
+    - void
+    - bronze
+    Name: Corrosive Cloud
+    Description: A lingering corrosive haze that eats away at foes.
+    Type: 2
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - void
+    - inferno
+    Name: Shadow Venin
+    Description: Void-tainted venom that gnaws at vitality.
+    Type: 2
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - inferno
+    - void
+    Name: Ignite
+    Description: Set the foe ablaze, dealing damage over time.
+    Type: 2
+    Rarity: 2
+    Action: 22
+  - Variants:
+    - storm
+    - void
+    - radiant
+    Name: Virulent Surge
+    Description: Highly concentrated toxin for severe DOT.
+    Type: 2
+    Rarity: 2
+    Action: 23
+  - Variants:
+    - void
+    - storm
+    - radiant
+    Name: Neurotoxin
+    Description: A potent nerve agent; heavy damage over time.
+    Type: 2
+    Rarity: 3
+    Action: 25
+  - Variants:
+    - void
+    - rust
+    - terra
+    Name: Miasma Veil
+    Description: A dense, toxic shroud that relentlessly drains.
+    Type: 2
+    Rarity: 3
+    Action: 28
 --- !u!1 &458288810
 GameObject:
   m_ObjectHideFlags: 0
@@ -7090,7 +8124,7 @@ MonoBehaviour:
   Inventory:
   - Name: King
     PieceType: 5
-    Position: -1
+    Position: 5
     Health: 300
     MaxHealth: 300
     Attack: 4
@@ -7099,7 +8133,19 @@ MonoBehaviour:
     Variant: basic
     HiddenStat: 2
     Exp: 0
-    Moves: []
+    Moves:
+    - Variants:
+      - basic
+      - bronze
+      - stone
+      - terra
+      - radiant
+      - storm
+      Name: Strike
+      Description: A simple strike with solid force.
+      Type: 0
+      Rarity: 0
+      Action: 40
   Defeated: 0
 --- !u!1 &591158247
 GameObject:

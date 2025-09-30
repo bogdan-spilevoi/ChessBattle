@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class MovePool : MonoBehaviour
 {
     public static List<Move> Pool = new() {
@@ -272,5 +273,10 @@ new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",
 
         return norm.OrderByDescending(x => x.Value).First().Key;
     }
+    public List<Move> VisualizeMoves = new();
 
+    private void Awake()
+    {
+        VisualizeMoves = Pool;
+    }
 }

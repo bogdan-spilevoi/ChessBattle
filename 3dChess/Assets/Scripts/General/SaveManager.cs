@@ -27,7 +27,10 @@ public class SaveManager : MonoBehaviour
         print(json);
         PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
     }
-
+    public SaveData GetData()
+    {
+        return JsonConvert.DeserializeObject<SaveData>(PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave")));
+    }
     public void LoadGame()
     {
         print(PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave")));

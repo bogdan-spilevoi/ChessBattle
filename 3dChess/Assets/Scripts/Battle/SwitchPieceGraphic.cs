@@ -17,5 +17,6 @@ public class SwitchPieceGraphic : MonoBehaviour
         S_Health.maxValue = maxHealth;
         S_Health.value = health;
         I_Graphic.sprite = img;
+        Helper.FitImageToSize(I_Graphic, 200);
     }
 }

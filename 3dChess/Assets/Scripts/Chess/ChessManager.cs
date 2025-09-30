@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class ChessManager : MonoBehaviour
 {    
+    public SaveData saveData;
+    public TrainerData trainerData;
     public List<Piece> OrgPieces = new();
     public static int Turn = 0;
     public List<EntityData> AllWhites = new();
@@ -21,16 +23,19 @@ public class ChessManager : MonoBehaviour
 
     public void PreparePieces()
     {
-        string white = PlayerPrefs.GetString("pieces");
+        string white = PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave"));
         string black = PlayerPrefs.GetString("trainer");
 
         print(white);
         print(black);
 
-        InventoryData whiteData = JsonConvert.DeserializeObject<InventoryData>(white);
+        SaveData whiteData = JsonConvert.DeserializeObject<SaveData>(white);
+        saveData = whiteData;
         TrainerData blackData = JsonConvert.DeserializeObject<TrainerData>(black);
+        trainerData = blackData;
+        Debug.LogWarning(black);
 
-        foreach(var piece in whiteData.Inventory)
+        foreach(var piece in whiteData.InventoryData.Inventory)
         {
             AllWhites.Add(piece);
             if (piece.Position == -1) continue;
@@ -56,20 +61,17 @@ public class ChessManager : MonoBehaviour
     }
 
     public void EndGame()
-    {
-        InventoryData whiteData = new()
-        {
-            Inventory = AllWhites
-        };
-
-        string json = JsonConvert.SerializeObject(whiteData, Formatting.Indented);
-        PlayerPrefs.SetString("pieces", json);
+    {       
+        string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+        PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
         SceneManager.LoadScene("Game");
     }
 
     public void EndMatch(bool state)
     {
-        if(state)
+        saveData.InventoryData.Inventory = AllWhites;
+        saveData.TrainerData.Find(t => t.Name == trainerData.Name).Defeated = !state;
+        if (state)
         {
             ChessUI.WinUI();
         }
