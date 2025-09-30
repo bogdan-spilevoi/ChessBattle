@@ -103,10 +103,10 @@ public class Variants : MonoBehaviour
         if (candidates.Count == 0)
             return null;
 
-        var chosen = candidates[Random.Range(0, candidates.Count)];
-        for(int i =0; i< 4; i++)
+        var chosen = candidates[GetWeightedRandom(candidates.Count)];
+        for(int i = 0; i< 4; i++)
         {
-            chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType));
+            chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType, i));
         }
         
         return chosen;
@@ -114,13 +114,56 @@ public class Variants : MonoBehaviour
 
     public static EntityData GetRandom()
     {
-        var chosen = PiecesVariants[Random.Range(0, PiecesVariants.Count)];
-        for (int i = 0; i < 4; i++)
-        {
-            chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType));
-        }
-        return chosen;
+        var type = GetRandomType();
+
+        return GetRandomOfType(type);
     }
+
+    public static EntityData.Type GetRandomType()
+    {
+         int[] weights = new int[] { 8, 6, 4, 2, 1, 10};
+
+        int totalWeight = 0;
+        foreach (int w in weights)
+            totalWeight += w;
+
+        int random = Random.Range(0, totalWeight);
+        int cumulative = 0;
+
+        for (int i = 0; i < weights.Length; i++)
+        {
+            cumulative += weights[i];
+            if (random < cumulative)
+                return (EntityData.Type)i;
+        }
+
+        return (EntityData.Type)(weights.Length - 1);
+    }
+
+    public static int GetWeightedRandom(int count)
+    {
+        int[] weights = new int[count];
+        int totalWeight = 0;
+
+        for (int i = 0; i < count; i++)
+        {
+            weights[i] = count - i;
+            totalWeight += weights[i];
+        }
+
+        int random = Random.Range(0, totalWeight);
+        int cumulative = 0;
+
+        for (int i = 0; i < count; i++)
+        {
+            cumulative += weights[i];
+            if (random < cumulative)
+                return i;
+        }
+
+        return count - 1;
+    }
+
     private void Awake()
     {
         VisualizeVariants = PiecesVariants;

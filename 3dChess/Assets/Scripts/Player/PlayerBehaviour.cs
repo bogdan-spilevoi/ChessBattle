@@ -51,7 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.TryGetComponent(out Trainer t))
+        if(other.TryGetComponent(out Trainer t) && !t.Defeated)
         {
             TrainerInRange = t;
         }

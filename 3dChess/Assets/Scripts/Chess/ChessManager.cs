@@ -61,16 +61,17 @@ public class ChessManager : MonoBehaviour
     }
 
     public void EndGame()
-    {       
-        string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
-        PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
+    {
         SceneManager.LoadScene("Game");
     }
 
     public void EndMatch(bool state)
     {
         saveData.InventoryData.Inventory = AllWhites;
-        saveData.TrainerData.Find(t => t.Name == trainerData.Name).Defeated = !state;
+        saveData.TrainerData.Find(t => t.Name == trainerData.Name).Defeated = state;
+        print(trainerData.Name + " " + state);
+        string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+        PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
         if (state)
         {
             ChessUI.WinUI();

@@ -191,7 +191,7 @@ new Move("Neurotoxin",        "A potent nerve agent; heavy damage over time.",  
 new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",          MoveType.Poison, MoveRarity.Legendary, 28f, "void", "rust", "terra"),
     };
 
-    public static Move GetRandomMove(string variant, EntityData.Type type)
+    public static Move GetRandomMove(string variant, EntityData.Type type, int moveInd)
     {
         var rng = new System.Random();
 
@@ -225,7 +225,7 @@ new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",
             else candidates = allMovesForVariant;
         }
 
-        var rarity = PickRarityWithAvailability(candidates, rng);
+        var rarity = PickRarityWithAvailability(candidates, rng, moveInd);
 
         var sameRarity = candidates.Where(m => m.Rarity == rarity).ToList();
         if (sameRarity.Count == 0) sameRarity = candidates;
@@ -246,17 +246,40 @@ new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",
             _ => MoveType.Attack
         };
     }
-
-    private static MoveRarity PickRarityWithAvailability(List<Move> pool, System.Random rng)
+    public static List<Dictionary<MoveRarity, double>> baseWeights = new() {
+    new()
     {
-        var baseWeights = new Dictionary<MoveRarity, double> {
-        {MoveRarity.Common, 0.5},
-        {MoveRarity.Rare,   0.3},
-        {MoveRarity.Epic,   0.15},
-        {MoveRarity.Legendary, 0.05}
+        { MoveRarity.Common,     0.70 },
+        { MoveRarity.Rare,       0.20 },
+        { MoveRarity.Epic,       0.07 },
+        { MoveRarity.Legendary,  0.03 }
+    },
+    new()
+    {
+        { MoveRarity.Common,     0.55 },
+        { MoveRarity.Rare,       0.25 },
+        { MoveRarity.Epic,       0.13 },
+        { MoveRarity.Legendary,  0.07 }
+    },
+    new()
+    {
+        { MoveRarity.Common,     0.40 },
+        { MoveRarity.Rare,       0.30 },
+        { MoveRarity.Epic,       0.20 },
+        { MoveRarity.Legendary,  0.10 }
+    },
+    new()
+    {
+        { MoveRarity.Common,     0.25 },
+        { MoveRarity.Rare,       0.30 },
+        { MoveRarity.Epic,       0.27 },
+        { MoveRarity.Legendary,  0.18 }
+    },
     };
 
-        var available = baseWeights
+    private static MoveRarity PickRarityWithAvailability(List<Move> pool, System.Random rng, int moveInd = 0)
+    {       
+        var available = baseWeights[moveInd]
             .Where(kv => pool.Any(m => m.Rarity == kv.Key))
             .ToDictionary(kv => kv.Key, kv => kv.Value);
 
