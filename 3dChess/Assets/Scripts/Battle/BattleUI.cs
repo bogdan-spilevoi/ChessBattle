@@ -41,7 +41,7 @@ public class BattleUI : MonoBehaviour
 
         foreach (var m in MoveUI)
         {
-            Destroy(m);
+            Destroy(m.gameObject);
         }
         MoveUI.Clear();
 

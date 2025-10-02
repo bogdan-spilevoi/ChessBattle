@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour
 {
     public ChessManager ChessManager;
     public BattleUI BattleUI;
-    public Camera BattleCam;
+    public EffectManager EffectManager;
     public Entity Original1, Original2;
     public Entity player1 { get { return player1Team.Single(p => p.Value.Item2).Key; } }
     public Entity player2 { get { return player2Team.Single(p => p.Value.Item2).Key; } }
@@ -133,43 +133,93 @@ public class BattleManager : MonoBehaviour
         var defenderObj = deff.Item2;
 
         Vector3 initialPos = attackerObj.transform.position;
-        Tween.Position(attackerObj.transform, defenderObj.transform.position, 0.5f, 0, Tween.EaseIn);
+        
 
-        if(m.Type == MoveType.Attack)
-        {           
-            int damage = (int)m.Action;
-            string damageInfo = "-" + damage;
-
-            if (RandomChance.Percent(attacker.Luck * 5))
-            {
-                damage *= 2;
-                damageInfo = "-" + damage + " CRIT";
-            }
-            if (RandomChance.Percent(defender.Speed * 5))
-            {
-                damage = 0;
-                damageInfo = "EVADE";
-            }
-
-            defender.Health -= damage;
-            attacker.GiveExp(m.Action / 10);
-            if (defender.Health <= 0)
-                attacker.GiveExp(30);
-
-            if (defender.Health < 0)
-                defender.Health = 0;
-
-            StartCoroutine(ActionAfterTIme(0.5f, () => { TextAnimation(T_Animtation, attackingSide, damageInfo, Color.red, new(0, 0.2f, -0.15f)); }));
-        }
-        else if(m.Type == MoveType.Heal)
+        switch (m.Type)
         {
-            attacker.Health += (int)m.Action;
-        }           
+            case MoveType.Attack:
+                {
+                    Tween.Position(attackerObj.transform, defenderObj.transform.position, 0.5f, 0, Tween.EaseIn);
+                    int damage = (int)m.Action;
+                    string damageInfo = "-" + damage;
 
-        yield return new WaitForSeconds(0.5f);
-        BattleUI.UpdateHealth();
-        Tween.Position(attackerObj.transform, initialPos, 0.5f, 0, Tween.EaseOut);
-        yield return new WaitForSeconds(0.5f);
+                    if (RandomChance.Percent(attacker.Luck * 5))
+                    {
+                        damage *= 2;
+                        damageInfo = "-" + damage + " CRIT";
+                    }
+                    if (RandomChance.Percent(defender.Speed * 5))
+                    {
+                        damage = 0;
+                        damageInfo = "EVADE";
+                    }
+
+                    defender.Health -= damage;
+                    attacker.GiveExp(m.Action / 10);
+                    if (defender.Health <= 0)
+                        attacker.GiveExp(30);
+
+                    if (defender.Health < 0)
+                        defender.Health = 0;
+                
+                    yield return new WaitForSeconds(0.5f);
+                    EffectManager.TextAnimation(T_Animtation, !attackingSide, damageInfo, Color.red, new(0, 0.2f, -0.15f));
+                    BattleUI.UpdateHealth();
+                    Tween.Position(attackerObj.transform, initialPos, 0.5f, 0, Tween.EaseOut);
+                    yield return new WaitForSeconds(0.5f);
+                    break;
+                }
+            case MoveType.Heal:
+                {
+                    attacker.Health += (int)m.Action;
+                    EffectManager.DeliverHitEffect(MoveType.Heal, attackingSide);
+                    yield return new WaitForSeconds(1);
+                    BattleUI.UpdateHealth();
+                    break;
+                }
+            case MoveType.Defense:
+                {
+
+                    EffectManager.DeliverHitEffect(MoveType.Defense, attackingSide);
+                    yield return new WaitForSeconds(1);
+                    BattleUI.UpdateHealth();
+                    break;
+                }
+            case MoveType.Weaken:
+                {
+
+                    EffectManager.DeliverHitEffect(MoveType.Weaken, attackingSide);
+                    yield return new WaitForSeconds(1);
+                    BattleUI.UpdateHealth();
+                    break;
+                }
+            case MoveType.Slow:
+                {
+
+                    EffectManager.DeliverHitEffect(MoveType.Slow, attackingSide);
+                    yield return new WaitForSeconds(1);
+                    BattleUI.UpdateHealth();
+                    break;
+                }
+            case MoveType.Evasion:
+                {
+
+                    EffectManager.DeliverHitEffect(MoveType.Evasion, attackingSide);
+                    yield return new WaitForSeconds(1);
+                    BattleUI.UpdateHealth();
+                    break;
+                }
+            case MoveType.Poison:
+                {
+
+                    //EffectManager.DeliverHitEffect(MoveType.Evasion, attackingSide);
+                    yield return new WaitForSeconds(1);
+                    BattleUI.UpdateHealth();
+                    break;
+                }
+        }         
+
+        
 
         if (Original1.Health <= 0 || Original2.Health <= 0)
         {
@@ -199,17 +249,7 @@ public class BattleManager : MonoBehaviour
         A?.Invoke();
     }
 
-    private void TextAnimation(TMP_Text T_Text, bool side, string info, Color c, Vector3 add)
-    {
-        var text = Instantiate(T_Text, T_Text.gameObject.transform.parent);
-        text.transform.localPosition = (side ? P1.transform.localPosition : P2.transform.localPosition) + add + new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), 0) ;
-        Vector3 direction = text.transform.position - BattleCam.transform.position;
-        text.transform.rotation = Quaternion.LookRotation(direction);
-        text.text = info;
-        text.color = c;
-        text.gameObject.SetActive(true);
-        Tween.LocalPosition(text.transform, text.transform.localPosition + new Vector3(0, 0.2f, 0), 1f, 0, Tween.EaseOut, completeCallback: () => { Destroy(text.gameObject); });
-    }
+    
 
     public GameObject CreateNewShowPiece(GameObject p, Transform pos)
     {

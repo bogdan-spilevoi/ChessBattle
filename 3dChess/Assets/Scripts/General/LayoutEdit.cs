@@ -156,13 +156,13 @@ public class LayoutEdit : MonoBehaviour
         return newPieceGraphic;
     }
 
-    public int GetTileIndexFronPosition(Vector3 pos)
+    public int GetTileIndexFromPosition(Vector3 pos)
     {
         if (IsToTheRightOfLayout(pos)) return -2;
 
         for (int i = 0; i < 4 * 8; i++)
         {
-            if (IsInsideSquare(pos, Squares[i].GetComponent<RectTransform>().localPosition, 80) && player.PiecesInventory.Find(e => e.Position == i) == null)
+            if (IsInsideSquare(pos, Squares[i].GetComponent<RectTransform>().localPosition, 80))
                 return i;
         }
         return -1;

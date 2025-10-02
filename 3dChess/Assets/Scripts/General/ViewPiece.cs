@@ -19,6 +19,7 @@ public class ViewPiece : MonoBehaviour
     public Slider S_Health;
     public Slider S_Exp;
     public Slider S_Attack, S_Defence, S_Speed, S_Luck;
+    public Image Icon;
 
     public MoveUI OriginalMoveUI;   
     public GameObject MovesParent;
@@ -49,9 +50,10 @@ public class ViewPiece : MonoBehaviour
     public void SetDirection(int dir) => Direction = dir;
 
     public void OpenViewPiece(EntityData e)
-    {
+    {        
         Movement.IsPaused = true;
         thisEntity = e;
+        GetIcon();
         Basic.gameObject.SetActive(false);
         Tab_Basic.gameObject.SetActive(false);
 
@@ -59,7 +61,7 @@ public class ViewPiece : MonoBehaviour
         Tab_Piece.gameObject.SetActive(true);
 
         T_Name.text = e.Name;
-        T_Type.text = e.PieceType.ToString();
+        T_Type.text = e.Variant.ToUpper() + " <b>" + e.PieceType.ToString() + "</b>";
         T_Level.text = "lvl " + e.Level;
 
         if(CurrentPiece != null) 
@@ -77,6 +79,7 @@ public class ViewPiece : MonoBehaviour
         }
         CurrentMoves.Clear();
 
+        OriginalMoveUI.transform.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
         for(int i = 0; i < e.Moves.Count; i++)
         {
             var m = e.Moves[i];
@@ -131,6 +134,14 @@ public class ViewPiece : MonoBehaviour
         FindAnyObjectByType<PlayerBehaviour>().SaveManager.SaveGame();
         FindObjectOfType<LayoutEdit>().RefreshListPiecesUI();
         
+    }
+
+    public void GetIcon()
+    {
+        Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
+
+        Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic"); ;
+        Helper.FitImageToSize(Icon, 100);
     }
 }
 
