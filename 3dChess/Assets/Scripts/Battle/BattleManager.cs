@@ -140,7 +140,7 @@ public class BattleManager : MonoBehaviour
             case MoveType.Attack:
                 {
                     Tween.Position(attackerObj.transform, defenderObj.transform.position, 0.5f, 0, Tween.EaseIn);
-                    int damage = (int)m.Action;
+                    int damage = (int)m.Action + (int)(attacker.Attack * 2/100 * m.Action) + UnityEngine.Random.Range(0, attacker.HiddenStat);
                     string damageInfo = "-" + damage;
 
                     if (RandomChance.Percent(attacker.Luck * 5))

@@ -64,6 +64,11 @@ public class EntityData
         }
     }
 
+    public EntityData Copy()
+    {
+        return new EntityData(Name, PieceType, Position, Health, MaxHealth, Attack, Speed, Luck, Exp, Variant, Moves.ToArray());
+    }
+
     public EntityData(string Name, Type PieceType, int Position, int Health, int MaxHealth, int Attack, int Speed, int Luck, float Exp, string Variant, params Move[] Moves)
     {
         this.Name = Name;

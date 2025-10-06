@@ -14,6 +14,8 @@ public abstract class Entity : MonoBehaviour
     public int Speed { get { return Data.Speed; } } // max 10
     public int Luck { get { return Data.Luck; } } // max 10
 
+    public int HiddenStat { get { return Data.HiddenStat; } }
+
     public string Variant { get { return Data.Variant; } }
 
     public EntityData.Type PieceType {  get { return Data.PieceType; } }

@@ -80,6 +80,7 @@ public class ViewPiece : MonoBehaviour
         CurrentMoves.Clear();
 
         OriginalMoveUI.transform.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
+        print(e.Moves.Count);
         for(int i = 0; i < e.Moves.Count; i++)
         {
             var m = e.Moves[i];

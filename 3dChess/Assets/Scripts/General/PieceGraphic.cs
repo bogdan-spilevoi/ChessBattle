@@ -66,7 +66,7 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
             return;
         }
         var possibleOtherPieceInSquare = LayoutEdit.player.PiecesInventory.Find(e => e.Position == pos && e != thisEntity && e.Position != -1);
-        print((possibleOtherPieceInSquare == null) + " " + position + " " + pos);
+        //print((possibleOtherPieceInSquare == null) + " " + position + " " + pos);
         if (possibleOtherPieceInSquare != null)
         {
             var otherPieceGraphic = LayoutEdit.PieceGraphics.Find(p => p.thisEntity == possibleOtherPieceInSquare);

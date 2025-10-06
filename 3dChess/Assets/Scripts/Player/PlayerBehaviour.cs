@@ -18,6 +18,7 @@ public class PlayerBehaviour : MonoBehaviour
     public LayoutEdit LayoutEdit;
 
     public Action<EntityData> OnGetPiece;
+    public BoxBehaviour BoxBehaviour;
 
 
     private void Update()
@@ -57,15 +58,15 @@ public class PlayerBehaviour : MonoBehaviour
         }
         if(other.CompareTag("test"))
         {
-            GetPiece(Variants.GetRandom());
+            BoxBehaviour.PrepareBox();
         }
-        if (other.CompareTag("test2"))
-        {
-            GetPiece(Variants.GetRandomOfType(EntityData.Type.King));
-        }
+        //if (other.CompareTag("test2"))
+        //{
+        //    GetPiece(Variants.GetRandomOfType(EntityData.Type.King));
+        //}
     }
 
-    public void GetPiece(EntityData e)
+    public EntityData GetPiece(EntityData e)
     {
         string p = e.Variant + "/" + e.PieceType;
         if(!pieceFoundData.PiecesFound.Contains(p))
@@ -75,6 +76,7 @@ public class PlayerBehaviour : MonoBehaviour
         SaveManager.SaveGame();
         LayoutEdit.RefreshListPiecesUI();
         OnGetPiece?.Invoke(e);
+        return e;
     }
 
     private void OnTriggerExit(Collider other)

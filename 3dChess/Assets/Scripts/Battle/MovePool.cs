@@ -203,10 +203,10 @@ new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",
         var specifics = allMovesForVariant.Where(m => m.Type == GetPreferredType(type)).ToList();
         var randoms = allMovesForVariant;
 
-        int roll =Random.Range(0, 100);
+        int roll = Random.Range(0, 100);
 
         List<Move> candidates;
-        if (roll < 40 && attacks.Count > 0)
+        if (moveInd == 0)
         {
             candidates = attacks;
         }

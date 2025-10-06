@@ -103,12 +103,12 @@ public class Variants : MonoBehaviour
         if (candidates.Count == 0)
             return null;
 
-        var chosen = candidates[GetWeightedRandom(candidates.Count)];
+        var chosen =  candidates[GetWeightedRandom(candidates.Count)].Copy();
         for(int i = 0; i< 4; i++)
         {
             chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType, i));
         }
-        
+        chosen.HiddenStat = Random.Range(0, 11);
         return chosen;
     }
 
