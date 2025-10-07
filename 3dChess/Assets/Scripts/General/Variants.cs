@@ -7,94 +7,96 @@ using UnityEngine;
 public class Variants : MonoBehaviour
 {
     public static List<EntityData> PiecesVariants = new()
-    {
-        new EntityData("Pawn", EntityData.Type.Pawn,     -1, 250, 250, 2, 5, 4, 0, "basic", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 275, 275, 3, 4, 3, 0, "basic", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 300, 300, 3, 3, 4, 0, "basic", null),
-        new EntityData("Rook", EntityData.Type.Rook,     -1, 450, 450, 2, 2, 4, 0, "basic", null),
-        new EntityData("Queen", EntityData.Type.Queen,   -1, 300, 300, 5, 1, 2, 0, "basic", null),
-        new EntityData("King", EntityData.Type.King,     -1, 300, 300, 4, 2, 3, 0, "basic", null),
+{
+    // --- BASIC SET ---
+    new EntityData("Pawn", EntityData.Type.Pawn, -1, 250, 250, 2, 5, 4, 0, "basic", null),
+    new EntityData("Knight", EntityData.Type.Knight, -1, 275, 275, 3, 4, 3, 0, "basic", null),
+    new EntityData("Bishop", EntityData.Type.Bishop, -1, 300, 300, 3, 3, 4, 0, "basic", null),
+    new EntityData("Rook", EntityData.Type.Rook, -1, 450, 450, 2, 2, 4, 0, "basic", null),
+    new EntityData("Queen", EntityData.Type.Queen, -1, 300, 300, 5, 1, 2, 0, "basic", null),
+    new EntityData("King", EntityData.Type.King, -1, 300, 300, 4, 2, 3, 0, "basic", null),
 
+    // --- RUST SET ---
+    new EntityData("Scrapling", EntityData.Type.Pawn, -1, 180, 180, 2, 4, 1, 0, "rust", null),
+    new EntityData("Oxide Rider", EntityData.Type.Knight, -1, 250, 250, 3, 4, 2, 0, "rust", null),
+    new EntityData("Corroded Monk", EntityData.Type.Bishop, -1, 280, 280, 3, 3, 2, 0, "rust", null),
+    new EntityData("Iron Bastion", EntityData.Type.Rook, -1, 350, 350, 4, 2, 2, 0, "rust", null),
+    new EntityData("Rust Empress", EntityData.Type.Queen, -1, 300, 300, 4, 3, 1, 0, "rust", null),
+    new EntityData("Oxidized Sovereign", EntityData.Type.King, -1, 320, 320, 3, 2, 2, 0, "rust", null),
 
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 180, 180, 2, 4, 1, 0, "rust", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 250, 250, 3, 4, 2, 0, "rust", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 280, 280, 3, 3, 2, 0, "rust", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 350, 350, 4, 2, 2, 0, "rust", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 300, 300, 4, 3, 1, 0, "rust", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 320, 320, 3, 2, 2, 0, "rust", null),
+    // --- STONE SET ---
+    new EntityData("Pebblin", EntityData.Type.Pawn, -1, 260, 260, 3, 4, 3, 0, "stone", null),
+    new EntityData("Granite Charger", EntityData.Type.Knight, -1, 380, 380, 4, 4, 4, 0, "stone", null),
+    new EntityData("Marble Sage", EntityData.Type.Bishop, -1, 420, 420, 4, 3, 4, 0, "stone", null),
+    new EntityData("Obsidian Tower", EntityData.Type.Rook, -1, 500, 500, 5, 2, 4, 0, "stone", null),
+    new EntityData("Stone Matron", EntityData.Type.Queen, -1, 480, 480, 5, 3, 4, 0, "stone", null),
+    new EntityData("Rock Warden", EntityData.Type.King, -1, 520, 520, 4, 2, 4, 0, "stone", null),
 
+    // --- BRONZE SET ---
+    new EntityData("Copperling", EntityData.Type.Pawn, -1, 280, 280, 3, 5, 5, 0, "bronze", null),
+    new EntityData("Bronze Rider", EntityData.Type.Knight, -1, 360, 360, 4, 5, 5, 0, "bronze", null),
+    new EntityData("Gilded Monk", EntityData.Type.Bishop, -1, 400, 400, 4, 4, 6, 0, "bronze", null),
+    new EntityData("Alloy Bastion", EntityData.Type.Rook, -1, 520, 520, 5, 3, 5, 0, "bronze", null),
+    new EntityData("Amber Regent", EntityData.Type.Queen, -1, 460, 460, 5, 4, 5, 0, "bronze", null),
+    new EntityData("Bronze Monarch", EntityData.Type.King, -1, 500, 500, 4, 3, 5, 0, "bronze", null),
 
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 260, 260, 3, 4, 3, 0, "stone", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 380, 380, 4, 4, 4, 0, "stone", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 420, 420, 4, 3, 4, 0, "stone", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 500, 500, 5, 2, 4, 0, "stone", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 480, 480, 5, 3, 4, 0, "stone", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 520, 520, 4, 2, 4, 0, "stone", null),
+    // --- FROST SET ---
+    new EntityData("Snowling", EntityData.Type.Pawn, -1, 320, 320, 4, 4, 8, 0, "frost", null),
+    new EntityData("Glacier Rider", EntityData.Type.Knight, -1, 520, 520, 5, 4, 6, 0, "frost", null),
+    new EntityData("Ice Sage", EntityData.Type.Bishop, -1, 650, 650, 5, 3, 8, 0, "frost", null),
+    new EntityData("Frozen Keep", EntityData.Type.Rook, -1, 850, 850, 4, 2, 5, 0, "frost", null),
+    new EntityData("Ice Empress", EntityData.Type.Queen, -1, 700, 700, 5, 3, 6, 0, "frost", null),
+    new EntityData("Winter King", EntityData.Type.King, -1, 900, 900, 3, 2, 5, 0, "frost", null),
 
+    // --- STORM SET ---
+    new EntityData("Sparkpawn", EntityData.Type.Pawn, -1, 260, 260, 5,10, 6, 0, "storm", null),
+    new EntityData("Thunder Rider", EntityData.Type.Knight, -1, 320, 320, 6,10, 5, 0, "storm", null),
+    new EntityData("Tempest Oracle", EntityData.Type.Bishop, -1, 360, 360, 5, 9, 8, 0, "storm", null),
+    new EntityData("Storm Pillar", EntityData.Type.Rook, -1, 420, 420, 6, 7, 5, 0, "storm", null),
+    new EntityData("Lightning Queen", EntityData.Type.Queen, -1, 500, 500, 7, 8, 5, 0, "storm", null),
+    new EntityData("Sky King", EntityData.Type.King, -1, 480, 480, 6, 6, 5, 0, "storm", null),
 
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 280, 280, 3, 5, 5, 0, "bronze", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 360, 360, 4, 5, 5, 0, "bronze", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 400, 400, 4, 4, 6, 0, "bronze", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 520, 520, 5, 3, 5, 0, "bronze", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 460, 460, 5, 4, 5, 0, "bronze", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 500, 500, 4, 3, 5, 0, "bronze", null),
+    // --- TERRA SET ---
+    new EntityData("Mudling", EntityData.Type.Pawn, -1, 380, 380, 6, 5, 8, 0, "terra", null),
+    new EntityData("Earth Rider", EntityData.Type.Knight, -1, 540, 540, 6, 5, 6, 0, "terra", null),
+    new EntityData("Verdant Sage", EntityData.Type.Bishop, -1, 620, 620, 6, 4, 7, 0, "terra", null),
+    new EntityData("Gaia Tower", EntityData.Type.Rook, -1, 900, 900, 5, 3, 5, 0, "terra", null),
+    new EntityData("Nature Queen", EntityData.Type.Queen, -1, 680, 680, 6, 4, 6, 0, "terra", null),
+    new EntityData("Earthen King", EntityData.Type.King, -1, 800, 800, 4, 3, 6, 0, "terra", null),
 
+    // --- AQUA SET ---
+    new EntityData("Droplet", EntityData.Type.Pawn, -1, 300, 300, 4, 6,10, 0, "aqua", null),
+    new EntityData("Wave Rider", EntityData.Type.Knight, -1, 380, 380, 5, 6, 9, 0, "aqua", null),
+    new EntityData("Tide Priest", EntityData.Type.Bishop, -1, 420, 420, 5, 6,10, 0, "aqua", null),
+    new EntityData("Coral Bastion", EntityData.Type.Rook, -1, 500, 500, 6, 4, 8, 0, "aqua", null),
+    new EntityData("Sea Empress", EntityData.Type.Queen, -1, 560, 560, 6, 6, 8, 0, "aqua", null),
+    new EntityData("Ocean King", EntityData.Type.King, -1, 600, 600, 5, 5, 8, 0, "aqua", null),
 
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 320, 320, 4, 4, 8, 0, "frost", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 520, 520, 5, 4, 6, 0, "frost", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 650, 650, 5, 3, 8, 0, "frost", null), 
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 850, 850, 4, 2, 5, 0, "frost", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 700, 700, 5, 3, 6, 0, "frost", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 900, 900, 3, 2, 5, 0, "frost", null),
+    // --- INFERNO SET ---
+    new EntityData("Cinderling", EntityData.Type.Pawn, -1, 240, 240, 7, 9, 3, 0, "inferno", null),
+    new EntityData("Blaze Rider", EntityData.Type.Knight, -1, 320, 320, 8, 8, 4, 0, "inferno", null),
+    new EntityData("Flame Monk", EntityData.Type.Bishop, -1, 360, 360, 7, 7, 5, 0, "inferno", null),
+    new EntityData("Pyre Tower", EntityData.Type.Rook, -1, 420, 420, 9, 4, 3, 0, "inferno", null),
+    new EntityData("Inferna Queen", EntityData.Type.Queen, -1, 520, 520, 8, 6, 4, 0, "inferno", null),
+    new EntityData("Ash King", EntityData.Type.King, -1, 500, 500, 7, 3, 4, 0, "inferno", null),
 
+    // --- VOID SET ---
+    new EntityData("Nullpawn", EntityData.Type.Pawn, -1, 240, 240, 6, 7, 8, 0, "void", null),
+    new EntityData("Abyss Rider", EntityData.Type.Knight, -1, 320, 320, 7, 7, 8, 0, "void", null),
+    new EntityData("Void Monk", EntityData.Type.Bishop, -1, 360, 360, 7, 6, 9, 0, "void", null),
+    new EntityData("Eclipse Bastion", EntityData.Type.Rook, -1, 420, 420, 8, 5, 7, 0, "void", null),
+    new EntityData("Dark Empress", EntityData.Type.Queen, -1, 520, 520, 8, 6, 7, 0, "void", null),
+    new EntityData("Shadow King", EntityData.Type.King, -1, 480, 480, 7, 5, 7, 0, "void", null),
 
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 260, 260, 5,10, 6, 0, "storm", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 320, 320, 6,10, 5, 0, "storm", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 360, 360, 5, 9, 8, 0, "storm", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 420, 420, 6, 7, 5, 0, "storm", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 500, 500, 7, 8, 5, 0, "storm", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 480, 480, 6, 6, 5, 0, "storm", null),
+    // --- RADIANT SET ---
+    new EntityData("Lightpawn", EntityData.Type.Pawn, -1, 260, 260, 3,10, 9, 0, "radiant", null),
+    new EntityData("Solar Rider", EntityData.Type.Knight, -1, 340, 340, 4, 9, 8, 0, "radiant", null),
+    new EntityData("Lumina Sage", EntityData.Type.Bishop, -1, 380, 380, 4, 8,10, 0, "radiant", null),
+    new EntityData("Sun Tower", EntityData.Type.Rook, -1, 460, 460, 5, 7, 8, 0, "radiant", null),
+    new EntityData("Radiant Queen", EntityData.Type.Queen, -1, 520, 520, 6, 8, 8, 0, "radiant", null),
+    new EntityData("Celestial King", EntityData.Type.King, -1, 520, 520, 5, 7, 8, 0, "radiant", null),
+};
 
-
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 380, 380, 6, 5, 8, 0, "terra", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 540, 540, 6, 5, 6, 0, "terra", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 620, 620, 6, 4, 7, 0, "terra", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 900, 900, 5, 3, 5, 0, "terra", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 680, 680, 6, 4, 6, 0, "terra", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 800, 800, 4, 3, 6, 0, "terra", null),
-
-
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 300, 300, 4, 6,10, 0, "aqua", null), 
-        new EntityData("Knight", EntityData.Type.Knight, -1, 380, 380, 5, 6, 9, 0, "aqua", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 420, 420, 5, 6,10, 0, "aqua", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 500, 500, 6, 4, 8, 0, "aqua", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 560, 560, 6, 6, 8, 0, "aqua", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 600, 600, 5, 5, 8, 0, "aqua", null),
-
-
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 240, 240, 7, 9, 3, 0, "inferno", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 320, 320, 8, 8, 4, 0, "inferno", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 360, 360, 7, 7, 5, 0, "inferno", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 420, 420, 9, 4, 3, 0, "inferno", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 520, 520, 8, 6, 4, 0, "inferno", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 500, 500, 7, 3, 4, 0, "inferno", null),
-
-
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 240, 240, 6, 7, 8, 0, "void", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 320, 320, 7, 7, 8, 0, "void", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 360, 360, 7, 6, 9, 0, "void", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 420, 420, 8, 5, 7, 0, "void", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 520, 520, 8, 6, 7, 0, "void", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 480, 480, 7, 5, 7, 0, "void", null),
-
-
-        new EntityData("Pawn",   EntityData.Type.Pawn,   -1, 260, 260, 3,10, 9, 0, "radiant", null),
-        new EntityData("Knight", EntityData.Type.Knight, -1, 340, 340, 4, 9, 8, 0, "radiant", null),
-        new EntityData("Bishop", EntityData.Type.Bishop, -1, 380, 380, 4, 8,10, 0, "radiant", null),
-        new EntityData("Rook",   EntityData.Type.Rook,   -1, 460, 460, 5, 7, 8, 0, "radiant", null),
-        new EntityData("Queen",  EntityData.Type.Queen,  -1, 520, 520, 6, 8, 8, 0, "radiant", null),
-        new EntityData("King",   EntityData.Type.King,   -1, 520, 520, 5, 7, 8, 0, "radiant", null),
-    };
 
     public static EntityData GetRandomOfType(EntityData.Type type)
     {

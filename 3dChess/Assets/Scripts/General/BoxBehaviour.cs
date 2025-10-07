@@ -15,7 +15,7 @@ public class BoxBehaviour : MonoBehaviour
     private TweenBase ShakeAnim;
     public bool IsReady;
     public PlayerBehaviour player;
-
+    public GameObject Basic;
     public ParticleSystem Before, After;
 
     void Start()
@@ -33,6 +33,7 @@ public class BoxBehaviour : MonoBehaviour
 
     public void PrepareBox()
     {
+        Basic.SetActive(false);
         Before.Play();
         Movement.IsPaused = true;
         Box.transform.localPosition = Hidden;
@@ -75,5 +76,6 @@ public class BoxBehaviour : MonoBehaviour
         Movement.IsPaused = false;
         Destroy(CurrentPiece);
         GetPiece.gameObject.SetActive(false);
+        Basic.SetActive(true);
     }
 }

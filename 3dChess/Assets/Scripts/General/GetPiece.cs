@@ -12,6 +12,7 @@ public class GetPiece : MonoBehaviour
     public GetMoveUI OriginalGetMoveUI;
     public List<GetMoveUI> CurrentMoves = new();
     public Slider S_Attack, S_Defense, S_Speed, S_Luck;
+    
 
     public void Create(EntityData e)
     {

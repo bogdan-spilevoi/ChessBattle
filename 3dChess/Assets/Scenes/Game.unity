@@ -323,6 +323,155 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19792166}
   m_CullTransparentMesh: 1
+--- !u!1 &19929022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19929023}
+  - component: {fileID: 19929025}
+  - component: {fileID: 19929024}
+  - component: {fileID: 19929026}
+  m_Layer: 5
+  m_Name: T_Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &19929023
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19929022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 508653521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 600, y: -0.00013160706}
+  m_SizeDelta: {x: 99.28, y: 30.967}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &19929024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19929022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 1000/1000
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &19929025
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19929022}
+  m_CullTransparentMesh: 1
+--- !u!114 &19929026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19929022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
 --- !u!1 &24941472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1949,6 +2098,155 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102286090}
   m_CullTransparentMesh: 1
+--- !u!1 &103491194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 103491195}
+  - component: {fileID: 103491198}
+  - component: {fileID: 103491197}
+  - component: {fileID: 103491196}
+  m_Layer: 5
+  m_Name: T_Exp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &103491195
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103491194}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 427603965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 600, y: -0.00005340576}
+  m_SizeDelta: {x: 99.28, y: 30.967}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &103491196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103491194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
+--- !u!114 &103491197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103491194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 1000/1000
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: aae934b55e5734a4882f00f15997eb3b, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &103491198
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103491194}
+  m_CullTransparentMesh: 1
 --- !u!1 &107661043
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,8 +3377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24.78003}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0, y: -25}
+  m_SizeDelta: {x: 491.5577, y: 49.78}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &195258970
 MonoBehaviour:
@@ -6309,6 +6607,7 @@ RectTransform:
   - {fileID: 458288811}
   - {fileID: 1387536421}
   - {fileID: 1670132809}
+  - {fileID: 103491195}
   m_Father: {fileID: 577529610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -6951,7 +7250,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Scrapling
     PieceType: 0
     Position: -1
     Health: 180
@@ -6963,7 +7262,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Oxide Rider
     PieceType: 1
     Position: -1
     Health: 250
@@ -6975,7 +7274,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Corroded Monk
     PieceType: 2
     Position: -1
     Health: 280
@@ -6987,7 +7286,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Iron Bastion
     PieceType: 3
     Position: -1
     Health: 350
@@ -6999,7 +7298,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Rust Empress
     PieceType: 4
     Position: -1
     Health: 300
@@ -7011,7 +7310,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Oxidized Sovereign
     PieceType: 5
     Position: -1
     Health: 320
@@ -7023,7 +7322,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Pebblin
     PieceType: 0
     Position: -1
     Health: 260
@@ -7035,7 +7334,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Granite Charger
     PieceType: 1
     Position: -1
     Health: 380
@@ -7047,7 +7346,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Marble Sage
     PieceType: 2
     Position: -1
     Health: 420
@@ -7059,7 +7358,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Obsidian Tower
     PieceType: 3
     Position: -1
     Health: 500
@@ -7071,7 +7370,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Stone Matron
     PieceType: 4
     Position: -1
     Health: 480
@@ -7083,7 +7382,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Rock Warden
     PieceType: 5
     Position: -1
     Health: 520
@@ -7095,7 +7394,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Copperling
     PieceType: 0
     Position: -1
     Health: 280
@@ -7107,7 +7406,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Bronze Rider
     PieceType: 1
     Position: -1
     Health: 360
@@ -7119,7 +7418,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Gilded Monk
     PieceType: 2
     Position: -1
     Health: 400
@@ -7131,7 +7430,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Alloy Bastion
     PieceType: 3
     Position: -1
     Health: 520
@@ -7143,7 +7442,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Amber Regent
     PieceType: 4
     Position: -1
     Health: 460
@@ -7155,7 +7454,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Bronze Monarch
     PieceType: 5
     Position: -1
     Health: 500
@@ -7167,7 +7466,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Snowling
     PieceType: 0
     Position: -1
     Health: 320
@@ -7179,7 +7478,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Glacier Rider
     PieceType: 1
     Position: -1
     Health: 520
@@ -7191,7 +7490,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Ice Sage
     PieceType: 2
     Position: -1
     Health: 650
@@ -7203,7 +7502,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Frozen Keep
     PieceType: 3
     Position: -1
     Health: 850
@@ -7215,7 +7514,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Ice Empress
     PieceType: 4
     Position: -1
     Health: 700
@@ -7227,7 +7526,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Winter King
     PieceType: 5
     Position: -1
     Health: 900
@@ -7239,7 +7538,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Sparkpawn
     PieceType: 0
     Position: -1
     Health: 260
@@ -7251,7 +7550,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Thunder Rider
     PieceType: 1
     Position: -1
     Health: 320
@@ -7263,7 +7562,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Tempest Oracle
     PieceType: 2
     Position: -1
     Health: 360
@@ -7275,7 +7574,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Storm Pillar
     PieceType: 3
     Position: -1
     Health: 420
@@ -7287,7 +7586,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Lightning Queen
     PieceType: 4
     Position: -1
     Health: 500
@@ -7299,7 +7598,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Sky King
     PieceType: 5
     Position: -1
     Health: 480
@@ -7311,7 +7610,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Mudling
     PieceType: 0
     Position: -1
     Health: 380
@@ -7323,7 +7622,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Earth Rider
     PieceType: 1
     Position: -1
     Health: 540
@@ -7335,7 +7634,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Verdant Sage
     PieceType: 2
     Position: -1
     Health: 620
@@ -7347,7 +7646,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Gaia Tower
     PieceType: 3
     Position: -1
     Health: 900
@@ -7359,7 +7658,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Nature Queen
     PieceType: 4
     Position: -1
     Health: 680
@@ -7371,7 +7670,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Earthen King
     PieceType: 5
     Position: -1
     Health: 800
@@ -7383,7 +7682,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Droplet
     PieceType: 0
     Position: -1
     Health: 300
@@ -7395,7 +7694,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Wave Rider
     PieceType: 1
     Position: -1
     Health: 380
@@ -7407,7 +7706,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Tide Priest
     PieceType: 2
     Position: -1
     Health: 420
@@ -7419,7 +7718,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Coral Bastion
     PieceType: 3
     Position: -1
     Health: 500
@@ -7431,7 +7730,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Sea Empress
     PieceType: 4
     Position: -1
     Health: 560
@@ -7443,7 +7742,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Ocean King
     PieceType: 5
     Position: -1
     Health: 600
@@ -7455,7 +7754,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Cinderling
     PieceType: 0
     Position: -1
     Health: 240
@@ -7467,7 +7766,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Blaze Rider
     PieceType: 1
     Position: -1
     Health: 320
@@ -7479,7 +7778,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Flame Monk
     PieceType: 2
     Position: -1
     Health: 360
@@ -7491,7 +7790,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Pyre Tower
     PieceType: 3
     Position: -1
     Health: 420
@@ -7503,7 +7802,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Inferna Queen
     PieceType: 4
     Position: -1
     Health: 520
@@ -7515,7 +7814,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Ash King
     PieceType: 5
     Position: -1
     Health: 500
@@ -7527,7 +7826,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Nullpawn
     PieceType: 0
     Position: -1
     Health: 240
@@ -7539,7 +7838,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Abyss Rider
     PieceType: 1
     Position: -1
     Health: 320
@@ -7551,7 +7850,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Void Monk
     PieceType: 2
     Position: -1
     Health: 360
@@ -7563,7 +7862,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Eclipse Bastion
     PieceType: 3
     Position: -1
     Health: 420
@@ -7575,7 +7874,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Dark Empress
     PieceType: 4
     Position: -1
     Health: 520
@@ -7587,7 +7886,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Shadow King
     PieceType: 5
     Position: -1
     Health: 480
@@ -7599,7 +7898,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Pawn
+  - Name: Lightpawn
     PieceType: 0
     Position: -1
     Health: 260
@@ -7611,7 +7910,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Knight
+  - Name: Solar Rider
     PieceType: 1
     Position: -1
     Health: 340
@@ -7623,7 +7922,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Bishop
+  - Name: Lumina Sage
     PieceType: 2
     Position: -1
     Health: 380
@@ -7635,7 +7934,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Rook
+  - Name: Sun Tower
     PieceType: 3
     Position: -1
     Health: 460
@@ -7647,7 +7946,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: Queen
+  - Name: Radiant Queen
     PieceType: 4
     Position: -1
     Health: 520
@@ -7659,7 +7958,7 @@ MonoBehaviour:
     HiddenStat: 0
     Exp: 0
     Moves: []
-  - Name: King
+  - Name: Celestial King
     PieceType: 5
     Position: -1
     Health: 520
@@ -7696,6 +7995,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 40
+    Count: 10
   - Variants:
     - aqua
     - storm
@@ -7704,6 +8004,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 40
+    Count: 10
   - Variants:
     - basic
     - bronze
@@ -7716,6 +8017,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 41
+    Count: 10
   - Variants:
     - frost
     - stone
@@ -7724,6 +8026,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 44
+    Count: 10
   - Variants:
     - rust
     - bronze
@@ -7733,6 +8036,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 43
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -7742,6 +8046,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 45
+    Count: 10
   - Variants:
     - bronze
     - stone
@@ -7751,6 +8056,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 45
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -7760,6 +8066,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 47
+    Count: 10
   - Variants:
     - aqua
     - storm
@@ -7768,6 +8075,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 50
+    Count: 8
   - Variants:
     - storm
     - radiant
@@ -7779,6 +8087,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
+    Count: 8
   - Variants:
     - frost
     - stone
@@ -7787,6 +8096,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
+    Count: 8
   - Variants:
     - storm
     - radiant
@@ -7795,6 +8105,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
+    Count: 8
   - Variants:
     - radiant
     - aqua
@@ -7803,6 +8114,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
+    Count: 8
   - Variants:
     - inferno
     - storm
@@ -7811,6 +8123,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
+    Count: 8
   - Variants:
     - void
     - inferno
@@ -7819,6 +8132,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 53
+    Count: 6
   - Variants:
     - frost
     - void
@@ -7827,6 +8141,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 54
+    Count: 6
   - Variants:
     - radiant
     - storm
@@ -7835,6 +8150,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 55
+    Count: 6
   - Variants:
     - void
     - inferno
@@ -7843,6 +8159,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 55
+    Count: 6
   - Variants:
     - inferno
     - radiant
@@ -7851,6 +8168,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 3
     Action: 60
+    Count: 4
   - Variants:
     - storm
     - inferno
@@ -7859,6 +8177,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 3
     Action: 70
+    Count: 4
   - Variants:
     - basic
     - terra
@@ -7870,6 +8189,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 30
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -7880,6 +8200,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 32
+    Count: 10
   - Variants:
     - aqua
     - frost
@@ -7889,6 +8210,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 34
+    Count: 10
   - Variants:
     - rust
     - bronze
@@ -7898,6 +8220,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 28
+    Count: 10
   - Variants:
     - basic
     - radiant
@@ -7906,6 +8229,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 35
+    Count: 10
   - Variants:
     - frost
     - aqua
@@ -7915,6 +8239,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 36
+    Count: 10
   - Variants:
     - basic
     - aqua
@@ -7925,6 +8250,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 40
+    Count: 8
   - Variants:
     - inferno
     - bronze
@@ -7934,6 +8260,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 42
+    Count: 8
   - Variants:
     - radiant
     - aqua
@@ -7942,6 +8269,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 44
+    Count: 8
   - Variants:
     - aqua
     - radiant
@@ -7950,6 +8278,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 46
+    Count: 8
   - Variants:
     - void
     - aqua
@@ -7958,6 +8287,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 52
+    Count: 6
   - Variants:
     - radiant
     - aqua
@@ -7966,6 +8296,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 55
+    Count: 6
   - Variants:
     - terra
     - stone
@@ -7975,6 +8306,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 50
+    Count: 6
   - Variants:
     - inferno
     - storm
@@ -7983,6 +8315,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 58
+    Count: 6
   - Variants:
     - radiant
     - storm
@@ -7992,6 +8325,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 3
     Action: 70
+    Count: 4
   - Variants:
     - void
     - terra
@@ -8001,6 +8335,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 3
     Action: 65
+    Count: 4
   - Variants:
     - basic
     - bronze
@@ -8012,6 +8347,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 12
+    Count: 10
   - Variants:
     - frost
     - radiant
@@ -8021,6 +8357,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 15
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -8031,6 +8368,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 16
+    Count: 10
   - Variants:
     - basic
     - bronze
@@ -8040,6 +8378,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 18
+    Count: 10
   - Variants:
     - frost
     - stone
@@ -8049,6 +8388,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 14
+    Count: 10
   - Variants:
     - aqua
     - radiant
@@ -8058,6 +8398,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 16
+    Count: 10
   - Variants:
     - frost
     - stone
@@ -8068,6 +8409,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 22
+    Count: 8
   - Variants:
     - aqua
     - radiant
@@ -8076,6 +8418,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 22
+    Count: 8
   - Variants:
     - storm
     - bronze
@@ -8086,6 +8429,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 23
+    Count: 8
   - Variants:
     - terra
     - stone
@@ -8096,6 +8440,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 24
+    Count: 8
   - Variants:
     - frost
     - terra
@@ -8104,6 +8449,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 35
+    Count: 6
   - Variants:
     - terra
     - stone
@@ -8112,6 +8458,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 32
+    Count: 6
   - Variants:
     - radiant
     - aqua
@@ -8121,6 +8468,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 33
+    Count: 6
   - Variants:
     - storm
     - bronze
@@ -8130,6 +8478,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 32
+    Count: 6
   - Variants:
     - radiant
     - storm
@@ -8139,6 +8488,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 3
     Action: 42
+    Count: 4
   - Variants:
     - void
     - frost
@@ -8148,6 +8498,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 3
     Action: 45
+    Count: 4
   - Variants:
     - basic
     - storm
@@ -8159,6 +8510,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 12
+    Count: 10
   - Variants:
     - bronze
     - rust
@@ -8167,6 +8519,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 13
+    Count: 10
   - Variants:
     - radiant
     - basic
@@ -8175,6 +8528,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 11
+    Count: 10
   - Variants:
     - aqua
     - frost
@@ -8183,6 +8537,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 14
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -8191,6 +8546,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 10
+    Count: 10
   - Variants:
     - storm
     - inferno
@@ -8199,6 +8555,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 12
+    Count: 10
   - Variants:
     - radiant
     - storm
@@ -8208,6 +8565,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 18
+    Count: 8
   - Variants:
     - inferno
     - storm
@@ -8216,6 +8574,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 19
+    Count: 8
   - Variants:
     - storm
     - radiant
@@ -8225,6 +8584,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 20
+    Count: 8
   - Variants:
     - void
     - rust
@@ -8234,6 +8594,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 17
+    Count: 8
   - Variants:
     - void
     - storm
@@ -8242,6 +8603,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - inferno
     - radiant
@@ -8250,6 +8612,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 23
+    Count: 6
   - Variants:
     - radiant
     - aqua
@@ -8258,6 +8621,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 24
+    Count: 6
   - Variants:
     - frost
     - aqua
@@ -8267,6 +8631,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - radiant
     - storm
@@ -8276,6 +8641,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 3
     Action: 28
+    Count: 4
   - Variants:
     - void
     - inferno
@@ -8285,6 +8651,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 3
     Action: 26
+    Count: 4
   - Variants:
     - bronze
     - stone
@@ -8296,6 +8663,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: -12
+    Count: 10
   - Variants:
     - aqua
     - void
@@ -8305,6 +8673,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: -14
+    Count: 10
   - Variants:
     - terra
     - aqua
@@ -8313,6 +8682,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: -13
+    Count: 10
   - Variants:
     - frost
     - stone
@@ -8321,6 +8691,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: -12
+    Count: 10
   - Variants:
     - rust
     - bronze
@@ -8329,6 +8700,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: -11
+    Count: 10
   - Variants:
     - basic
     - radiant
@@ -8337,6 +8709,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: -10
+    Count: 10
   - Variants:
     - terra
     - aqua
@@ -8345,6 +8718,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: -18
+    Count: 8
   - Variants:
     - terra
     - stone
@@ -8354,6 +8728,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: -19
+    Count: 8
   - Variants:
     - frost
     - void
@@ -8362,6 +8737,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: -18
+    Count: 8
   - Variants:
     - storm
     - inferno
@@ -8370,6 +8746,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: -17
+    Count: 8
   - Variants:
     - frost
     - terra
@@ -8379,6 +8756,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: -22
+    Count: 6
   - Variants:
     - void
     - rust
@@ -8388,6 +8766,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: -23
+    Count: 6
   - Variants:
     - inferno
     - terra
@@ -8396,6 +8775,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: -22
+    Count: 6
   - Variants:
     - aqua
     - storm
@@ -8404,6 +8784,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: -21
+    Count: 6
   - Variants:
     - void
     - radiant
@@ -8412,6 +8793,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 3
     Action: -28
+    Count: 4
   - Variants:
     - frost
     - aqua
@@ -8421,6 +8803,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 3
     Action: -26
+    Count: 4
   - Variants:
     - rust
     - bronze
@@ -8429,6 +8812,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 11
+    Count: 10
   - Variants:
     - rust
     - bronze
@@ -8438,6 +8822,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 11
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -8447,6 +8832,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 12
+    Count: 10
   - Variants:
     - frost
     - stone
@@ -8456,6 +8842,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 13
+    Count: 10
   - Variants:
     - storm
     - bronze
@@ -8464,6 +8851,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 14
+    Count: 10
   - Variants:
     - aqua
     - basic
@@ -8473,6 +8861,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 14
+    Count: 10
   - Variants:
     - basic
     - inferno
@@ -8483,6 +8872,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 18
+    Count: 8
   - Variants:
     - inferno
     - rust
@@ -8491,6 +8881,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 19
+    Count: 8
   - Variants:
     - frost
     - void
@@ -8500,6 +8891,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 18
+    Count: 8
   - Variants:
     - aqua
     - void
@@ -8508,6 +8900,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 18
+    Count: 8
   - Variants:
     - frost
     - void
@@ -8516,6 +8909,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - void
     - frost
@@ -8525,6 +8919,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 23
+    Count: 6
   - Variants:
     - terra
     - stone
@@ -8534,6 +8929,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - radiant
     - aqua
@@ -8542,6 +8938,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 24
+    Count: 6
   - Variants:
     - void
     - frost
@@ -8550,6 +8947,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 3
     Action: 28
+    Count: 4
   - Variants:
     - void
     - radiant
@@ -8559,6 +8957,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 3
     Action: 26
+    Count: 4
   - Variants:
     - basic
     - void
@@ -8568,6 +8967,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 10
+    Count: 10
   - Variants:
     - aqua
     - rust
@@ -8576,6 +8976,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 11
+    Count: 10
   - Variants:
     - storm
     - rust
@@ -8585,6 +8986,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 12
+    Count: 10
   - Variants:
     - basic
     - rust
@@ -8594,6 +8996,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 13
+    Count: 10
   - Variants:
     - void
     - rust
@@ -8604,6 +9007,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 14
+    Count: 10
   - Variants:
     - aqua
     - void
@@ -8614,6 +9018,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 14
+    Count: 10
   - Variants:
     - aqua
     - frost
@@ -8622,6 +9027,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 16
+    Count: 8
   - Variants:
     - terra
     - void
@@ -8631,6 +9037,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 16
+    Count: 8
   - Variants:
     - stone
     - rust
@@ -8643,6 +9050,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 18
+    Count: 8
   - Variants:
     - inferno
     - void
@@ -8652,6 +9060,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 19
+    Count: 8
   - Variants:
     - rust
     - void
@@ -8661,6 +9070,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - void
     - inferno
@@ -8669,6 +9079,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - inferno
     - void
@@ -8677,6 +9088,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 22
+    Count: 6
   - Variants:
     - storm
     - void
@@ -8686,6 +9098,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 23
+    Count: 6
   - Variants:
     - void
     - storm
@@ -8695,6 +9108,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 3
     Action: 25
+    Count: 4
   - Variants:
     - void
     - rust
@@ -8704,6 +9118,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 3
     Action: 28
+    Count: 4
 --- !u!1 &458288810
 GameObject:
   m_ObjectHideFlags: 0
@@ -14811,6 +15226,7 @@ RectTransform:
   - {fileID: 2130032759}
   - {fileID: 721533552}
   - {fileID: 2032348405}
+  - {fileID: 19929023}
   m_Father: {fileID: 577529610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
@@ -16678,6 +17094,7 @@ MonoBehaviour:
       Type: 0
       Rarity: 0
       Action: 40
+      Count: 0
   Defeated: 0
 --- !u!1 &591158247
 GameObject:
@@ -18691,7 +19108,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -29823,10 +30240,12 @@ MonoBehaviour:
   T_Name: {fileID: 397456451}
   T_Level: {fileID: 963361062}
   T_Type: {fileID: 1027024197}
+  T_Health: {fileID: 19929024}
+  T_Exp: {fileID: 103491197}
   S_Health: {fileID: 508653522}
   S_Exp: {fileID: 427603966}
   S_Attack: {fileID: 1903656443}
-  S_Defense: {fileID: 0}
+  S_Defense: {fileID: 56911255}
   S_Speed: {fileID: 883174857}
   S_Luck: {fileID: 905041365}
   Icon: {fileID: 1516322251}
@@ -35518,7 +35937,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 45.7, y: -0.000022888184}
+  m_AnchoredPosition: {x: 40.4, y: -0.000022888184}
   m_SizeDelta: {x: 35, y: 35}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1545212463
@@ -37770,7 +38189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13.6, y: -24.126}
+  m_AnchoredPosition: {x: -15.8, y: -24.126}
   m_SizeDelta: {x: 35.96, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728252124
@@ -40573,6 +40992,7 @@ MonoBehaviour:
   Shown: {x: -0.05000007, y: 0.023543, z: 1.2745849}
   IsReady: 0
   player: {fileID: 758007027}
+  Basic: {fileID: 1604742582}
   Before: {fileID: 740717737}
   After: {fileID: 496237141}
 --- !u!1 &1995053164

@@ -217,9 +217,10 @@ public class BattleManager : MonoBehaviour
                     BattleUI.UpdateHealth();
                     break;
                 }
-        }         
+        }
 
-        
+        m.Count--;
+        BattleUI.Create(this);
 
         if (Original1.Health <= 0 || Original2.Health <= 0)
         {

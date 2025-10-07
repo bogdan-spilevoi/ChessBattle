@@ -16,6 +16,7 @@ public class BattleUI : MonoBehaviour
     public BattleMoveUI OrgMove;
     public List<BattleMoveUI> MoveUI;
     public GameObject PlayerUIOverlay, AttackUI, DialogueUI;
+    public Button B_Attack;
 
     public GameObject Tab_SwitchPiece;
     public List<SwitchPieceGraphic> SwitchPieces;
@@ -24,7 +25,6 @@ public class BattleUI : MonoBehaviour
 
     public void Create(BattleManager battleManager)
     {
-
         BattleManager = battleManager;
 
         T_Name1.text = BattleManager.player1.Name == "" ? BattleManager.player1.GetType().ToString() : BattleManager.player1.Name;
@@ -71,6 +71,7 @@ public class BattleUI : MonoBehaviour
         PlayerUIOverlay.SetActive(b);
         AttackUI.SetActive(b);
         DialogueUI.SetActive(!b);
+        B_Attack.enabled = BattleManager.player1.AvialableMoves.Any(m => m.Count > 0);
     }
 
     public void ToggleSwitchPiece(bool b)

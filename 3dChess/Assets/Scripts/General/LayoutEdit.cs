@@ -115,7 +115,7 @@ public class LayoutEdit : MonoBehaviour
         IComparer<EntityData> comparer = sortMethod switch
         {
             0 => Comparer<EntityData>.Create((a, b) => b.Exp.CompareTo(a.Exp)),
-            1 => Comparer<EntityData>.Create((a, b) => b.Health.CompareTo(a.Health)),
+            1 => Comparer<EntityData>.Create((a, b) => (a.MaxHealth - a.Health).CompareTo(b.MaxHealth - b.Health)),
             2 => Comparer<EntityData>.Create((a, b) => b.PieceType.CompareTo(a.PieceType)),
             3 => Comparer<EntityData>.Create((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal)),
             _ => Comparer<EntityData>.Create((a, b) => b.Exp.CompareTo(a.Exp)),

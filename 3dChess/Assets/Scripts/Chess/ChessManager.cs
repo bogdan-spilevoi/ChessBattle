@@ -43,6 +43,11 @@ public class ChessManager : MonoBehaviour
             var p = Instantiate(OrgPieces[(int)piece.PieceType]);
             p.gameObject.SetActive(true);
             p.Create(piece.Position, piece);
+
+            foreach(var move in piece.Moves)
+            {
+                move.Count = move.MaxCount;
+            }
             
             WhitePieces.Add(p);
         }
@@ -54,8 +59,13 @@ public class ChessManager : MonoBehaviour
             var p = Instantiate(OrgPieces[(int)piece.PieceType]);
             p.gameObject.SetActive(true);
             p.side = false;
-            p.Create(64 - piece.Position, piece); 
-            
+            p.Create(64 - piece.Position, piece);
+
+            foreach (var move in piece.Moves)
+            {
+                move.Count = move.MaxCount;
+            }
+
             BlackPieces.Add(p);
         }
     }

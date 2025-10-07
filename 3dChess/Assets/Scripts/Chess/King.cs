@@ -25,7 +25,7 @@ public class King : Piece
 
             if (x < 0 || y < 0 || x > 7 || y > 7) continue;
             if (Ref.ManageTiles.GetTile(x, y).currentPiece != null && Ref.ManageTiles.GetTile(x, y).currentPiece.side == side) continue;
-            if (attackTiles.Contains(Ref.ManageTiles.GetTile(x, y))) continue;
+            //if (attackTiles.Contains(Ref.ManageTiles.GetTile(x, y))) continue;
 
             Preview.Add(Ref.ManageTiles.GetTile(x, y));
         }

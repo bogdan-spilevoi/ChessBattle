@@ -15,7 +15,7 @@ public class ViewPiece : MonoBehaviour
 
     [Header("Info")]
     public TMP_Text T_Name;
-    public TMP_Text T_Level, T_Type;
+    public TMP_Text T_Level, T_Type, T_Health, T_Exp;
     public Slider S_Health;
     public Slider S_Exp;
     public Slider S_Attack, S_Defense, S_Speed, S_Luck;
@@ -102,12 +102,15 @@ public class ViewPiece : MonoBehaviour
         S_Attack.maxValue = 10;
         S_Defense.maxValue = 1000;
         S_Speed.maxValue = 10;
-        S_Luck.maxValue = 10;
+        S_Luck.maxValue = 10;       
 
         S_Attack.value = e.Attack;
         S_Defense.value = e.MaxHealth;
         S_Speed.value = e.Speed;
         S_Luck.value = e.Luck;
+
+        T_Health.text = $"{e.Health}/{e.MaxHealth}";
+        T_Exp.text = $"{(int)(S_Exp.value - S_Exp.minValue)}/{S_Exp.maxValue - S_Exp.minValue}";
     }
 
     public void CloseViewPiece()

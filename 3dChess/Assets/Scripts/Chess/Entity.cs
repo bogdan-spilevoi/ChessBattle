@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
@@ -76,6 +77,8 @@ public abstract class Entity : MonoBehaviour
     }
 
     public List<Move> Moves { get { return Data.Moves; } }
+    public List<Move> AvialableMoves => Moves.TakeWhile((move, i) => Move.MoveIndToLvlRequired(i) <= Level).ToList();
+
     public abstract void UpdateUI();
 
     public abstract void OnIncludedBattleEnd();
