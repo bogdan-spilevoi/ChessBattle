@@ -26,6 +26,7 @@ public class BattleManager : MonoBehaviour
     public BattleResult Result = BattleResult.Empty;
 
     public Action<BattleResult, Tile> OnBattleEnd;
+    public static Action<bool> OnMoveEnd;
 
     public TMP_Text T_Animtation;
 
@@ -120,12 +121,10 @@ public class BattleManager : MonoBehaviour
         Turn++;
         BattleUI.UpdateUI();
 
-        //Move Animation
-
-        StartCoroutine(StraightAttack((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, attackingSide));
+        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, attackingSide));
     }
 
-    private IEnumerator StraightAttack((Entity, GameObject) att, (Entity, GameObject) deff, Move m, bool attackingSide)
+    private IEnumerator ProcessMoveCor((Entity, GameObject) att, (Entity, GameObject) deff, Move m, bool attackingSide)
     {
         var attacker = att.Item1;
         var defender = deff.Item1;
@@ -140,19 +139,33 @@ public class BattleManager : MonoBehaviour
             case MoveType.Attack:
                 {
                     Tween.Position(attackerObj.transform, defenderObj.transform.position, 0.5f, 0, Tween.EaseIn);
-                    int damage = (int)m.Action + (int)(attacker.Attack * 2/100 * m.Action) + UnityEngine.Random.Range(0, attacker.HiddenStat);
-                    string damageInfo = "-" + damage;
+                    print("Extra: " + (float)attacker.Attack * 2 / 100 * m.Action + " " + (int)((float)attacker.Attack * 2 / 100 * m.Action));
+                    int damage = (int)m.Action + (int)((float)attacker.Attack * 2/100 * m.Action) + UnityEngine.Random.Range(0, attacker.HiddenStat);
+                    
 
-                    if (RandomChance.Percent(attacker.Luck * 5))
+                    int defenderDefensePercent = EffectManager.HasEffect(!attackingSide, Effect.Type.Defense) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Defense) : 0;
+                    int attackerWeakenPercent = EffectManager.HasEffect(attackingSide, Effect.Type.Weaken) ? (int)EffectManager.GetEffecttypeAction(attackingSide, Effect.Type.Weaken) : 0;
+                    int attackerSlow = EffectManager.HasEffect(attackingSide, Effect.Type.Slow) ? (int)EffectManager.GetEffecttypeAction(attackingSide, Effect.Type.Slow) : 0;
+                    int defenderEvasion = EffectManager.HasEffect(!attackingSide, Effect.Type.Evasion) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Evasion) : 0;
+                    int defenderPoison = EffectManager.HasEffect(!attackingSide, Effect.Type.Poison) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Poison) : 0;
+
+                    print(defenderDefensePercent + " " + attackerWeakenPercent + " " + attackerSlow + " " + defenderEvasion + " " + defenderPoison);
+
+                    int orgDamage = damage;
+                    damage -= (int)(((float)defenderDefensePercent + attackerWeakenPercent) / 100 * orgDamage);
+
+                    string damageInfo = "-" + damage;
+                    if (RandomChance.Percent(attacker.Luck * 5 - attackerSlow))
                     {
                         damage *= 2;
                         damageInfo = "-" + damage + " CRIT";
                     }
-                    if (RandomChance.Percent(defender.Speed * 5))
+                    if (RandomChance.Percent(defender.Speed * 5 + defenderEvasion))
                     {
                         damage = 0;
                         damageInfo = "EVADE";
                     }
+                    
 
                     defender.Health -= damage;
                     attacker.GiveExp(m.Action / 10);
@@ -164,6 +177,11 @@ public class BattleManager : MonoBehaviour
                 
                     yield return new WaitForSeconds(0.5f);
                     EffectManager.TextAnimation(T_Animtation, !attackingSide, damageInfo, Color.red, new(0, 0.2f, -0.15f));
+                    if (defenderPoison > 0)
+                    {
+                        defender.Health -= defenderPoison;
+                        Helper.ActionAfterTime(0.2f, () => { EffectManager.TextAnimation(T_Animtation, !attackingSide, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f)); });
+                    }
                     BattleUI.UpdateHealth();
                     Tween.Position(attackerObj.transform, initialPos, 0.5f, 0, Tween.EaseOut);
                     yield return new WaitForSeconds(0.5f);
@@ -171,7 +189,10 @@ public class BattleManager : MonoBehaviour
                 }
             case MoveType.Heal:
                 {
+                    EffectManager.TextAnimation(T_Animtation, attackingSide, "+" + (int)m.Action, Color.green, new(0, 0.2f, -0.15f));
                     attacker.Health += (int)m.Action;
+                    if(attacker.Health > attacker.MaxHealth)
+                        attacker.Health = attacker.MaxHealth;
                     EffectManager.DeliverHitEffect(MoveType.Heal, attackingSide);
                     yield return new WaitForSeconds(1);
                     BattleUI.UpdateHealth();
@@ -181,6 +202,7 @@ public class BattleManager : MonoBehaviour
                 {
 
                     EffectManager.DeliverHitEffect(MoveType.Defense, attackingSide);
+                    EffectManager.DeliverEffect(MoveType.Defense, attackingSide, 4, m.Action);
                     yield return new WaitForSeconds(1);
                     BattleUI.UpdateHealth();
                     break;
@@ -189,6 +211,7 @@ public class BattleManager : MonoBehaviour
                 {
 
                     EffectManager.DeliverHitEffect(MoveType.Weaken, attackingSide);
+                    EffectManager.DeliverEffect(MoveType.Weaken, attackingSide, 4, m.Action);
                     yield return new WaitForSeconds(1);
                     BattleUI.UpdateHealth();
                     break;
@@ -197,6 +220,7 @@ public class BattleManager : MonoBehaviour
                 {
 
                     EffectManager.DeliverHitEffect(MoveType.Slow, attackingSide);
+                    EffectManager.DeliverEffect(MoveType.Slow, attackingSide, 4, m.Action);
                     yield return new WaitForSeconds(1);
                     BattleUI.UpdateHealth();
                     break;
@@ -205,14 +229,17 @@ public class BattleManager : MonoBehaviour
                 {
 
                     EffectManager.DeliverHitEffect(MoveType.Evasion, attackingSide);
+                    EffectManager.DeliverEffect(MoveType.Evasion, attackingSide, 4, m.Action);
                     yield return new WaitForSeconds(1);
                     BattleUI.UpdateHealth();
                     break;
                 }
             case MoveType.Poison:
                 {
-
-                    //EffectManager.DeliverHitEffect(MoveType.Evasion, attackingSide);
+                    defender.Health -= (int)m.Action;
+                    EffectManager.DeliverHitEffect(MoveType.Poison, attackingSide);
+                    EffectManager.DeliverEffect(MoveType.Poison, attackingSide, 4, m.Action);
+                    EffectManager.TextAnimation(T_Animtation, !attackingSide, "-" + m.Action, Color.magenta, new(0, 0.2f, -0.15f));
                     yield return new WaitForSeconds(1);
                     BattleUI.UpdateHealth();
                     break;
@@ -221,6 +248,7 @@ public class BattleManager : MonoBehaviour
 
         m.Count--;
         BattleUI.Create(this);
+        OnMoveEnd?.Invoke((Turn - 1) % 2 == 0);
 
         if (Original1.Health <= 0 || Original2.Health <= 0)
         {
@@ -242,15 +270,7 @@ public class BattleManager : MonoBehaviour
                 ChessManager.EndMatch(!sideOfDefeatedPiece);
             }
         }
-    }
-
-    private IEnumerator ActionAfterTIme(float time, Action A)
-    {
-        yield return new WaitForSecondsRealtime(time);
-        A?.Invoke();
-    }
-
-    
+    }  
 
     public GameObject CreateNewShowPiece(GameObject p, Transform pos)
     {
@@ -269,22 +289,32 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator SwitchPieceCor(Entity e, bool side)
     {
-        Tween.Position(P1.transform, Pos2.position, 0.5f, 0, Tween.EaseIn);
-        yield return new WaitForSeconds(0.75f);
-        Tween.Position(P2.transform, Pos1.position, 0.5f, 0, Tween.EaseOut);
-        yield return new WaitForSeconds(0.5f);
-
         var team = side ? player1Team : player2Team;
 
         var entry = team.Single(p => p.Value.Item2);
         team[entry.Key] = (entry.Value.Item1, false);
 
-        var newEntry = player1Team.Single(p => p.Value.Item1 == e);
+        var newEntry = team.Single(p => p.Key == e);
         team[newEntry.Key] = (newEntry.Value.Item1, true);
 
+        var posToGoTo = side ? Pos1Behind : Pos2Behind;
+        var posToGoBackTo = side ? Pos1 : Pos2;
+
+        Tween.Position(entry.Value.Item1.transform, posToGoTo.position, 0.5f, 0, Tween.EaseIn);
+        yield return new WaitForSeconds(0.75f);
+        Tween.Position(newEntry.Value.Item1.transform, posToGoBackTo.position, 0.5f, 0, Tween.EaseOut);
+        yield return new WaitForSeconds(0.5f);
+
+        int defenderPoison = EffectManager.HasEffect(!side, Effect.Type.Poison) ? (int)EffectManager.GetEffecttypeAction(!side, Effect.Type.Poison) : 0;
+        if (defenderPoison > 0)
+        {
+            player2.Health -= defenderPoison;
+            Helper.ActionAfterTime(0.2f, () => { EffectManager.TextAnimation(T_Animtation, !side, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f)); });
+        }
 
         BattleUI.Create(this);
         Turn++;
+        OnMoveEnd?.Invoke((Turn - 1) % 2 == 0);
         BattleUI.UpdateUI();
     }
 

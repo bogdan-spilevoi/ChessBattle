@@ -95,8 +95,8 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
     public void GetIcon()
     {
         Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
-
-        Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic"); ;
+        print($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}" + " " + (mySprite == null));
+        Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
         Helper.FitImageToSize(Icon, fitTo);
     }
 }

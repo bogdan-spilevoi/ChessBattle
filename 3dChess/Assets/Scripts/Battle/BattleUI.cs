@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public Slider S_P1, S_P2;
-    public TMP_Text T_Name1, T_Name2, T_Lvl1, T_Lvl2;
+    public TMP_Text T_Name1, T_Name2, T_Lvl1, T_Lvl2, T_Health1;
 
     public BattleManager BattleManager;
 
@@ -54,6 +54,7 @@ public class BattleUI : MonoBehaviour
             MoveUI.Add(g);
             g.GetComponent<Button>().onClick.AddListener(() => { BattleManager.ProcessMove(m, true); });
         }
+        T_Health1.text = $"{BattleManager.player1.Health}/{BattleManager.player1.MaxHealth}";
         UpdateUI();
     }
 
@@ -61,6 +62,7 @@ public class BattleUI : MonoBehaviour
     {
         print("Animating health bar");
         int h1 = BattleManager.player1.Health, h2 = BattleManager.player2.Health;
+        T_Health1.text = $"{h1}/{BattleManager.player1.MaxHealth}";
         Tween.Value(S_P1.value, BattleManager.player1.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
         Tween.Value(S_P2.value, BattleManager.player2.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
     }

@@ -116,28 +116,28 @@ new Move("Void Phase",       "Momentarily phase out of reality.",            Mov
 
 // ===================== SPEED =====================
 // -------- Common --------
-new Move("Weighted Step",   "Heavy plating slows the foe’s movement.",        MoveType.Slow, MoveRarity.Common,  -12f, "bronze", "stone", "terra", "basic", "inferno"),
-new Move("Undercurrent",    "A subtle drag of water slows the target.",       MoveType.Slow, MoveRarity.Common,  -14f, "aqua", "void", "stone"),
-new Move("Sticky Mud",      "Bog the enemy down with mud.",                   MoveType.Slow, MoveRarity.Common,  -13f, "terra", "aqua"),
-new Move("Frost Chill",     "A numbing cold slows reactions.",                MoveType.Slow, MoveRarity.Common,  -12f, "frost", "stone"),
-new Move("Rust Creep",      "Rust spreads, slowing movements.",               MoveType.Slow, MoveRarity.Common,  -11f, "rust", "bronze"),
-new Move("Dull Air",        "A heavy stillness makes actions sluggish.",      MoveType.Slow, MoveRarity.Common,  -10f, "basic", "radiant"),
+new Move("Weighted Step",   "Heavy plating slows the foe’s movement.",        MoveType.Slow, MoveRarity.Common,  12f, "bronze", "stone", "terra", "basic", "inferno"),
+new Move("Undercurrent",    "A subtle drag of water slows the target.",       MoveType.Slow, MoveRarity.Common,  14f, "aqua", "void", "stone"),
+new Move("Sticky Mud",      "Bog the enemy down with mud.",                   MoveType.Slow, MoveRarity.Common,  13f, "terra", "aqua"),
+new Move("Frost Chill",     "A numbing cold slows reactions.",                MoveType.Slow, MoveRarity.Common,  12f, "frost", "stone"),
+new Move("Rust Creep",      "Rust spreads, slowing movements.",               MoveType.Slow, MoveRarity.Common,  11f, "rust", "bronze"),
+new Move("Dull Air",        "A heavy stillness makes actions sluggish.",      MoveType.Slow, MoveRarity.Common,  10f, "basic", "radiant"),
 
 // -------- Rare --------
-new Move("Rootbind",        "Entangle the foe, drastically slowing them.",    MoveType.Slow, MoveRarity.Rare,    -18f, "terra", "aqua"),
-new Move("Earthen Grasp",   "Roots seize the enemy and drag them down.",      MoveType.Slow, MoveRarity.Rare,    -19f, "terra", "stone", "rust"),
-new Move("Icy Shackles",    "Chains of frost slow the enemy sharply.",        MoveType.Slow, MoveRarity.Rare,    -18f, "frost", "void"),
-new Move("Storm Drag",      "Wind shear hampers enemy movements.",            MoveType.Slow, MoveRarity.Rare,    -17f, "storm", "inferno"),
+new Move("Rootbind",        "Entangle the foe, drastically slowing them.",    MoveType.Slow, MoveRarity.Rare,    18f, "terra", "aqua"),
+new Move("Earthen Grasp",   "Roots seize the enemy and drag them down.",      MoveType.Slow, MoveRarity.Rare,    19f, "terra", "stone", "rust"),
+new Move("Icy Shackles",    "Chains of frost slow the enemy sharply.",        MoveType.Slow, MoveRarity.Rare,    18f, "frost", "void"),
+new Move("Storm Drag",      "Wind shear hampers enemy movements.",            MoveType.Slow, MoveRarity.Rare,    17f, "storm", "inferno"),
 
 // -------- Epic --------
-new Move("Permafrost Bind", "Frozen ground locks the foe in place.",          MoveType.Slow, MoveRarity.Epic,    -22f, "frost", "terra", "stone"),
-new Move("Entropic Slow",   "Void energies erode quickness.",                 MoveType.Slow, MoveRarity.Epic,    -23f, "void", "rust", "radiant"),
-new Move("Lava Shackles",   "Molten chains restrict motion severely.",        MoveType.Slow, MoveRarity.Epic,    -22f, "inferno", "terra"),
-new Move("Crashing Wave",   "A powerful undertow slows the target greatly.",  MoveType.Slow, MoveRarity.Epic,    -21f, "aqua", "storm"),
+new Move("Permafrost Bind", "Frozen ground locks the foe in place.",          MoveType.Slow, MoveRarity.Epic,    22f, "frost", "terra", "stone"),
+new Move("Entropic Slow",   "Void energies erode quickness.",                 MoveType.Slow, MoveRarity.Epic,    23f, "void", "rust", "radiant"),
+new Move("Lava Shackles",   "Molten chains restrict motion severely.",        MoveType.Slow, MoveRarity.Epic,    22f, "inferno", "terra"),
+new Move("Crashing Wave",   "A powerful undertow slows the target greatly.",  MoveType.Slow, MoveRarity.Epic,    21f, "aqua", "storm"),
 
 // -------- Legendary --------
-new Move("Time Fracture",   "Reality warps and halts the foe’s speed.",       MoveType.Slow, MoveRarity.Legendary,-28f, "void", "radiant"),
-new Move("Glacial Prison",  "A tomb of ice nearly stops the foe cold.",       MoveType.Slow, MoveRarity.Legendary,-26f, "frost", "aqua", "terra"),
+new Move("Time Fracture",   "Reality warps and halts the foe’s speed.",       MoveType.Slow, MoveRarity.Legendary,28f, "void", "radiant"),
+new Move("Glacial Prison",  "A tomb of ice nearly stops the foe cold.",       MoveType.Slow, MoveRarity.Legendary,26f, "frost", "aqua", "terra"),
 
 // ===================== WEAKEN ====================
 // -------- Common --------

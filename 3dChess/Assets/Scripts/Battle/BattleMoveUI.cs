@@ -22,7 +22,7 @@ public class BattleMoveUI : MonoBehaviour
         Helper.FitImageToSize(I_Rarity, 65);
         Helper.FitImageToSize(I_Icon, 50);
         Overlay.SetActive(isLocked);
-        GetComponent<Button>().enabled = !isLocked;
+        //GetComponent<Button>().enabled = !isLocked;
         T_Count.text = $"{m.Count}/{m.MaxCount}";
     }
 }
