@@ -18,7 +18,7 @@ public class ViewPiece : MonoBehaviour
     public TMP_Text T_Level, T_Type;
     public Slider S_Health;
     public Slider S_Exp;
-    public Slider S_Attack, S_Defence, S_Speed, S_Luck;
+    public Slider S_Attack, S_Defense, S_Speed, S_Luck;
     public Image Icon;
 
     public MoveUI OriginalMoveUI;   
@@ -100,12 +100,12 @@ public class ViewPiece : MonoBehaviour
         S_Exp.value = e.Exp;
 
         S_Attack.maxValue = 10;
-        S_Defence.maxValue = 1000;
+        S_Defense.maxValue = 1000;
         S_Speed.maxValue = 10;
         S_Luck.maxValue = 10;
 
         S_Attack.value = e.Attack;
-        S_Defence.value = e.MaxHealth;
+        S_Defense.value = e.MaxHealth;
         S_Speed.value = e.Speed;
         S_Luck.value = e.Luck;
     }

@@ -210,7 +210,7 @@ new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",
         {
             candidates = attacks;
         }
-        else if (roll < 80 && specifics.Count > 0)
+        else if (roll < 70 && specifics.Count > 0)
         {
             candidates = specifics;
         }
