@@ -22,7 +22,17 @@ public class EffectListUI : MonoBehaviour
         var elem = AllEffectsUI.Find(ef => ef.thisEffect == e);
         if (elem != null)
         {
-            Destroy(elem);
+            Destroy(elem.gameObject);
+            AllEffectsUI.Remove(elem);
+        }
+    }
+
+    public void RemoveEffectByType(Effect.Type t)
+    {
+        var elem = AllEffectsUI.Find(ef => ef.thisEffect.type == t);
+        if (elem != null)
+        {
+            Destroy(elem.gameObject);
             AllEffectsUI.Remove(elem);
         }
     }
