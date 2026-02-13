@@ -14,7 +14,7 @@ public class EffectUI : MonoBehaviour
     public void Create(Effect e)
     {
         Icon.sprite = Resources.Load<Sprite>($"MoveIcons/{e.type.ToString().ToLower()}");
-        Helper.FitImageToSize(Icon, 50);
+        Icon.Fit(50);
         T_Left.text = e.rounds.ToString();
         thisEffect = e;
     }

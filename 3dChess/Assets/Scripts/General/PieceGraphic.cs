@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
 {
@@ -94,9 +95,17 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
 
     public void GetIcon()
     {
-        Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
-        print($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}" + " " + (mySprite == null));
-        Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
-        Helper.FitImageToSize(Icon, fitTo);
+        try
+        {
+            Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
+            print($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}" + " " + (mySprite == null));
+            Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
+            Icon.Fit(fitTo);
+        }
+        catch(NullReferenceException e)
+        {
+            Debug.LogException(e);
+        }
+        
     }
 }

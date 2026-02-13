@@ -83,6 +83,6 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
         Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
 
         Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
-        Helper.FitImageToSize(Icon, fitTo);
+        Icon.Fit(fitTo);
     }
 }

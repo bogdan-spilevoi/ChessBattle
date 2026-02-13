@@ -52,7 +52,7 @@ public class GetPiece : MonoBehaviour
     {
         Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
 
-        Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic"); ;
-        Helper.FitImageToSize(Icon, 100);
+        Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
+        Icon.Fit(100);
     }
 }

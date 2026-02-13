@@ -19,7 +19,7 @@ public class MoveUI : MonoBehaviour
         T_Type.text = m.Type.ToString();
         T_Action.text = m.Action.ToString();
         I_Rarity.sprite = Resources.Load<Sprite>($"Rarities/{m.Rarity.ToString().ToLower()}");
-        Helper.FitImageToSize(I_Rarity, 65);
+        I_Rarity.Fit(65);
 
         if(lockState)
         {
@@ -27,7 +27,7 @@ public class MoveUI : MonoBehaviour
             T_LockInfo.text = "Requires lvl " + required;
         }
         I_Type.sprite = Resources.Load<Sprite>($"MoveIcons/{m.Type.ToString().ToLower()}");
-        Helper.FitImageToSize(I_Type, 40);
+        I_Type.Fit(40);
     }
 
     

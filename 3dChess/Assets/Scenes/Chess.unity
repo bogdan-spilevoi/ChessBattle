@@ -9365,7 +9365,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 798482255}
+  thisEffect:
+    type: 0
+    rounds: 0
+    action: 0
   T_Left: {fileID: 2041015775}
+  thisList: {fileID: 0}
 --- !u!1 &808174521
 GameObject:
   m_ObjectHideFlags: 0
@@ -10442,7 +10447,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 989095617}
+  thisEffect:
+    type: 0
+    rounds: 0
+    action: 0
   T_Left: {fileID: 2011573857}
+  thisList: {fileID: 0}
 --- !u!1 &994453049
 GameObject:
   m_ObjectHideFlags: 0
@@ -12876,7 +12886,7 @@ MonoBehaviour:
     Description: "Heavy plating slows the foe\u2019s movement."
     Type: 5
     Rarity: 0
-    Action: -12
+    Action: 12
     Count: 10
   - Variants:
     - aqua
@@ -12886,7 +12896,7 @@ MonoBehaviour:
     Description: A subtle drag of water slows the target.
     Type: 5
     Rarity: 0
-    Action: -14
+    Action: 14
     Count: 10
   - Variants:
     - terra
@@ -12895,7 +12905,7 @@ MonoBehaviour:
     Description: Bog the enemy down with mud.
     Type: 5
     Rarity: 0
-    Action: -13
+    Action: 13
     Count: 10
   - Variants:
     - frost
@@ -12904,7 +12914,7 @@ MonoBehaviour:
     Description: A numbing cold slows reactions.
     Type: 5
     Rarity: 0
-    Action: -12
+    Action: 12
     Count: 10
   - Variants:
     - rust
@@ -12913,7 +12923,7 @@ MonoBehaviour:
     Description: Rust spreads, slowing movements.
     Type: 5
     Rarity: 0
-    Action: -11
+    Action: 11
     Count: 10
   - Variants:
     - basic
@@ -12922,7 +12932,7 @@ MonoBehaviour:
     Description: A heavy stillness makes actions sluggish.
     Type: 5
     Rarity: 0
-    Action: -10
+    Action: 10
     Count: 10
   - Variants:
     - terra
@@ -12931,7 +12941,7 @@ MonoBehaviour:
     Description: Entangle the foe, drastically slowing them.
     Type: 5
     Rarity: 1
-    Action: -18
+    Action: 18
     Count: 8
   - Variants:
     - terra
@@ -12941,7 +12951,7 @@ MonoBehaviour:
     Description: Roots seize the enemy and drag them down.
     Type: 5
     Rarity: 1
-    Action: -19
+    Action: 19
     Count: 8
   - Variants:
     - frost
@@ -12950,7 +12960,7 @@ MonoBehaviour:
     Description: Chains of frost slow the enemy sharply.
     Type: 5
     Rarity: 1
-    Action: -18
+    Action: 18
     Count: 8
   - Variants:
     - storm
@@ -12959,7 +12969,7 @@ MonoBehaviour:
     Description: Wind shear hampers enemy movements.
     Type: 5
     Rarity: 1
-    Action: -17
+    Action: 17
     Count: 8
   - Variants:
     - frost
@@ -12969,7 +12979,7 @@ MonoBehaviour:
     Description: Frozen ground locks the foe in place.
     Type: 5
     Rarity: 2
-    Action: -22
+    Action: 22
     Count: 6
   - Variants:
     - void
@@ -12979,7 +12989,7 @@ MonoBehaviour:
     Description: Void energies erode quickness.
     Type: 5
     Rarity: 2
-    Action: -23
+    Action: 23
     Count: 6
   - Variants:
     - inferno
@@ -12988,7 +12998,7 @@ MonoBehaviour:
     Description: Molten chains restrict motion severely.
     Type: 5
     Rarity: 2
-    Action: -22
+    Action: 22
     Count: 6
   - Variants:
     - aqua
@@ -12997,7 +13007,7 @@ MonoBehaviour:
     Description: A powerful undertow slows the target greatly.
     Type: 5
     Rarity: 2
-    Action: -21
+    Action: 21
     Count: 6
   - Variants:
     - void
@@ -13006,7 +13016,7 @@ MonoBehaviour:
     Description: "Reality warps and halts the foe\u2019s speed."
     Type: 5
     Rarity: 3
-    Action: -28
+    Action: 28
     Count: 4
   - Variants:
     - frost
@@ -13016,7 +13026,7 @@ MonoBehaviour:
     Description: A tomb of ice nearly stops the foe cold.
     Type: 5
     Rarity: 3
-    Action: -26
+    Action: 26
     Count: 4
   - Variants:
     - rust
@@ -13372,6 +13382,8 @@ MonoBehaviour:
   T_Animtation: {fileID: 1532174525}
   Player1: {fileID: 2039190100}
   Player2: {fileID: 1481331729}
+  P1List: []
+  P2List: []
 --- !u!1 &1229472657
 GameObject:
   m_ObjectHideFlags: 0
@@ -16072,12 +16084,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

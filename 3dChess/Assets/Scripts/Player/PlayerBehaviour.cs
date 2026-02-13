@@ -1,14 +1,17 @@
 using Newtonsoft.Json;
+using Pixelplacement;
 using Pixelplacement.TweenSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements.Experimental;
 
 public class PlayerBehaviour : MonoBehaviour
 {
     public SaveManager SaveManager;
+    public Camera Camera;
     public PieceFoundData pieceFoundData;
     public List<EntityData> PiecesInventory = new();
     [HideInInspector]
@@ -19,6 +22,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     public Action<EntityData> OnGetPiece;
     public BoxBehaviour BoxBehaviour;
+
+    private Vector3 InitialCameraPos;
+    private Quaternion InitialCameraRotation;
+
+    private void Start()
+    {
+        InitialCameraPos = Camera.transform.localPosition;
+        InitialCameraRotation = Camera.transform.rotation;
+    }
 
 
     private void Update()
@@ -31,10 +43,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (TrainerInRange != null)
         {
             UI.ShowBattleTrainerButton(TrainerInRange.Name);
-            if(Input.GetKeyDown(KeyCode.Space) &&!Movement.IsPaused)
+            if(Input.GetKeyDown(KeyCode.Space) && !Movement.IsPaused)
             {
-                PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(new TrainerData(TrainerInRange), Formatting.Indented));
-                SceneManager.LoadScene("Chess");
+                SpeakWithNpc(TrainerInRange);
+                GameRef.TrainerSpeak.Create(TrainerInRange,
+                    () =>
+                    {
+                        PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(new TrainerData(TrainerInRange), Formatting.Indented));
+                        SceneManager.LoadScene("Chess");
+                    });               
             }            
         }
         else
@@ -52,7 +69,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.TryGetComponent(out Trainer t) && !t.Defeated)
+        if(other.TryGetComponent(out Trainer t))
         {
             TrainerInRange = t;
         }
@@ -60,10 +77,6 @@ public class PlayerBehaviour : MonoBehaviour
         {
             BoxBehaviour.PrepareBox();
         }
-        //if (other.CompareTag("test2"))
-        //{
-        //    GetPiece(Variants.GetRandomOfType(EntityData.Type.King));
-        //}
     }
 
     public EntityData GetPiece(EntityData e)
@@ -92,5 +105,20 @@ public class PlayerBehaviour : MonoBehaviour
         GetComponent<CharacterController>().enabled = false;
         transform.position = pos;
         GetComponent<CharacterController>().enabled = true;
+    }
+
+    public void SpeakWithNpc(Trainer trainer)
+    {
+        var camerPos = (transform.position + trainer.transform.position) / 2 + new Vector3(0, 4, -5);
+        Quaternion targetRotation = InitialCameraRotation * Quaternion.Euler(-15f, 0f, 0f);
+
+        Tween.Position(Camera.transform, camerPos, 0.5f, 0, Tween.EaseOut);
+        Tween.Rotation(Camera.transform, targetRotation, 0.5f, 0, Tween.EaseOut);
+    }
+
+    public void ResetCamera()
+    {
+        Tween.LocalPosition(Camera.transform, InitialCameraPos, 0.5f, 0, Tween.EaseOut);
+        Tween.Rotation(Camera.transform, InitialCameraRotation, 0.5f, 0, Tween.EaseOut);
     }
 }

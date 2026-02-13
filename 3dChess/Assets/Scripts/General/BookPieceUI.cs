@@ -49,6 +49,6 @@ public class BookPieceUI : MonoBehaviour
         Sprite mySprite = Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/{thisEntity.Variant}");
 
         Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
-        Helper.FitImageToSize(Icon, fitTo);
+        Icon.Fit(fitTo);
     }
 }

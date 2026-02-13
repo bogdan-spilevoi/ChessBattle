@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private CharacterController Controller;
+    private Animator Animator;
     public Transform Cam;
     public float speed = 12f;
     public float jumpForce = 5;
@@ -19,16 +20,20 @@ public class Movement : MonoBehaviour
 
     private Vector3 LastPos = Vector3.zero;
 
-    private bool StopAudio = true;
+    public bool Moving = false;
     public static bool IsPaused = false;
     public static int SprintAdditive;
 
     public float RayDist;
 
+    private Coroutine WaitForSadIdle;
+    public float SadIdleTimeout = 10;
+
     private void Awake()
     {
         //Cam = Camera.main.transform;
         Controller = GetComponent<CharacterController>();
+        Animator = GetComponentInChildren<Animator>();
         PlayerInput = new();
         IsPaused = false;
     }
@@ -49,7 +54,14 @@ public class Movement : MonoBehaviour
     void Update()
     {
         if (IsPaused)
+        {
+            if(Moving)
+            {
+                Moving = false;
+                Animator.SetBool("moving", false);
+            }
             return;
+        }
 
         isGrounded = Controller.isGrounded;
 
@@ -78,16 +90,26 @@ public class Movement : MonoBehaviour
 
         Controller.Move(velocity * Time.deltaTime);
 
-        if (LastPos != gameObject.transform.position)
+        if (MovementInput != Vector2.zero && !Moving)
         {
-            if (!StopAudio)
-            {
-                StopAudio = true;
-            }
+            Moving = true;
+
+            if(WaitForSadIdle != null)
+                StopCoroutine(WaitForSadIdle);
+            Animator.SetBool("moving", true);
         }
-        else if (StopAudio || Time.timeScale == 0)
+        if (MovementInput == Vector2.zero && Moving)
         {
-            StopAudio = false;
+            Moving = false;
+            Animator.SetBool("moving", false);
+            WaitForSadIdle = StartCoroutine(Helper.ActionAfterTimeCor(SadIdleTimeout, () => { Animator.SetTrigger("sad"); }));
+        }
+
+        if(Moving)
+        {
+            var current = Animator.gameObject.transform.rotation;
+            var target = Quaternion.Euler(0f, Movement2DToRot(MovementInput), 0f);
+            Animator.gameObject.transform.rotation = Quaternion.Slerp(current, target, 0.1f);
         }
 
         LastPos = gameObject.transform.position;
@@ -115,4 +137,25 @@ public class Movement : MonoBehaviour
     {
         IsPaused = toggle;
     }
+    private float Movement2DToRot(Vector2 Movement)
+    {
+        
+        var roundY = Mathf.RoundToInt(Movement.y);
+        var roundX = Mathf.RoundToInt(Movement.x);
+
+        return (roundY, roundX) switch
+        {
+            (1, 0) => 0,
+            (1, 1) => 45,
+            (0, 1) => 90,
+            (-1, 1) => 135,
+            (-1, 0) => 180,
+            (-1, -1) => 225,
+            (0, -1) => 270,
+            (1, -1) => 315,
+            _ => 0,
+
+        };
+    }
+
 }

@@ -202,9 +202,7 @@ public class LayoutEdit : MonoBehaviour
             return;
         }
 
-        Tab_Layout.alpha = 0;
-        Tab_Layout.interactable = false;
-        Tab_Layout.blocksRaycasts = false;
+        Tab_Layout.Deactivate();
         player.SaveManager.SaveGame();
     }
 
