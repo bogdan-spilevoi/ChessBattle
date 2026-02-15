@@ -12,6 +12,9 @@ public class GameRef : MonoBehaviour
     public PlayerBehaviour playerBehaviour;
     public static PlayerBehaviour PlayerBehaviour {  get { return Instance.playerBehaviour; } }
 
+    public LayoutEdit layoutEdit;
+    public static LayoutEdit LayoutEdit {  get { return Instance.layoutEdit; } }
+
     private void Awake()
     {
         if(Instance == null)

@@ -135,8 +135,8 @@ public class ViewPiece : MonoBehaviour
         thisEntity.Name = In_Name.text;
         Tab_ChangeName.SetActive(false);
         T_Name.text = thisEntity.Name;
-        FindAnyObjectByType<PlayerBehaviour>().SaveManager.SaveGame();
-        FindObjectOfType<LayoutEdit>().RefreshListPiecesUI();
+        GameRef.PlayerBehaviour.SaveManager.SaveGame();
+        GameRef.LayoutEdit.RefreshListPiecesUI();
         
     }
 

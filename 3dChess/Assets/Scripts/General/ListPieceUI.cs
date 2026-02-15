@@ -12,7 +12,6 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
     public TMP_Text T_Name, T_Type, T_Level;
     public Slider S_Health;
     private EntityData thisEntity;
-    public LayoutEdit LayoutEdit;
     public PieceGraphic PieceGraphic;
     public GameObject Overlay;
     private float fitTo = 60;
@@ -59,10 +58,10 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (thisEntity.Health <= 0) return;
         if (thisEntity.Position != -1) return;
-        if (LayoutEdit.PiecesOnBoard >= LayoutEdit.Limit) return;
+        if (GameRef.LayoutEdit.PiecesOnBoard >= GameRef.LayoutEdit.Limit) return;
         if(PieceGraphic == null)
         {
-            PieceGraphic = LayoutEdit.CreatePieceGraphic(eventData.position, thisEntity);
+            PieceGraphic = GameRef.LayoutEdit.CreatePieceGraphic(eventData.position, thisEntity);
         }
         else
         {

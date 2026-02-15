@@ -73,7 +73,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             TrainerInRange = t;
         }
-        if(other.CompareTag("test"))
+        if(other.CompareTag("test") && LayoutEdit.FinishedSetup)
         {
             BoxBehaviour.PrepareBox();
         }

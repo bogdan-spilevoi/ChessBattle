@@ -30,6 +30,7 @@ public class TrainerSpeak : MonoBehaviour
 
         T_TrainerName.text = trainer.Name;
         T_Dialogue.text = trainer.Defeated ? trainer.DefeatedText : trainer.ChallengeText;
+        SetupIcon();
 
         B_Flee.gameObject.SetActive(optional);
         B_Battle.gameObject.SetActive(!trainer.Defeated);
@@ -50,5 +51,17 @@ public class TrainerSpeak : MonoBehaviour
             Movement.IsPaused = false;
             OnBattle();
         });
+    }
+
+    private void SetupIcon()
+    {
+        var initialHeight = I_TrainerPic.GetComponent<RectTransform>().sizeDelta.y;
+        var sprt = Resources.Load<Sprite>($"Icons/Trainers/{thisTrainer.Name}");
+        I_TrainerPic.sprite = sprt != null ? sprt : null;
+        I_TrainerPic.FitSpecific(true, I_TrainerPic.GetComponent<RectTransform>().sizeDelta.x);
+
+        I_TrainerPic.GetComponent<RectTransform>().localPosition = new Vector2(
+            I_TrainerPic.GetComponent<RectTransform>().localPosition.x,
+            I_TrainerPic.GetComponent<RectTransform>().localPosition.y + (I_TrainerPic.GetComponent<RectTransform>().sizeDelta.y - initialHeight) / 2);
     }
 }

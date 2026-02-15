@@ -14,4 +14,14 @@ public class UI : MonoBehaviour
     }
 
     public void HideBattleTrainerBUtton() => B_BattleTrainer.SetActive(false);
+
+    public void ActivateTab(CanvasGroup canvasGroup)
+    {
+        canvasGroup.Activate();
+    }
+
+    public void DeActivateTab(CanvasGroup canvasGroup)
+    {
+        canvasGroup.Deactivate();
+    }
 }

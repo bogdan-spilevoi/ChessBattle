@@ -21,6 +21,7 @@ public class LayoutEdit : MonoBehaviour
     public ListPieceUI OrgListPiece;
 
     public TMP_Text T_Limit;
+    public GameObject Warning;
     public TMP_Text T_Warning;
 
     public GameObject RemovePieceGraphicHelper;
@@ -29,6 +30,7 @@ public class LayoutEdit : MonoBehaviour
     public int Limit = 8;
 
     public Color C1, C2;
+    public static bool FinishedSetup = false;
 
     private void Start()
     {
@@ -99,6 +101,7 @@ public class LayoutEdit : MonoBehaviour
         RefreshListPiecesUI();
         UpdateLimit();
         player.SaveManager.SaveGame();
+        FinishedSetup = true;
     }
 
     public void RefreshListPiecesUI(int sortMethod = -1)
@@ -217,8 +220,10 @@ public class LayoutEdit : MonoBehaviour
 
     private IEnumerator ShowWarningCor(string text, float time)
     {
+        Warning.SetActive(true);
         T_Warning.text = text;
         yield return new WaitForSecondsRealtime(time);
         T_Warning.text = "";
+        Warning.SetActive(false);
     }
 }
