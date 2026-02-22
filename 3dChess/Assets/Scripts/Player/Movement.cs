@@ -90,7 +90,7 @@ public class Movement : MonoBehaviour
 
         Controller.Move(velocity * Time.deltaTime);
 
-        if (MovementInput != Vector2.zero && !Moving)
+        if (MovementInput != Vector2.zero && !Moving && LastPos != gameObject.transform.position)
         {
             Moving = true;
 
@@ -98,7 +98,7 @@ public class Movement : MonoBehaviour
                 StopCoroutine(WaitForSadIdle);
             Animator.SetBool("moving", true);
         }
-        if (MovementInput == Vector2.zero && Moving)
+        if ((MovementInput == Vector2.zero || LastPos == gameObject.transform.position) && Moving)
         {
             Moving = false;
             Animator.SetBool("moving", false);

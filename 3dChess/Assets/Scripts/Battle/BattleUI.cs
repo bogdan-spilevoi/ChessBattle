@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public Slider S_P1, S_P2;
-    public TMP_Text T_Name1, T_Name2, T_Lvl1, T_Lvl2, T_Health1;
+    public TMP_Text T_Name1, T_Name2, T_Lvl1, T_Lvl2, T_Health1, T_Health2;
 
     public BattleManager BattleManager;
 
@@ -31,7 +31,7 @@ public class BattleUI : MonoBehaviour
         T_Name2.text = BattleManager.player2.Name == "" ? BattleManager.player2.GetType().ToString() : BattleManager.player2.Name;
 
         T_Lvl1.text = "lvl " +  BattleManager.player1.Level.ToString();
-        T_Lvl2.text = "lvl" + BattleManager.player2.Level.ToString();
+        T_Lvl2.text = "lvl " + BattleManager.player2.Level.ToString();
 
         S_P1.maxValue = BattleManager.player1.MaxHealth;
         S_P1.value = BattleManager.player1.Health;
@@ -55,6 +55,7 @@ public class BattleUI : MonoBehaviour
             g.GetComponent<Button>().onClick.AddListener(() => { BattleManager.ProcessMove(m, true); });
         }
         T_Health1.text = $"{BattleManager.player1.Health}/{BattleManager.player1.MaxHealth}";
+        T_Health2.text = $"{BattleManager.player2.Health}/{BattleManager.player2.MaxHealth}";
         UpdateUI();
     }
 
@@ -62,6 +63,7 @@ public class BattleUI : MonoBehaviour
     {
         print("Animating health bar");
         int h1 = BattleManager.player1.Health, h2 = BattleManager.player2.Health;
+        T_Health2.text = $"{h2}/{BattleManager.player2.MaxHealth}";
         T_Health1.text = $"{h1}/{BattleManager.player1.MaxHealth}";
         Tween.Value(S_P1.value, BattleManager.player1.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
         Tween.Value(S_P2.value, BattleManager.player2.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );

@@ -14,17 +14,21 @@ public class ChessManager : MonoBehaviour
     public List<EntityData> AllWhites = new();
     public List<Piece> WhitePieces = new(), BlackPieces = new();
     public ChessUI ChessUI;
+    public static bool Local = true;
 
     private void Start()
     {
-        PreparePieces();
-        Turn = 0;
+        if(Local)
+        {
+            PreparePieces(PlayerPrefs.GetString("trainer"));
+            Turn = 0;
+        }
     }
 
-    public void PreparePieces()
+    public void PreparePieces(string opponent)
     {
         string white = PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave"));
-        string black = PlayerPrefs.GetString("trainer");
+        string black = opponent;
 
         print(white);
         print(black);
@@ -33,7 +37,6 @@ public class ChessManager : MonoBehaviour
         saveData = whiteData;
         TrainerData blackData = JsonConvert.DeserializeObject<TrainerData>(black);
         trainerData = blackData;
-        Debug.LogWarning(black);
 
         foreach(var piece in whiteData.InventoryData.Inventory)
         {

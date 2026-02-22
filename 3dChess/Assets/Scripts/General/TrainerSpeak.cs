@@ -47,6 +47,7 @@ public class TrainerSpeak : MonoBehaviour
             Active = false;
         });
         B_Battle.onClick.AddListener(() => {
+            GameRef.PlayerBehaviour.SaveManager.SaveGame();
             Active = false;
             Movement.IsPaused = false;
             OnBattle();
