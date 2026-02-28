@@ -25,12 +25,12 @@ public class EffectManager : MonoBehaviour
 
     private void OnEnable()
     {
-        BattleManager.OnMoveEnd += ManageAfterMove;
+        BattleManager.OnTurnEnd += ManageAfterMove;
     }
 
     private void OnDisable()
     {
-        BattleManager.OnMoveEnd -= ManageAfterMove;
+        BattleManager.OnTurnEnd -= ManageAfterMove;
     }
 
     public void ManageAfterMove(bool sideThatDidMove)

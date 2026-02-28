@@ -6,5 +6,6 @@ using UnityEngine;
 [Serializable]
 public class InventoryData
 {
-    public List<EntityData> Inventory;
+    public List<EntityData> Pieces;
+    public List<PotionData> Potions;
 }

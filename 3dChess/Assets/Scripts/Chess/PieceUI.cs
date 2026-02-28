@@ -35,11 +35,7 @@ public class PieceUI : MonoBehaviour
 
     private void Update()
     {
-        Transform target = Ref.Camera.transform;
-
-        Vector3 targetPosition = target.position;
-        targetPosition.z = transform.position.z;
-
-        transform.LookAt(targetPosition);
+        var cam = Ref.Camera.transform;
+        transform.rotation = Quaternion.LookRotation(-cam.forward, cam.up);
     }
 }

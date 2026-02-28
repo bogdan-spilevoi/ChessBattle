@@ -1,44 +1,45 @@
 using Newtonsoft.Json;
+using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ChessManager : MonoBehaviour
-{    
+{
+    public InventoryData WhiteData, BlackData;
     public SaveData saveData;
-    public TrainerData trainerData;
+    public string OpponentName;
+
     public List<Piece> OrgPieces = new();
+
     public static int Turn = 0;
+
     public List<EntityData> AllWhites = new();
     public List<Piece> WhitePieces = new(), BlackPieces = new();
     public ChessUI ChessUI;
     public static bool Local = true;
 
+    public static bool Side = true;
+
     private void Start()
     {
         if(Local)
         {
-            PreparePieces(PlayerPrefs.GetString("trainer"));
+            PrepareLocalMatch();
+            PreparePieces(WhiteData, BlackData);
             Turn = 0;
+            Ref.AI.CreateChess();
         }
     }
 
-    public void PreparePieces(string opponent)
+    //Match preparation
+    public void PreparePieces(InventoryData white, InventoryData black)
     {
-        string white = PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave"));
-        string black = opponent;
 
-        print(white);
-        print(black);
-
-        SaveData whiteData = JsonConvert.DeserializeObject<SaveData>(white);
-        saveData = whiteData;
-        TrainerData blackData = JsonConvert.DeserializeObject<TrainerData>(black);
-        trainerData = blackData;
-
-        foreach(var piece in whiteData.InventoryData.Inventory)
+        foreach(var piece in white.Pieces)
         {
             AllWhites.Add(piece);
             if (piece.Position == -1) continue;
@@ -55,7 +56,7 @@ public class ChessManager : MonoBehaviour
             WhitePieces.Add(p);
         }
 
-        foreach (var piece in blackData.Inventory)
+        foreach (var piece in black.Pieces)
         {
             if (piece.Position == -1) continue;
 
@@ -80,9 +81,11 @@ public class ChessManager : MonoBehaviour
 
     public void EndMatch(bool state)
     {
-        saveData.InventoryData.Inventory = AllWhites;
-        saveData.TrainerData.Find(t => t.Name == trainerData.Name).Defeated = state;
-        print(trainerData.Name + " " + state);
+        saveData.InventoryData.Pieces = AllWhites;
+        saveData.InventoryData.Potions = WhiteData.Potions;
+        if (Local)
+            saveData.TrainerData.Find(t => t.Name == OpponentName).Defeated = state;
+
         string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
         PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
         if (state)
@@ -93,5 +96,96 @@ public class ChessManager : MonoBehaviour
         {
             ChessUI.LoseUI();
         }
+    }
+
+    public void PrepareLocalMatch()
+    {
+        string white = PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave"));
+        string black = PlayerPrefs.GetString("trainer");
+        OpponentName = PlayerPrefs.GetString("trainerName");
+
+        SaveData whiteData = JsonConvert.DeserializeObject<SaveData>(white);
+        saveData = whiteData;
+
+        InventoryData whiteInventory = whiteData.InventoryData;
+        whiteInventory.Pieces = whiteInventory.Pieces.Where(p => p.Position > -1).ToList();
+        whiteInventory.Potions = whiteInventory.Potions.Where(p => p.Position > -1).ToList();
+
+        InventoryData blackInventory = JsonConvert.DeserializeObject<InventoryData>(black);
+
+        WhiteData = whiteInventory;
+        BlackData = blackInventory;
+    }
+
+    
+
+
+    //Match logic
+    public void MovePiece(bool side, int pieceInd, int tileInd)
+    {
+        var piece = side ? WhitePieces[pieceInd] : BlackPieces[pieceInd];
+        var tile = Ref.ManageTiles.GetTile(tileInd);
+        MovePiece(side, piece, tile);
+    }
+    public void MovePiece(bool side, Piece piece, Tile tile)
+    {     
+        if (tile.currentPiece != null)
+        {
+            BattleManager.Ongoing = true;
+            this.ActionAfterTime(0.25f, () =>
+            {
+                Ref.BattleManager.StartBattle(piece, tile.currentPiece, tile, side);
+            });        
+        }
+        else
+        {
+            piece.GoToTile(tile);
+            IncreaseTurn();
+        }
+    }
+
+
+
+    public void PrepareMove(bool side, Piece piece, Tile tile)
+    {
+        var pieceInd = GetPieceIndex(piece);
+        var tileInd = tile.GetIndex();
+
+        Ref.CommandManager.AddCommandLocal(new MoveCommand(side, pieceInd, tileInd));
+    }
+
+    //Helpers
+    public int GetPieceIndex(Piece piece)
+    {
+        var pieces = piece.side ? WhitePieces : BlackPieces;
+        return pieces.IndexOf(piece);
+    }
+    public int GetPieceIndex(bool side, Piece piece)
+    {
+        var pieces = side ? WhitePieces : BlackPieces;
+        return pieces.IndexOf(piece);
+    }
+
+    public Piece GetPieceByIndex(bool side, int pieceInd)
+    {
+        var pieces = side ? WhitePieces : BlackPieces;
+        return pieces[pieceInd];
+    }
+
+    public PotionData GetPotionByIndex(bool side, int potionInd)
+    {
+        var inventory = side ? WhiteData : BlackData;
+        return inventory.Potions.Where(p => p.Position == potionInd).First();
+    }
+    public void RemovePotionAtIndex(bool side, int potionInd)
+    {
+        var inventory = side ? WhiteData : BlackData;
+        inventory.Potions.Remove(GetPotionByIndex(side, potionInd));
+    }
+
+    public static void IncreaseTurn()
+    {
+        Debug.LogWarning("Chess turn increased");
+        Turn++;
     }
 }

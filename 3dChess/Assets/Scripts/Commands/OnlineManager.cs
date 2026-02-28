@@ -9,4 +9,14 @@ public class OnlineManager : MonoBehaviour
         bool flag = PlayerPrefsExtentions.GetBool("online");
         ChessManager.Local = !flag;
     }
+
+    public void SendCommand(CommandBase command)
+    {
+
+    }
+
+    public void ReceiveCommand()
+    {
+
+    }
 }

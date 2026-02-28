@@ -191,6 +191,12 @@ new Move("Neurotoxin",        "A potent nerve agent; heavy damage over time.",  
 new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",          MoveType.Poison, MoveRarity.Legendary, 28f, "void", "rust", "terra"),
     };
 
+    public static Move GetMoveByIndex(string variant, int index)
+    {
+        var movesForVariant = Pool.Where(m => m.Variants.Contains(variant) || m.Variants.Contains("basic")).ToList();
+        if (index < 0 || index >= movesForVariant.Count) return null;
+        return movesForVariant[index];
+    }
     public static Move GetRandomMove(string variant, EntityData.Type type, int moveInd)
     {
         var rng = new System.Random();

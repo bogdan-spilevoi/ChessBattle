@@ -4,6 +4,7 @@ using Pixelplacement.TweenSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements.Experimental;
@@ -13,7 +14,10 @@ public class PlayerBehaviour : MonoBehaviour
     public SaveManager SaveManager;
     public Camera Camera;
     public PieceFoundData pieceFoundData;
+
     public List<EntityData> PiecesInventory = new();
+    public List<PotionData> PotionInventory = new();
+
     [HideInInspector]
     public Trainer TrainerInRange;
     public UI UI;
@@ -21,6 +25,7 @@ public class PlayerBehaviour : MonoBehaviour
     public LayoutEdit LayoutEdit;
 
     public Action<EntityData> OnGetPiece;
+    public Action<PotionData> OnGetPotion;
     public BoxBehaviour BoxBehaviour;
 
     private Vector3 InitialCameraPos;
@@ -45,13 +50,7 @@ public class PlayerBehaviour : MonoBehaviour
             UI.ShowBattleTrainerButton(TrainerInRange.Name);
             if(Input.GetKeyDown(KeyCode.Space) && !Movement.IsPaused)
             {
-                SpeakWithNpc(TrainerInRange);
-                GameRef.TrainerSpeak.Create(TrainerInRange,
-                    () =>
-                    {
-                        PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(new TrainerData(TrainerInRange), Formatting.Indented));
-                        SceneManager.LoadScene("Chess");
-                    });               
+                TalkToNpc(TrainerInRange);
             }            
         }
         else
@@ -77,9 +76,14 @@ public class PlayerBehaviour : MonoBehaviour
         {
             BoxBehaviour.PrepareBox();
         }
+
+        if (other.CompareTag("test2"))
+        {
+            AddPotionToInventory(Variants.GetRandomPotion());
+        }
     }
 
-    public EntityData GetPiece(EntityData e)
+    public EntityData AddPieceToInventory(EntityData e)
     {
         string p = e.Variant + "/" + e.PieceType;
         if(!pieceFoundData.PiecesFound.Contains(p))
@@ -90,6 +94,14 @@ public class PlayerBehaviour : MonoBehaviour
         LayoutEdit.RefreshListPiecesUI();
         OnGetPiece?.Invoke(e);
         return e;
+    }
+
+    public PotionData AddPotionToInventory(PotionData p)
+    {
+        PotionInventory.Add(p);
+        SaveManager.SaveGame();
+        OnGetPotion?.Invoke(p);
+        return p;
     }
 
     private void OnTriggerExit(Collider other)
@@ -116,9 +128,33 @@ public class PlayerBehaviour : MonoBehaviour
         Tween.Rotation(Camera.transform, targetRotation, 0.5f, 0, Tween.EaseOut);
     }
 
+    private void TalkToNpc(Trainer trainer)
+    {
+        SpeakWithNpc(trainer);
+        GameRef.TrainerSpeak.Create(trainer,
+            () =>
+            {
+                print("AA\n" + JsonConvert.SerializeObject(trainer.GetInventory()));
+                PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(trainer.GetInventory(), Formatting.Indented));
+                PlayerPrefs.SetString("trainerName", trainer.Name);
+                SceneManager.LoadScene("Chess");
+            });
+    }
+
     public void ResetCamera()
     {
         Tween.LocalPosition(Camera.transform, InitialCameraPos, 0.5f, 0, Tween.EaseOut);
         Tween.Rotation(Camera.transform, InitialCameraRotation, 0.5f, 0, Tween.EaseOut);
+    }
+
+    public List<PotionData> GetPotionsByName(string name)
+    {
+        return PotionInventory.Where(x => x.Name == name).ToList();
+    }
+
+    public bool TryGetPotionOnPosition(int pos, out PotionData potion)
+    {
+        potion = PotionInventory.FirstOrDefault(p => p.Position == pos);
+        return potion != null;
     }
 }

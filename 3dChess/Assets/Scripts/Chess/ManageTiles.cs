@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class ManageTiles : MonoBehaviour
@@ -21,6 +22,15 @@ public class ManageTiles : MonoBehaviour
         originalSize = OriginalTile.transform.localScale.x;
         originalPos = OriginalTile.transform.localPosition;
         MakeTiles();
+    }
+
+    public Tile GetFenTile(string fen)
+    {
+        string alph = "abcdefgh";
+        char letter = fen[0];
+        int num = int.Parse(fen[1].ToString());
+
+        return GetTile(num - 1, alph.IndexOf(letter));
     }
 
     public Tile GetTile(int index)
@@ -154,5 +164,36 @@ public class ManageTiles : MonoBehaviour
                 Tiles[i].Add(tile);
             }
         }
+    }
+
+    public string GetFenTable()
+    {
+        string table = "";
+        for (int i = 7; i >= 0; i--)
+        {
+            int emptyCnt = 0;
+            for (int j = 0; j < 8; j++)
+            {
+                bool empty = Tiles[i][j].currentPiece == null;
+                if(empty) emptyCnt++;
+
+                if(!empty)
+                {
+                    if(emptyCnt > 0)
+                    {
+                        table += emptyCnt.ToString();
+                        emptyCnt = 0;
+                    }
+                    table += Tiles[i][j].currentPiece.GetFenChar();
+                }
+            }
+            if(emptyCnt > 0)
+            {
+                table += emptyCnt.ToString();
+            }
+            table += "/";
+        }
+        table = table[..^1];
+        return table;
     }
 }

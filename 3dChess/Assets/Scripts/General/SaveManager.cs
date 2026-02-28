@@ -19,7 +19,11 @@ public class SaveManager : MonoBehaviour
         SaveData sv = new();
         var allTrainers = FindObjectsOfType<Trainer>().ToList();
         sv.TrainerData = allTrainers.ConvertAll(t => new TrainerData(t));
-        sv.InventoryData = new InventoryData() { Inventory = player.PiecesInventory };
+        sv.InventoryData = new InventoryData() 
+        { 
+            Pieces = player.PiecesInventory, 
+            Potions = player.PotionInventory 
+        };
         sv.Position = player.transform.position;
         sv.PieceFoundData = player.pieceFoundData;
 
@@ -48,7 +52,8 @@ public class SaveManager : MonoBehaviour
                 t.Create(trainer);
             }
         }
-        player.PiecesInventory = sv == null ? new() : sv.InventoryData.Inventory;
+        player.PiecesInventory = sv == null ? new() : sv.InventoryData.Pieces;
+        player.PotionInventory = sv == null ? new() : sv.InventoryData.Potions;
         player.PiecesInventory ??= new();
         player.pieceFoundData ??= new();
     }

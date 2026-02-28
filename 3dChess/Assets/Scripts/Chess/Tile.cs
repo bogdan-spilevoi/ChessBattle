@@ -14,6 +14,10 @@ public class Tile : MonoBehaviour
         this.y = y;
     }
 
+    public int GetIndex()
+    {
+        return x * 8 + y;
+    }
     public override string ToString()
     {
         return "[" + x + ", " + y + "]";

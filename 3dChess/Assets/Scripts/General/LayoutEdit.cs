@@ -93,7 +93,6 @@ public class LayoutEdit : MonoBehaviour
             var newPieceGraphic = Instantiate(OrgPieceGraphic, LayoutParent.transform);
             newPieceGraphic.gameObject.SetActive(true);
             newPieceGraphic.Create(p, p.Position);
-            newPieceGraphic.LayoutEdit = this;
 
             newPieceGraphic.GetComponent<RectTransform>().localPosition = Squares[p.Position].GetComponent<RectTransform>().localPosition;            
             PieceGraphics.Add(newPieceGraphic);
@@ -153,7 +152,6 @@ public class LayoutEdit : MonoBehaviour
         var newPieceGraphic = Instantiate(OrgPieceGraphic, LayoutParent.transform);
         newPieceGraphic.gameObject.SetActive(true);
         newPieceGraphic.Create(p, p.Position);
-        newPieceGraphic.LayoutEdit = this;
         newPieceGraphic.GetComponent<RectTransform>().position = pos;       
         PieceGraphics.Add(newPieceGraphic);
         return newPieceGraphic;
@@ -194,11 +192,11 @@ public class LayoutEdit : MonoBehaviour
 
     public void CloseTab(CanvasGroup Tab_Layout)
     {
-        if(PieceGraphics.Where(p => p.thisEntity.PieceType == EntityData.Type.King).Count() == 0)
-        {
-            ShowWarning("Loadout has no Kings!");
-            return;
-        }
+        //if(PieceGraphics.Where(p => p.thisEntity.PieceType == EntityData.Type.King).Count() == 0)
+        //{
+        //    ShowWarning("Loadout has no Kings!");
+        //    return;
+        //}
         if (PieceGraphics.Where(p => p.thisEntity.PieceType == EntityData.Type.King).Count() > 1)
         {
             ShowWarning("Loadout has more than one King!");

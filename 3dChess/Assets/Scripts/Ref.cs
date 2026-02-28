@@ -26,9 +26,17 @@ public class Ref : MonoBehaviour
     public AI aI;
     public static AI AI { get { return Instance.aI; } }
 
-
     public BattleUI battleUI;
     public static BattleUI BattleUI { get { return Instance.battleUI; } }
+
+    public ChessManager chessManager;
+    public static ChessManager ChessManager { get { return Instance.chessManager; } }
+
+    public CommandManager commandManager;
+    public static CommandManager CommandManager { get { return Instance.commandManager; } }
+
+    public OnlineManager onlineManager;
+    public static OnlineManager OnlineManager { get { return Instance.onlineManager; } }
 
 
     private void Awake()

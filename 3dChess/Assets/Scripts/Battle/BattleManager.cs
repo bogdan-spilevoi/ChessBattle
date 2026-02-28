@@ -9,24 +9,27 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-    public ChessManager ChessManager;
-    public BattleUI BattleUI;
+    private readonly static WaitForSeconds _waitForSeconds1 = new(1);
+    private readonly static WaitForSeconds _waitForSeconds0_5 = new(0.5f);
+
     public EffectManager EffectManager;
-    public Entity Original1, Original2;
-    public Entity player1 { get { return player1Team.Single(p => p.Value.Item2).Key; } }
-    public Entity player2 { get { return player2Team.Single(p => p.Value.Item2).Key; } }
+    public Piece Original1, Original2;
+
+    public Piece ActivePlayer1 { get { return player1Team.Single(p => p.Value.Item2).Key; } }
+    public Piece ActivePlayer2 { get { return player2Team.Single(p => p.Value.Item2).Key; } }
 
     public GameObject P1 { get { return player1Team.Single(p => p.Value.Item2).Value.Item1; } }
     public GameObject P2 { get { return player2Team.Single(p => p.Value.Item2).Value.Item1; } }
 
-    public Dictionary<Entity, (GameObject, bool)> player1Team = new(), player2Team = new();
+    public Dictionary<Piece, (GameObject, bool)> player1Team = new(), player2Team = new();
     public Transform Pos1, Pos2, Pos1Behind, Pos2Behind;
     public Tile contestedTile;
     public int Turn;
     public BattleResult Result = BattleResult.Empty;
 
-    public Action<BattleResult, Tile> OnBattleEnd;
-    public static Action<bool> OnMoveEnd;
+    public static Action<bool> OnTurnEnd;
+
+    public static bool Ongoing = false;
 
     public TMP_Text T_Animtation;
 
@@ -38,28 +41,26 @@ public class BattleManager : MonoBehaviour
         Fleed = 2,
     }
 
-    public void StartBattle(Entity e1, Entity e2, Tile t, bool start)
+    public void StartBattle(Piece e1, Piece e2, Tile t, bool start)
     {
-        Ref.AI.Create();     
-        OnBattleEnd = null;
+        Ref.AI.CreateBattle();  
+        Debug.LogError("Starting battle between " + e1.name + " and " + e2.name + " at tile " + t.x + "," + t.y + " at side " + start);
+        
         Original1 = e1;
         Original2 = e2;
-        var player1 = ((Piece)e1).side ? e1 : e2;
-        var player2 = ((Piece)e1).side ? e2 : e1;
+        var player1 = e1.side ? e1 : e2;
+        var player2 = e1.side ? e2 : e1;
         contestedTile = t;
         Turn = start ? 0 : 1;
 
-        var player1team = FindObjectsOfType<Piece>().Where(e => e.side == ((Piece)player1).side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player1).Cast<Entity>().ToList();
-        var player2team = FindObjectsOfType<Piece>().Where(e => e.side == ((Piece)player2).side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player2).Cast<Entity>().ToList();
+        var player1team = FindObjectsOfType<Piece>().Where(e => e.side == player1.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player1).ToList();
+        var player2team = FindObjectsOfType<Piece>().Where(e => e.side == player2.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player2).ToList();
 
         player1Team.Clear();
         player2Team.Clear();
 
         var P1 = CreateNewShowPiece(player1.gameObject, Pos1);
-        var P2 = CreateNewShowPiece(player2.gameObject, Pos2);
-
-        player1Team.Add(player1, (P1, true));
-        player2Team.Add(player2, (P2, true));
+        var P2 = CreateNewShowPiece(player2.gameObject, Pos2);    
 
         foreach (var otherPiece in player1team)
         {
@@ -72,11 +73,14 @@ public class BattleManager : MonoBehaviour
             player2Team.Add(otherPiece, (newPiece, false));
         }
 
+        player1Team.Add(player1, (P1, true));
+        player2Team.Add(player2, (P2, true));
+
         Ref.Camera.gameObject.SetActive(false);
         Ref.BattleCamera.gameObject.SetActive(true);
 
-        BattleUI.gameObject.SetActive(true);
-        BattleUI.Create(this);
+        Ref.BattleUI.gameObject.SetActive(true);
+        Ref.BattleUI.Create(this);
         
     }
 
@@ -88,12 +92,12 @@ public class BattleManager : MonoBehaviour
 
     public void EndBattle()
     {
-       
-        BattleUI.gameObject.SetActive(false);
+        Ongoing = false;
+        Ref.BattleUI.gameObject.SetActive(false);
 
         Ref.Camera.gameObject.SetActive(true);
         Ref.BattleCamera.gameObject.SetActive(false);
-        Ref.AI.Stop();       
+        Ref.AI.StopBattle();       
 
         foreach(var p in player1Team.Concat(player2Team))
         {
@@ -105,12 +109,65 @@ public class BattleManager : MonoBehaviour
         player1Team.Clear();
         player2Team.Clear();
 
-        Debug.Log(Result);
-        OnBattleEnd?.Invoke(Result, contestedTile);
+        ChessManager.IncreaseTurn();
     }
 
+    public void PrepareUsePotion(PotionData potionData, bool side)
+    {
+        IncreaseTurn();
+        Ref.BattleUI.UpdateUI();
+        var player = side ? ActivePlayer1 : ActivePlayer2;
+        var pieceInd = Ref.ChessManager.GetPieceIndex(side, player);
+        Ref.CommandManager.AddCommandLocal(new UsePotionCommand(side, pieceInd, potionData.Position));
+    }
 
-    public void ProcessMove(Move m, bool attackingSide)
+    public void ProcessPotion(bool side, int pieceInd, int potionInd)
+    {
+        var player = side ? ActivePlayer1 : ActivePlayer2;
+        var potion = Ref.ChessManager.GetPotionByIndex(side, potionInd);
+        StartCoroutine(ProcessPotionCor(player, potion, side));
+    }
+
+    private IEnumerator ProcessPotionCor(Entity entity, PotionData potion, bool side)
+    {
+        switch(potion.Name)
+        {
+            case "Heal":            
+                int toGive = (int)(entity.MaxHealth * 0.4);                
+                entity.GiveHealth(toGive);
+
+                EffectManager.TextAnimation(T_Animtation, side, "+" + toGive, Color.green, new(0, 0.2f, -0.15f));
+                EffectManager.DeliverHitEffect(MoveType.Heal, side);
+
+                yield return _waitForSeconds0_5;
+                Ref.BattleUI.UpdateHealth();
+                yield return _waitForSeconds0_5;
+                break;
+        }
+
+
+
+        Ref.ChessManager.RemovePotionAtIndex(side, potion.Position);
+
+        Ref.BattleUI.Create(this);
+        OnTurnEnd?.Invoke((Turn - 1) % 2 == 0);
+    }
+
+    public void PrepareUseMove(Move m, bool attackingSide)
+    {
+        var player = attackingSide ? ActivePlayer1 : ActivePlayer2;
+        var pieceInd = Ref.ChessManager.GetPieceIndex(attackingSide, player);
+        Ref.CommandManager.AddCommandLocal(new UseMoveCommand(attackingSide, pieceInd, player.GetMoveIndex(m), (uint)UnityEngine.Random.Range(int.MinValue, int.MaxValue)));
+    }    
+
+    public void ProcessMove(bool attackingSide, int pieceInd, int moveIndex, Rng32 rng)
+    {
+        var player = attackingSide ? ActivePlayer1 : ActivePlayer2;
+        var move = player.GetMoveByIndex(moveIndex);
+        ProcessMove(move, attackingSide, rng);
+    }
+
+    public void ProcessMove(Move m, bool attackingSide, Rng32 rng)
     {
         var list0 = Turn % 2 == 0 ? player1Team : player2Team;
         var list1 = Turn % 2 != 0 ? player1Team : player2Team;
@@ -118,13 +175,14 @@ public class BattleManager : MonoBehaviour
         var attacker = list0.Single(p => p.Value.Item2);
         var defender = list1.Single(p => p.Value.Item2);
 
-        Turn++;
-        BattleUI.UpdateUI();
+        IncreaseTurn();
 
-        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, attackingSide));
+        Ref.BattleUI.UpdateUI();
+
+        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, attackingSide, rng));
     }
 
-    private IEnumerator ProcessMoveCor((Entity, GameObject) att, (Entity, GameObject) deff, Move m, bool attackingSide)
+    private IEnumerator ProcessMoveCor((Entity, GameObject) att, (Entity, GameObject) deff, Move m, bool attackingSide, Rng32 rng)
     {
         var attacker = att.Item1;
         var defender = deff.Item1;
@@ -140,8 +198,7 @@ public class BattleManager : MonoBehaviour
                 {
                     Tween.Position(attackerObj.transform, defenderObj.transform.position, 0.5f, 0, Tween.EaseIn);
                     print("Extra: " + (float)attacker.Attack * 2 / 100 * m.Action + " " + (int)((float)attacker.Attack * 2 / 100 * m.Action));
-                    int damage = (int)m.Action + (int)((float)attacker.Attack * 2/100 * m.Action) + UnityEngine.Random.Range(0, attacker.HiddenStat);
-                    
+                    int damage = (int)m.Action + (int)((float)attacker.Attack * 2/100 * m.Action) + rng.RangeInt(0, attacker.HiddenStat);   
 
                     int defenderDefensePercent = EffectManager.HasEffect(!attackingSide, Effect.Type.Defense) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Defense) : 0;
                     int attackerWeakenPercent = EffectManager.HasEffect(attackingSide, Effect.Type.Weaken) ? (int)EffectManager.GetEffecttypeAction(attackingSide, Effect.Type.Weaken) : 0;
@@ -149,18 +206,18 @@ public class BattleManager : MonoBehaviour
                     int defenderEvasion = EffectManager.HasEffect(!attackingSide, Effect.Type.Evasion) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Evasion) : 0;
                     int defenderPoison = EffectManager.HasEffect(!attackingSide, Effect.Type.Poison) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Poison) : 0;
 
-                    print(defenderDefensePercent + " " + attackerWeakenPercent + " " + attackerSlow + " " + defenderEvasion + " " + defenderPoison);
+                    //print(defenderDefensePercent + " " + attackerWeakenPercent + " " + attackerSlow + " " + defenderEvasion + " " + defenderPoison);
 
                     int orgDamage = damage;
                     damage -= (int)(((float)defenderDefensePercent + attackerWeakenPercent) / 100 * orgDamage);
 
                     string damageInfo = "-" + damage;
-                    if (RandomChance.Percent(attacker.Luck * 5 - attackerSlow))
+                    if (rng.Percent(attacker.Luck * 5 - attackerSlow))
                     {
                         damage *= 2;
                         damageInfo = "-" + damage + " CRIT";
                     }
-                    if (RandomChance.Percent(defender.Speed * 5 + defenderEvasion))
+                    if (rng.Percent(defender.Speed * 5 + defenderEvasion))
                     {
                         damage = 0;
                         damageInfo = "EVADE";
@@ -175,27 +232,27 @@ public class BattleManager : MonoBehaviour
                     if (defender.Health < 0)
                         defender.Health = 0;
                 
-                    yield return new WaitForSeconds(0.5f);
+                    yield return _waitForSeconds0_5;
                     EffectManager.TextAnimation(T_Animtation, !attackingSide, damageInfo, Color.red, new(0, 0.2f, -0.15f));
                     if (defenderPoison > 0)
                     {
                         defender.Health -= defenderPoison;
-                        Helper.ActionAfterTime(0.2f, () => { EffectManager.TextAnimation(T_Animtation, !attackingSide, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f)); });
+                        this.ActionAfterTime(0.2f, () => { EffectManager.TextAnimation(T_Animtation, !attackingSide, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f)); });
                     }
-                    BattleUI.UpdateHealth();
+                    Ref.BattleUI.UpdateHealth();
                     Tween.Position(attackerObj.transform, initialPos, 0.5f, 0, Tween.EaseOut);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return _waitForSeconds0_5;
                     break;
                 }
             case MoveType.Heal:
-                {
+                {                   
+                    attacker.GiveHealth((int)m.Action);
+
                     EffectManager.TextAnimation(T_Animtation, attackingSide, "+" + (int)m.Action, Color.green, new(0, 0.2f, -0.15f));
-                    attacker.Health += (int)m.Action;
-                    if(attacker.Health > attacker.MaxHealth)
-                        attacker.Health = attacker.MaxHealth;
                     EffectManager.DeliverHitEffect(MoveType.Heal, attackingSide);
-                    yield return new WaitForSeconds(1);
-                    BattleUI.UpdateHealth();
+
+                    yield return _waitForSeconds1;
+                    Ref.BattleUI.UpdateHealth();
                     break;
                 }
             case MoveType.Defense:
@@ -203,8 +260,8 @@ public class BattleManager : MonoBehaviour
 
                     EffectManager.DeliverHitEffect(MoveType.Defense, attackingSide);
                     EffectManager.DeliverEffect(MoveType.Defense, attackingSide, 4, m.Action);
-                    yield return new WaitForSeconds(1);
-                    BattleUI.UpdateHealth();
+                    yield return _waitForSeconds1;
+                    Ref.BattleUI.UpdateHealth();
                     break;
                 }
             case MoveType.Weaken:
@@ -212,8 +269,8 @@ public class BattleManager : MonoBehaviour
 
                     EffectManager.DeliverHitEffect(MoveType.Weaken, attackingSide);
                     EffectManager.DeliverEffect(MoveType.Weaken, attackingSide, 4, m.Action);
-                    yield return new WaitForSeconds(1);
-                    BattleUI.UpdateHealth();
+                    yield return _waitForSeconds1;
+                    Ref.BattleUI.UpdateHealth();
                     break;
                 }
             case MoveType.Slow:
@@ -221,8 +278,8 @@ public class BattleManager : MonoBehaviour
 
                     EffectManager.DeliverHitEffect(MoveType.Slow, attackingSide);
                     EffectManager.DeliverEffect(MoveType.Slow, attackingSide, 4, m.Action);
-                    yield return new WaitForSeconds(1);
-                    BattleUI.UpdateHealth();
+                    yield return _waitForSeconds1;
+                    Ref.BattleUI.UpdateHealth();
                     break;
                 }
             case MoveType.Evasion:
@@ -230,8 +287,8 @@ public class BattleManager : MonoBehaviour
 
                     EffectManager.DeliverHitEffect(MoveType.Evasion, attackingSide);
                     EffectManager.DeliverEffect(MoveType.Evasion, attackingSide, 4, m.Action);
-                    yield return new WaitForSeconds(1);
-                    BattleUI.UpdateHealth();
+                    yield return _waitForSeconds1;
+                    Ref.BattleUI.UpdateHealth();
                     break;
                 }
             case MoveType.Poison:
@@ -240,20 +297,21 @@ public class BattleManager : MonoBehaviour
                     EffectManager.DeliverHitEffect(MoveType.Poison, attackingSide);
                     EffectManager.DeliverEffect(MoveType.Poison, attackingSide, 4, m.Action);
                     EffectManager.TextAnimation(T_Animtation, !attackingSide, "-" + m.Action, Color.magenta, new(0, 0.2f, -0.15f));
-                    yield return new WaitForSeconds(1);
-                    BattleUI.UpdateHealth();
+                    yield return _waitForSeconds1;
+                    Ref.BattleUI.UpdateHealth();
                     break;
                 }
         }
 
         m.Count--;
-        BattleUI.Create(this);
-        OnMoveEnd?.Invoke((Turn - 1) % 2 == 0);
+        Ref.BattleUI.Create(this);
+        OnTurnEnd?.Invoke((Turn - 1) % 2 == 0);
 
         if (Original1.Health <= 0 || Original2.Health <= 0)
         {
             var defeatedPiece = Original1.Health <= 0 ? Original1 : Original2;
-            bool sideOfDefeatedPiece = ((Piece)defeatedPiece).side;
+            var winningPiece = Original1.Health > 0 ? Original1 : Original2;
+            bool sideOfDefeatedPiece = defeatedPiece.side;
             print("Side of defeated piece " + sideOfDefeatedPiece);
             var winningTeam = sideOfDefeatedPiece ? player2Team : player1Team;
             Result = sideOfDefeatedPiece ? BattleResult.WonSide0 : BattleResult.WonSide1;
@@ -262,12 +320,15 @@ public class BattleManager : MonoBehaviour
             {
                 pair.Key.GiveExp(15);
             }
-            
+
+            defeatedPiece.Defeat();
+            winningPiece.GoToTile(contestedTile);
+
             EndBattle();
             
             if(defeatedPiece.GetType() == typeof(King))
             {
-                ChessManager.EndMatch(!sideOfDefeatedPiece);
+                Ref.ChessManager.EndMatch(!sideOfDefeatedPiece);
             }
         }
     }  
@@ -275,19 +336,35 @@ public class BattleManager : MonoBehaviour
     public GameObject CreateNewShowPiece(GameObject p, Transform pos)
     {
         var newPiece = Instantiate(p);
+        float y = newPiece.GetComponent<Piece>().normalY;
         Destroy(newPiece.GetComponent<Piece>());
         Destroy(newPiece.transform.GetChild(0).gameObject);
         newPiece.transform.SetParent(transform);
-        newPiece.transform.position = new Vector3(pos.transform.position.x, newPiece.transform.position.y, pos.transform.position.z);
+        newPiece.transform.position = new Vector3(pos.transform.position.x, y, pos.transform.position.z);
         return newPiece;
     }
 
-    public void SwitchPiece(Entity e, bool side)
+    public void PrepareSwitchPiece(Piece e, bool side)
+    {
+        IncreaseTurn();
+        var player = side? ActivePlayer1 : ActivePlayer2;
+        Ref.CommandManager.AddCommandLocal(new SwitchPieceCommand(side, Ref.ChessManager.GetPieceIndex(side, player), Ref.ChessManager.GetPieceIndex(side, e)));
+    }
+
+    public void SwitchPiece(bool side, int pieceInd, int newPieceInd)
+    {
+        var player = side ? ActivePlayer1 : ActivePlayer2;
+        var piece = Ref.ChessManager.GetPieceByIndex(side, pieceInd);
+        var newPiece = Ref.ChessManager.GetPieceByIndex(side, newPieceInd);
+       SwitchPiece(newPiece, side);
+    }
+
+    public void SwitchPiece(Piece e, bool side)
     {
         StartCoroutine(SwitchPieceCor(e, side));
     }
 
-    private IEnumerator SwitchPieceCor(Entity e, bool side)
+    private IEnumerator SwitchPieceCor(Piece e, bool side)
     {
         var team = side ? player1Team : player2Team;
 
@@ -303,19 +380,23 @@ public class BattleManager : MonoBehaviour
         Tween.Position(entry.Value.Item1.transform, posToGoTo.position, 0.5f, 0, Tween.EaseIn);
         yield return new WaitForSeconds(0.75f);
         Tween.Position(newEntry.Value.Item1.transform, posToGoBackTo.position, 0.5f, 0, Tween.EaseOut);
-        yield return new WaitForSeconds(0.5f);
+        yield return _waitForSeconds0_5;
 
         int defenderPoison = EffectManager.HasEffect(!side, Effect.Type.Poison) ? (int)EffectManager.GetEffecttypeAction(!side, Effect.Type.Poison) : 0;
         if (defenderPoison > 0)
         {
-            player2.Health -= defenderPoison;
+            ActivePlayer2.Health -= defenderPoison;
             Helper.ActionAfterTime(0.2f, () => { EffectManager.TextAnimation(T_Animtation, !side, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f)); });
         }
 
-        BattleUI.Create(this);
-        Turn++;
-        OnMoveEnd?.Invoke((Turn - 1) % 2 == 0);
-        BattleUI.UpdateUI();
+        Ref.BattleUI.Create(this);
+        OnTurnEnd?.Invoke((Turn - 1) % 2 == 0);
+        Ref.BattleUI.UpdateUI();
     }
 
+    public void IncreaseTurn()
+    {
+        Debug.LogWarning("Battle turn increased");
+        Turn++;
+    }
 }

@@ -79,7 +79,21 @@ public abstract class Entity : MonoBehaviour
     public List<Move> Moves { get { return Data.Moves; } }
     public List<Move> AvialableMoves => Moves.TakeWhile((move, i) => Move.MoveIndToLvlRequired(i) <= Level).ToList();
 
+    public int GetMoveIndex(Move m)
+    {
+        return Moves.IndexOf(m); 
+    }
+    public Move GetMoveByIndex(int ind)
+    {
+        return Moves[ind];
+    }
+
     public abstract void UpdateUI();
 
     public abstract void OnIncludedBattleEnd();
+
+    public void GiveHealth(int amount)
+    {
+        Health = Mathf.Clamp(Health + amount, 0, MaxHealth);
+    }
 }

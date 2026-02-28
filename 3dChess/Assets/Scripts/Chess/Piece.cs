@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Outline))]
 public abstract class Piece : Entity
 {
+    private static readonly WaitForSeconds _waitForSeconds0_1 = new(0.1f);
     public bool isHeld;
     private Camera cam;
     public float heldHeight;
@@ -15,8 +16,6 @@ public abstract class Piece : Entity
     public int movesCnt = 0;
     public bool side = true; //true = white, false = black
     public Tile currentTile;
-
-    public Tile orgTile;
     public List<Tile> Preview;
 
     public PieceUI pieceUI;
@@ -43,7 +42,6 @@ public abstract class Piece : Entity
 
         tile.currentPiece = this;
         currentTile = tile;
-        orgTile = currentTile;
         transform.position = new Vector3(tile.transform.position.x, normalY, tile.transform.position.z);
 
         Data = e;
@@ -147,53 +145,46 @@ public abstract class Piece : Entity
         Ref.ManageTiles.ResetAllTileStates();
 
         var tilePos = Ref.ManageTiles.GetTile(Ref.ManageTiles.GetUnderTile(transform.position));
-        var tileToGo = tilePos != null && Preview.Contains(tilePos) ? tilePos : orgTile;
-        currentTile = tileToGo;
+        var tileToGo = tilePos != null && Preview.Contains(tilePos) ? tilePos : currentTile;
 
-        Tween.LocalPosition(transform, new Vector3(tileToGo.transform.position.x, normalY, tileToGo.transform.position.z), 0.1f, 0, Tween.EaseOut);
         
-        yield return new WaitForSeconds(0.1f);
+        yield return _waitForSeconds0_1;
         animaiton = false;
 
-        if(tileToGo != orgTile)
+        if(tileToGo != currentTile)
         {
             SubmitMove(tileToGo);
         }
+        else
+        {
+            Tween.LocalPosition(transform, new Vector3(tileToGo.transform.position.x, normalY, tileToGo.transform.position.z), 0.1f, 0, Tween.EaseOut);
+        }
     }
+
+    public void Defeat()
+    {
+        currentTile.currentPiece = null;
+        currentTile = null;
+        gameObject.SetActive(false);
+    }
+
+    public void GoToTile(Tile tile)
+    {
+        if (animaiton)
+            return;
+        animaiton = true;
+
+        movesCnt++;
+        currentTile.currentPiece = null;
+        currentTile = tile;     
+        currentTile.currentPiece = this;
+        Tween.LocalPosition(transform, new Vector3(tile.transform.position.x, normalY, tile.transform.position.z), 0.25f, 0, Tween.EaseOut, completeCallback: () => { animaiton = false; });
+    }
+
 
     public void SubmitMove(Tile tile)
     {
-        ChessManager.Turn++;
-        if (tile.currentPiece != null)
-        {
-            Ref.BattleManager.StartBattle(this, tile.currentPiece, tile, side);           
-            Ref.BattleManager.OnBattleEnd += BattleEndListener;
-        }
-        else
-        {
-            Debug.Log("No contest for tile.");
-            movesCnt++;
-            tile.currentPiece = this;
-            orgTile.currentPiece = null;
-            orgTile = tile;
-        }       
-    }
-
-    public void BattleEndListener(BattleManager.BattleResult result, Tile tile)
-    {        
-        int sideToInt = side ? 1 : 0;
-        Debug.Log("Winner from piece: " + result + " " + side + " " + sideToInt);
-        if (sideToInt != (int)result)
-        {
-            Tween.LocalPosition(transform, new Vector3(orgTile.transform.position.x, normalY, orgTile.transform.position.z), 0.25f, 0, Tween.EaseOut);
-        }
-        else
-        {
-            movesCnt++;
-            tile.currentPiece = this;
-            orgTile.currentPiece = null;
-            orgTile = tile;
-        }
+        Ref.ChessManager.PrepareMove(side, this, tile);      
     }
 
     public void ActivatePieceUI()
@@ -217,5 +208,20 @@ public abstract class Piece : Entity
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public char GetFenChar()
+    {
+        char c = GetType().Name switch
+        {
+            "Pawn" => 'p',
+            "Rook" => 'r',
+            "Knight" => 'n',
+            "Bishop" => 'b',
+            "Queen" => 'q',
+            "King" => 'k',
+            _ => '?'
+        };
+        return side ? char.ToUpper(c) : c;
     }
 }

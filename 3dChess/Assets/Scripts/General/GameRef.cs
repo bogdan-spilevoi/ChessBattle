@@ -15,6 +15,9 @@ public class GameRef : MonoBehaviour
     public LayoutEdit layoutEdit;
     public static LayoutEdit LayoutEdit {  get { return Instance.layoutEdit; } }
 
+    public PotionsEdit potionsEdit;
+    public static PotionsEdit PotionsEdit { get { return Instance.potionsEdit; } }
+
     private void Awake()
     {
         if(Instance == null)

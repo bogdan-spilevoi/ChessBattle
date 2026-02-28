@@ -97,6 +97,30 @@ public class Variants : MonoBehaviour
     new EntityData("Celestial King", EntityData.Type.King, -1, 520, 520, 5, 7, 8, 0, "radiant", null),
 };
 
+    public static List<PotionData> PotionVariants = new()
+    {
+        new PotionData("Heal", -1),
+        new PotionData("Cleanse", -1),
+    };
+
+    public static EntityData GetPieceByIndex(int index)
+    {
+        if (index < 0 || index >= PiecesVariants.Count)
+            return null;
+        return PiecesVariants[index].Copy();
+    }
+
+    public static PotionData GetPotionByIndex(int index)
+    {
+        if (index < 0 || index >= PotionVariants.Count)
+            return null;
+        return PotionVariants[index].Copy();
+    }
+
+    public static PotionData GetRandomPotion()
+    {
+        return PotionVariants[Random.Range(0, PotionVariants.Count)].Copy();
+    }
 
     public static EntityData GetRandomOfType(EntityData.Type type)
     {
@@ -106,7 +130,7 @@ public class Variants : MonoBehaviour
             return null;
 
         var chosen =  candidates[GetWeightedRandom(candidates.Count)].Copy();
-        for(int i = 0; i< 4; i++)
+        for(int i = 0; i < 4; i++)
         {
             chosen.Moves.Add(MovePool.GetRandomMove(chosen.Variant, chosen.PieceType, i));
         }

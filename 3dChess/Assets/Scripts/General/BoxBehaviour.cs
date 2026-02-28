@@ -51,7 +51,7 @@ public class BoxBehaviour : MonoBehaviour
         IsReady = false;
         ShakeAnim.Stop();
         Box.SetActive(false);        
-        var p = player.GetPiece(Variants.GetRandom());
+        var p = player.AddPieceToInventory(Variants.GetRandom());
 
         CurrentPiece = Instantiate(Pieces[(int)p.PieceType], Pieces[(int)p.PieceType].transform.parent);
         CurrentPiece.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/{p.Variant}");
