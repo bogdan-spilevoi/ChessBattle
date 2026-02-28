@@ -24,7 +24,11 @@ public class BattleMoveUI : MonoBehaviour
         I_Icon.Fit(50);
 
         Overlay.SetActive(isLocked);
-        //GetComponent<Button>().enabled = !isLocked;
         T_Count.text = $"{m.Count}/{m.MaxCount}";
+
+        //GetComponent<Button>().enabled = !isLocked;
+        GetComponent<Button>().onClick.AddListener(() => {
+            Ref.BattleManager.PrepareUseMove(m, ChessManager.Side);
+        });
     }
 }

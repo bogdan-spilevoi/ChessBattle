@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Helper : MonoBehaviour
+public static class Helper
 {
     public static async void ActionAfterTime(float time, Action A)
     {
@@ -21,4 +21,8 @@ public class Helper : MonoBehaviour
         A?.Invoke();
     }
 
+    public static void ActionAfterTime(this MonoBehaviour mono, float time, Action A)
+    {
+        mono.StartCoroutine(ActionAfterTimeCor(time, A));
+    }
 }

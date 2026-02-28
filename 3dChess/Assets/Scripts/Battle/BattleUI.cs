@@ -14,8 +14,9 @@ public class BattleUI : MonoBehaviour
     public BattleManager BattleManager;
 
     public BattleMoveUI OrgMove;
-    public List<BattleMoveUI> MoveUI;
-    public GameObject PlayerUIOverlay, AttackUI, DialogueUI;
+    public List<BattleMoveUI> MovesUI;
+    public List<PotionSlotUI> PotionSlotsUI;
+    public GameObject PlayerUIOverlay, AttackUI, PotionsUI, DialogueUI;
     public Button B_Attack;
 
     public GameObject Tab_SwitchPiece;
@@ -27,46 +28,45 @@ public class BattleUI : MonoBehaviour
     {
         BattleManager = battleManager;
 
-        T_Name1.text = BattleManager.player1.Name == "" ? BattleManager.player1.GetType().ToString() : BattleManager.player1.Name;
-        T_Name2.text = BattleManager.player2.Name == "" ? BattleManager.player2.GetType().ToString() : BattleManager.player2.Name;
+        T_Name1.text = BattleManager.ActivePlayer1.Name == "" ? BattleManager.ActivePlayer1.GetType().ToString() : BattleManager.ActivePlayer1.Name;
+        T_Name2.text = BattleManager.ActivePlayer2.Name == "" ? BattleManager.ActivePlayer2.GetType().ToString() : BattleManager.ActivePlayer2.Name;
 
-        T_Lvl1.text = "lvl " +  BattleManager.player1.Level.ToString();
-        T_Lvl2.text = "lvl " + BattleManager.player2.Level.ToString();
+        T_Lvl1.text = "lvl " +  BattleManager.ActivePlayer1.Level.ToString();
+        T_Lvl2.text = "lvl " + BattleManager.ActivePlayer2.Level.ToString();
 
-        S_P1.maxValue = BattleManager.player1.MaxHealth;
-        S_P1.value = BattleManager.player1.Health;
+        S_P1.maxValue = BattleManager.ActivePlayer1.MaxHealth;
+        S_P1.value = BattleManager.ActivePlayer1.Health;
 
-        S_P2.maxValue = BattleManager.player2.MaxHealth;
-        S_P2.value = BattleManager.player2.Health;
+        S_P2.maxValue = BattleManager.ActivePlayer2.MaxHealth;
+        S_P2.value = BattleManager.ActivePlayer2.Health;
 
-        foreach (var m in MoveUI)
+        
+        MovesUI.ClearObjects();
+        for (int i = 0; i < BattleManager.ActivePlayer1.Moves.Count; i++)
         {
-            Destroy(m.gameObject);
-        }
-        MoveUI.Clear();
-
-        for(int i = 0; i < BattleManager.player1.Moves.Count; i++)
-        {
-            var m = BattleManager.player1.Moves[i];
+            var m = BattleManager.ActivePlayer1.Moves[i];
             var g = Instantiate(OrgMove, OrgMove.transform.parent);
             g.gameObject.SetActive(true);
-            g.Create(m, Move.MoveIndToLvlRequired(i) > BattleManager.player1.Level);
-            MoveUI.Add(g);
-            g.GetComponent<Button>().onClick.AddListener(() => { BattleManager.ProcessMove(m, true); });
+            g.Create(m, Move.MoveIndToLvlRequired(i) > BattleManager.ActivePlayer1.Level);
+            MovesUI.Add(g);         
         }
-        T_Health1.text = $"{BattleManager.player1.Health}/{BattleManager.player1.MaxHealth}";
-        T_Health2.text = $"{BattleManager.player2.Health}/{BattleManager.player2.MaxHealth}";
+
+        foreach(var potion in Ref.ChessManager.WhiteData.Potions)
+        {
+            PotionSlotsUI[potion.Position].Create(potion);
+        }
+        T_Health1.text = $"{BattleManager.ActivePlayer1.Health}/{BattleManager.ActivePlayer1.MaxHealth}";
+        T_Health2.text = $"{BattleManager.ActivePlayer2.Health}/{BattleManager.ActivePlayer2.MaxHealth}";
         UpdateUI();
     }
 
     public void UpdateHealth()
     {
-        print("Animating health bar");
-        int h1 = BattleManager.player1.Health, h2 = BattleManager.player2.Health;
-        T_Health2.text = $"{h2}/{BattleManager.player2.MaxHealth}";
-        T_Health1.text = $"{h1}/{BattleManager.player1.MaxHealth}";
-        Tween.Value(S_P1.value, BattleManager.player1.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
-        Tween.Value(S_P2.value, BattleManager.player2.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
+        int h1 = BattleManager.ActivePlayer1.Health, h2 = BattleManager.ActivePlayer2.Health;
+        T_Health2.text = $"{h2}/{BattleManager.ActivePlayer2.MaxHealth}";
+        T_Health1.text = $"{h1}/{BattleManager.ActivePlayer1.MaxHealth}";
+        Tween.Value(S_P1.value, BattleManager.ActivePlayer1.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
+        Tween.Value(S_P2.value, BattleManager.ActivePlayer2.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
     }
 
     public void UpdateUI()
@@ -74,8 +74,9 @@ public class BattleUI : MonoBehaviour
         bool b = BattleManager.Turn % 2 != 0;
         PlayerUIOverlay.SetActive(b);
         AttackUI.SetActive(b);
+        PotionsUI.SetActive(b);
         DialogueUI.SetActive(!b);
-        B_Attack.enabled = BattleManager.player1.AvialableMoves.Any(m => m.Count > 0);
+        B_Attack.enabled = BattleManager.ActivePlayer1.AvialableMoves.Any(m => m.Count > 0);
     }
 
     public void ToggleSwitchPiece(bool b)
@@ -85,23 +86,14 @@ public class BattleUI : MonoBehaviour
 
         var pieces = Ref.BattleManager.player1Team.Where(p => !p.Value.Item2).ToList();
 
-        foreach(var p in SwitchPieces)
-        {
-            Destroy(p.gameObject);
-        }
-        SwitchPieces.Clear();
-
+        SwitchPieces.ClearObjects();
         foreach (var p in pieces)
         {
             var piece = p.Key;
             var spg = Instantiate(OriginalPieceGraphic, OriginalPieceGraphic.transform.parent);
-            spg.Create(piece.Name, piece.Level, piece.Health, piece.MaxHealth, Resources.Load<Sprite>($"Icons/{piece.PieceType}/{piece.Variant}"));
+            spg.Create(piece);
             spg.gameObject.SetActive(true);
-            spg.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                ToggleSwitchPiece(false);
-                Ref.BattleManager.SwitchPiece(piece, true);
-            });
+            
             SwitchPieces.Add(spg);
         }
     }

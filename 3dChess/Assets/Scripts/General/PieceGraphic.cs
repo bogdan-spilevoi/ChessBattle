@@ -16,8 +16,6 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
     public RectTransform rectTransform;
     public EntityData thisEntity;
     public int position = -1;
-    [HideInInspector]
-    public LayoutEdit LayoutEdit;
     private float fitTo;
     public bool isDragging = false;
 
@@ -38,7 +36,7 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
 
     public void StartDrag()
     {
-        LayoutEdit.RemovePieceGraphicHelper.SetActive(true);
+        GameRef.LayoutEdit.RemovePieceGraphicHelper.SetActive(true);
         transform.SetAsLastSibling();
     }
 
@@ -56,30 +54,30 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         isDragging = false;
-        LayoutEdit.RemovePieceGraphicHelper.SetActive(false);
-        int pos = LayoutEdit.GetTileIndexFromPosition(rectTransform.localPosition);
+        GameRef.LayoutEdit.RemovePieceGraphicHelper.SetActive(false);
+        int pos = GameRef.LayoutEdit.GetTileIndexFromPosition(rectTransform.localPosition);
         if (pos == -2 ||(pos == -1 && position == -1))
         {
-            thisEntity.Position = -1;           
-            LayoutEdit.RemovePieceGraphic(this);
-            LayoutEdit.UpdateLimit();
-            LayoutEdit.UpdateAllListPieces();
+            thisEntity.Position = -1;
+            GameRef.LayoutEdit.RemovePieceGraphic(this);
+            GameRef.LayoutEdit.UpdateLimit();
+            GameRef.LayoutEdit.UpdateAllListPieces();
             return;
         }
-        var possibleOtherPieceInSquare = LayoutEdit.player.PiecesInventory.Find(e => e.Position == pos && e != thisEntity && e.Position != -1);
-        //print((possibleOtherPieceInSquare == null) + " " + position + " " + pos);
+        var possibleOtherPieceInSquare = GameRef.LayoutEdit.player.PiecesInventory.Find(e => e.Position == pos && e != thisEntity && e.Position != -1);
+
         if (possibleOtherPieceInSquare != null)
         {
-            var otherPieceGraphic = LayoutEdit.PieceGraphics.Find(p => p.thisEntity == possibleOtherPieceInSquare);
+            var otherPieceGraphic = GameRef.LayoutEdit.PieceGraphics.Find(p => p.thisEntity == possibleOtherPieceInSquare);
             possibleOtherPieceInSquare.Position = position;
             otherPieceGraphic.position = position;
             if (position == -1)
             {
-                LayoutEdit.PieceGraphics.Remove(otherPieceGraphic);
+                GameRef.LayoutEdit.PieceGraphics.Remove(otherPieceGraphic);
                 Destroy(otherPieceGraphic.gameObject);               
             }
             else
-                Tween.AnchoredPosition(otherPieceGraphic.rectTransform, LayoutEdit.Squares[position].GetComponent<RectTransform>().localPosition, 0.1f, 0, Tween.EaseInOut);
+                Tween.AnchoredPosition(otherPieceGraphic.rectTransform, GameRef.LayoutEdit.Squares[position].GetComponent<RectTransform>().localPosition, 0.1f, 0, Tween.EaseInOut);
         }
         if (pos != -1)
         {
@@ -88,9 +86,9 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
         }
         
 
-        Tween.AnchoredPosition(rectTransform, LayoutEdit.Squares[position].GetComponent<RectTransform>().localPosition, 0.1f, 0, Tween.EaseInOut);
-        LayoutEdit.UpdateAllListPieces();
-        LayoutEdit.UpdateLimit();
+        Tween.AnchoredPosition(rectTransform, GameRef.LayoutEdit.Squares[position].GetComponent<RectTransform>().localPosition, 0.1f, 0, Tween.EaseInOut);
+        GameRef.LayoutEdit.UpdateAllListPieces();
+        GameRef.LayoutEdit.UpdateLimit();
     }
 
     public void GetIcon()

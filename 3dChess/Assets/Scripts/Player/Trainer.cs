@@ -1,12 +1,15 @@
 using Pixelplacement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Trainer : MonoBehaviour
 {
     public string Name;
-    public List<EntityData> Inventory;
+    public List<TrainerPieceInfo> Pieces;
+    public List<int> Potions;
     [TextArea(10, 10)]
     public string ChallengeText, DefeatedText;
     public bool Defeated;
@@ -20,7 +23,6 @@ public class Trainer : MonoBehaviour
 
     public void Create(TrainerData data)
     {
-        Inventory = data.Inventory;
         Name = data.Name;
         Defeated = data.Defeated;
     }
@@ -38,4 +40,30 @@ public class Trainer : MonoBehaviour
     {
         Tween.Rotation(transform, InitialRotation, 0.5f, 0, Tween.EaseInOut);
     }
+
+    public InventoryData GetInventory()
+    {
+        List<EntityData> pieces = new();
+
+        return new InventoryData() 
+        { 
+            Pieces = new(Pieces.Select((pieceInfo) => {
+                var p = Variants.GetPieceByIndex(pieceInfo.PieceIndex);
+                p.Moves = pieceInfo.MoveIndexes.Select(i => MovePool.GetMoveByIndex(p.Variant, i)).ToList();
+                p.Position = pieceInfo.Position;
+                p.Level = pieceInfo.Level;
+                return p;
+            })), 
+            Potions = new(Potions.Select(p => Variants.GetPotionByIndex(p)))
+        };
+    }
+}
+
+[Serializable]
+public struct TrainerPieceInfo
+{
+    public int PieceIndex;
+    public int Position;
+    public int Level;
+    public List<int> MoveIndexes;
 }
