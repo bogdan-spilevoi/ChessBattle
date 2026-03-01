@@ -196,4 +196,9 @@ public class ManageTiles : MonoBehaviour
         table = table[..^1];
         return table;
     }
+
+    public void SwitchBoard()
+    {
+        transform.localRotation *= Quaternion.Euler(0, 0, 180);
+    }
 }

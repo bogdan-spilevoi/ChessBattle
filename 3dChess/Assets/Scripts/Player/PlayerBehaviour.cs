@@ -135,6 +135,7 @@ public class PlayerBehaviour : MonoBehaviour
             () =>
             {
                 print("AA\n" + JsonConvert.SerializeObject(trainer.GetInventory()));
+                PlayerPrefsExtentions.SetBool("online", false);
                 PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(trainer.GetInventory(), Formatting.Indented));
                 PlayerPrefs.SetString("trainerName", trainer.Name);
                 SceneManager.LoadScene("Chess");

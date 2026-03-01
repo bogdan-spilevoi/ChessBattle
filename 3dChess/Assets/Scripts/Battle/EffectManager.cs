@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.AssetImporters;
 using UnityEngine;
 
 public class EffectManager : MonoBehaviour

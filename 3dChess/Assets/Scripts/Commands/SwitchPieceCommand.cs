@@ -10,6 +10,7 @@ public class SwitchPieceCommand : CommandBase
     [JsonProperty(Order = 2)]
     public int NewPieceInd;
 
+    public SwitchPieceCommand() { Type = CommandType.BattleSwitchPiece; }
     public SwitchPieceCommand(bool side, int originalPieceInd, int newPieceInd) : base(side, CommandType.BattleSwitchPiece)
     {
         OriginalPieceInd = originalPieceInd;

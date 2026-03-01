@@ -9,7 +9,9 @@ public class Pawn : Piece
     {
         //orgTile = tile;
         Preview.Clear();
-        foreach (var newPos in pos)
+        var realPos = side ? pos : new List<(int, int)> { (-1, 0), (-2, 0) };
+
+        foreach (var newPos in realPos)
         {
             int x = tile.x + newPos.Item1;
             int y = tile.y + newPos.Item2;
@@ -23,8 +25,8 @@ public class Pawn : Piece
                 break;
         }
 
-        List<(int, int)> attack = new() { (1, -1), (1, 1) };
-        foreach(var attackPos in attack)
+        List<(int, int)> attack = new() { (side ? 1 : -1, -1), (side ? 1 : -1, 1) };
+        foreach (var attackPos in attack)
         {
             int x = tile.x + attackPos.Item1;
             int y = tile.y + attackPos.Item2;

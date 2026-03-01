@@ -20,7 +20,7 @@ public class PieceUI : MonoBehaviour
         S_Health.value = health;
         Type = type;
         T_Level.text = "lvl " + level;
-        S_Health.fillRect.GetComponentInChildren<Image>().color = Type ? C1 : C2;
+        S_Health.fillRect.GetComponentInChildren<Image>().color = Type == ChessManager.Side ? C1 : C2;
     }
 
     public void UpdateHealth(int newHealth)

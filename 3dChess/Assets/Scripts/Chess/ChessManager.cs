@@ -36,10 +36,36 @@ public class ChessManager : MonoBehaviour
     }
 
     //Match preparation
+    public void PreparePieces(string incoming, bool side)
+    {
+        print("Starting chess match with side:\n" + side);
+        string mine = GetMyInventoryData();
+        Side = side;
+
+        if(!side)
+        {
+            Ref.ManageTiles.SwitchBoard();
+            PreparePieces(JsonConvert.DeserializeObject<InventoryData>(incoming), JsonConvert.DeserializeObject<InventoryData>(mine));
+        }
+        else
+        {
+            PreparePieces(JsonConvert.DeserializeObject<InventoryData>(mine), JsonConvert.DeserializeObject<InventoryData>(incoming));
+        }
+
+        
+    }
     public void PreparePieces(InventoryData white, InventoryData black)
     {
+        WhiteData = white;
+        BlackData = black;
 
-        foreach(var piece in white.Pieces)
+        WhiteData.Pieces = WhiteData.Pieces.Where(p => p.Position > -1).ToList();
+        WhiteData.Potions = WhiteData.Potions.Where(p => p.Position > -1).ToList();
+
+        BlackData.Pieces = BlackData.Pieces.Where(p => p.Position > -1).ToList();
+        BlackData.Potions = BlackData.Potions.Where(p => p.Position > -1).ToList();
+
+        foreach (var piece in white.Pieces)
         {
             AllWhites.Add(piece);
             if (piece.Position == -1) continue;
@@ -117,6 +143,19 @@ public class ChessManager : MonoBehaviour
         BlackData = blackInventory;
     }
 
+    public string GetMyInventoryData()
+    {
+        string white = PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave"));
+        string black = PlayerPrefs.GetString("trainer");
+
+        SaveData whiteData = JsonConvert.DeserializeObject<SaveData>(white);
+        saveData = whiteData;
+
+        InventoryData whiteInventory = whiteData.InventoryData;
+        whiteInventory.Pieces = whiteInventory.Pieces.Where(p => p.Position > -1).ToList();
+        return JsonConvert.SerializeObject(whiteInventory);
+    }
+
     
 
 
@@ -132,10 +171,10 @@ public class ChessManager : MonoBehaviour
         if (tile.currentPiece != null)
         {
             BattleManager.Ongoing = true;
-            this.ActionAfterTime(0.25f, () =>
+            Ref.VersusUI.Create(piece, tile.currentPiece, () =>
             {
                 Ref.BattleManager.StartBattle(piece, tile.currentPiece, tile, side);
-            });        
+            });      
         }
         else
         {
@@ -181,6 +220,11 @@ public class ChessManager : MonoBehaviour
     {
         var inventory = side ? WhiteData : BlackData;
         inventory.Potions.Remove(GetPotionByIndex(side, potionInd));
+    }
+
+    public static bool IsMyTurn()
+    {
+        return Side == (Turn % 2 == 0);
     }
 
     public static void IncreaseTurn()

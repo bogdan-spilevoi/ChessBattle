@@ -11,6 +11,8 @@ public class AI : MonoBehaviour
 
     public void CreateBattle()
     {
+        if (!ChessManager.Local)
+            return;
         ThinkBattleMove = StartCoroutine(MakeMove());
     }
     public void StopBattle()

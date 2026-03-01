@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -48,10 +47,10 @@ public class BattleManager : MonoBehaviour
         
         Original1 = e1;
         Original2 = e2;
-        var player1 = e1.side ? e1 : e2;
-        var player2 = e1.side ? e2 : e1;
+        var player1 = e1.side == ChessManager.Side ? e1 : e2;
+        var player2 = e1.side == ChessManager.Side ? e2 : e1;
         contestedTile = t;
-        Turn = start ? 0 : 1;
+        Turn = start == ChessManager.Side ? 0 : 1;
 
         var player1team = FindObjectsOfType<Piece>().Where(e => e.side == player1.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player1).ToList();
         var player2team = FindObjectsOfType<Piece>().Where(e => e.side == player2.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player2).ToList();
@@ -84,7 +83,12 @@ public class BattleManager : MonoBehaviour
         
     }
 
-    public void FleeBattle()
+    public void PrepareFleeBattle()
+    {
+        Ref.CommandManager.AddCommandLocal(new FleeBattleCommand(ChessManager.Side));
+    }
+
+    public void FleeBattle(bool side)
     {
         Result = BattleResult.Fleed;
         EndBattle();
@@ -97,7 +101,9 @@ public class BattleManager : MonoBehaviour
 
         Ref.Camera.gameObject.SetActive(true);
         Ref.BattleCamera.gameObject.SetActive(false);
-        Ref.AI.StopBattle();       
+
+        if(ChessManager.Local)
+            Ref.AI.StopBattle();       
 
         foreach(var p in player1Team.Concat(player2Team))
         {
@@ -113,19 +119,19 @@ public class BattleManager : MonoBehaviour
     }
 
     public void PrepareUsePotion(PotionData potionData, bool side)
-    {
-        IncreaseTurn();
+    {     
         Ref.BattleUI.UpdateUI();
-        var player = side ? ActivePlayer1 : ActivePlayer2;
+        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
         var pieceInd = Ref.ChessManager.GetPieceIndex(side, player);
         Ref.CommandManager.AddCommandLocal(new UsePotionCommand(side, pieceInd, potionData.Position));
     }
 
     public void ProcessPotion(bool side, int pieceInd, int potionInd)
     {
-        var player = side ? ActivePlayer1 : ActivePlayer2;
+        IncreaseTurn();
+        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
         var potion = Ref.ChessManager.GetPotionByIndex(side, potionInd);
-        StartCoroutine(ProcessPotionCor(player, potion, side));
+        StartCoroutine(ProcessPotionCor(player, potion, ChessManager.Side ? side : !side));
     }
 
     private IEnumerator ProcessPotionCor(Entity entity, PotionData potion, bool side)
@@ -155,14 +161,15 @@ public class BattleManager : MonoBehaviour
 
     public void PrepareUseMove(Move m, bool attackingSide)
     {
-        var player = attackingSide ? ActivePlayer1 : ActivePlayer2;
+        var player = attackingSide == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        print("Preparing move " + m.Name + " for player " + player.Name + " at side " + attackingSide);
         var pieceInd = Ref.ChessManager.GetPieceIndex(attackingSide, player);
         Ref.CommandManager.AddCommandLocal(new UseMoveCommand(attackingSide, pieceInd, player.GetMoveIndex(m), (uint)UnityEngine.Random.Range(int.MinValue, int.MaxValue)));
     }    
 
     public void ProcessMove(bool attackingSide, int pieceInd, int moveIndex, Rng32 rng)
     {
-        var player = attackingSide ? ActivePlayer1 : ActivePlayer2;
+        var player = attackingSide == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
         var move = player.GetMoveByIndex(moveIndex);
         ProcessMove(move, attackingSide, rng);
     }
@@ -179,7 +186,7 @@ public class BattleManager : MonoBehaviour
 
         Ref.BattleUI.UpdateUI();
 
-        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, attackingSide, rng));
+        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, ChessManager.Side ? attackingSide : !attackingSide , rng));
     }
 
     private IEnumerator ProcessMoveCor((Entity, GameObject) att, (Entity, GameObject) deff, Move m, bool attackingSide, Rng32 rng)
@@ -313,8 +320,8 @@ public class BattleManager : MonoBehaviour
             var winningPiece = Original1.Health > 0 ? Original1 : Original2;
             bool sideOfDefeatedPiece = defeatedPiece.side;
             print("Side of defeated piece " + sideOfDefeatedPiece);
-            var winningTeam = sideOfDefeatedPiece ? player2Team : player1Team;
-            Result = sideOfDefeatedPiece ? BattleResult.WonSide0 : BattleResult.WonSide1;
+            var winningTeam = sideOfDefeatedPiece == ChessManager.Side ? player2Team : player1Team;
+            Result = sideOfDefeatedPiece == ChessManager.Side ? BattleResult.WonSide0 : BattleResult.WonSide1;
 
             foreach (var pair in winningTeam)
             {
@@ -345,15 +352,15 @@ public class BattleManager : MonoBehaviour
     }
 
     public void PrepareSwitchPiece(Piece e, bool side)
-    {
-        IncreaseTurn();
-        var player = side? ActivePlayer1 : ActivePlayer2;
+    {      
+        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
         Ref.CommandManager.AddCommandLocal(new SwitchPieceCommand(side, Ref.ChessManager.GetPieceIndex(side, player), Ref.ChessManager.GetPieceIndex(side, e)));
     }
 
     public void SwitchPiece(bool side, int pieceInd, int newPieceInd)
     {
-        var player = side ? ActivePlayer1 : ActivePlayer2;
+        IncreaseTurn();
+        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
         var piece = Ref.ChessManager.GetPieceByIndex(side, pieceInd);
         var newPiece = Ref.ChessManager.GetPieceByIndex(side, newPieceInd);
        SwitchPiece(newPiece, side);
@@ -366,7 +373,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator SwitchPieceCor(Piece e, bool side)
     {
-        var team = side ? player1Team : player2Team;
+        var team = side == ChessManager.Side ? player1Team : player2Team;
 
         var entry = team.Single(p => p.Value.Item2);
         team[entry.Key] = (entry.Value.Item1, false);
@@ -374,8 +381,8 @@ public class BattleManager : MonoBehaviour
         var newEntry = team.Single(p => p.Key == e);
         team[newEntry.Key] = (newEntry.Value.Item1, true);
 
-        var posToGoTo = side ? Pos1Behind : Pos2Behind;
-        var posToGoBackTo = side ? Pos1 : Pos2;
+        var posToGoTo = side == ChessManager.Side ? Pos1Behind : Pos2Behind;
+        var posToGoBackTo = side == ChessManager.Side ? Pos1 : Pos2;
 
         Tween.Position(entry.Value.Item1.transform, posToGoTo.position, 0.5f, 0, Tween.EaseIn);
         yield return new WaitForSeconds(0.75f);

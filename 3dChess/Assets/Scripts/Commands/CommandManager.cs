@@ -8,7 +8,10 @@ public class CommandManager : MonoBehaviour
 {
     private readonly JsonSerializerSettings settings = new()
     {
-        Converters = new List<JsonConverter> { new StringEnumConverter() }
+        Converters = new List<JsonConverter> { 
+            new StringEnumConverter(), 
+            new CommandConverter()          
+        }
     };
 
     public List<CommandBase> commands = new();
@@ -18,13 +21,22 @@ public class CommandManager : MonoBehaviour
     public void AddCommandLocal(CommandBase command)
     {
         commands.Add(command);
-        serializedCommands.Add(JsonConvert.SerializeObject(command, settings));
+        var serializedCommand = JsonConvert.SerializeObject(command, settings);
+        serializedCommands.Add(serializedCommand);
         command.Execute();
 
         if(!ChessManager.Local)
         {
-            Ref.OnlineManager.SendCommand(command);
+            Ref.OnlineManager.SendCommand(serializedCommand);
         }
+    }
+
+    public void AddCommandExternal(string serializedCommand)
+    {
+        var command = JsonConvert.DeserializeObject<CommandBase>(serializedCommand, settings);
+        commands.Add(command);
+        serializedCommands.Add(serializedCommand);
+        command.Execute();
     }
 
     public void AddCommandExternal(CommandBase command)

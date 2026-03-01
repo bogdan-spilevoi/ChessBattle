@@ -81,3 +81,6 @@ Assets/**/LightmapSnapshot.asset
 
 # Ignore Unity Test Results
 TestResults/
+
+Assets/Resources/firebase_config.json
+Assets/StreamingAssets/firebase_config.json

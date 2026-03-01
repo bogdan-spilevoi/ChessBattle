@@ -81,11 +81,22 @@ public abstract class Entity : MonoBehaviour
 
     public int GetMoveIndex(Move m)
     {
-        return Moves.IndexOf(m); 
+        var ind = Moves.IndexOf(m); 
+        if(ind == -1)
+            Debug.LogError("Move not found: " + m.Name + " for piece " + Name);
+        return ind;
     }
     public Move GetMoveByIndex(int ind)
     {
-        return Moves[ind];
+        try
+        {
+            return Moves[ind];
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(ind + " " + e);
+            throw;
+        }
     }
 
     public abstract void UpdateUI();

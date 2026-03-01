@@ -38,6 +38,15 @@ public class Ref : MonoBehaviour
     public OnlineManager onlineManager;
     public static OnlineManager OnlineManager { get { return Instance.onlineManager; } }
 
+    public VersusUI versusUI;
+    public static VersusUI VersusUI { get { return Instance.versusUI; } }
+
+    public RtdbRestListener rtdbRestListener;
+    public static RtdbRestListener RtdbRestListener { get { return Instance.rtdbRestListener; } }
+
+    public Look look;
+    public static Look Look { get { return Instance.look; } }
+
 
     private void Awake()
     {
