@@ -19,4 +19,9 @@ public class PotionData
     {
         return new PotionData(Name, Position);
     }
+
+    public override string ToString()
+    {
+        return Name + "_" + Position;
+    }
 }

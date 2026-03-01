@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class OnlineManager : MonoBehaviour
 {
-    public GameObject LoadingScreen;
     public Guid MyId, OtherId, MatchId;
     public bool Accepted = false;
     //status 0 = waiting for player, 1 = waiting for inventories, 2 = playing
@@ -19,7 +18,7 @@ public class OnlineManager : MonoBehaviour
         if(flag)
         {
             MyId = Guid.NewGuid();
-            LoadingScreen.SetActive(true);
+            Ref.LoadingScreen.Toggle(true);
             LookForRoom();
         }
     }
@@ -71,6 +70,7 @@ public class OnlineManager : MonoBehaviour
 
                 MatchId = Guid.Parse(match.Key);
                 OtherId = Guid.Parse(match.Child("host").Child("id").GetValue<string>());
+                Ref.LoadingScreen.SetInfo("Found match, trying to join...");
 
                 tryFound = true;
 
@@ -80,12 +80,14 @@ public class OnlineManager : MonoBehaviour
         }
         if (!tryFound)
         {
+            Ref.LoadingScreen.SetInfo("No matches found, creating room...");
             CreateRoom();
         }
     }
 
     async void CreateRoom()
     {
+        Ref.LoadingScreen.SetInfo("Creating room...");
         var matchGuid = Guid.NewGuid().ToString();
         MatchId = Guid.Parse(matchGuid);
 
@@ -95,6 +97,8 @@ public class OnlineManager : MonoBehaviour
         await FirebaseDatabase.DefaultInstance.GetReference("matches").Child(matchGuid).Child("host").Child("id").SetValueAsync(MyId.ToString());
 
         FirebaseDatabase.DefaultInstance.GetReference("matches").Child(matchGuid).Child("room").ChildAdded += HostManageRoom;
+
+        Ref.LoadingScreen.SetInfo("Room created, waiting for player...");
     }
 
     private async void HostManageRoom(DataSnapshot dataSnapshot)
@@ -105,6 +109,8 @@ public class OnlineManager : MonoBehaviour
         }
         if(dataSnapshot.Key == "trying")
         {
+            Ref.LoadingScreen.HideCancel();
+            Ref.LoadingScreen.SetInfo("Player is trying to join, accepting...");
             Accepted = true;
             Debug.Log($"[OnlineManager] Accepting Player to join: {dataSnapshot}");
             OtherId = Guid.Parse(dataSnapshot.GetValue<string>());
@@ -122,6 +128,8 @@ public class OnlineManager : MonoBehaviour
     {
         if(dataSnapshot.Key == "accepted" && MyId == Guid.Parse(dataSnapshot.GetValue<string>()))
         {
+            Ref.LoadingScreen.HideCancel();
+            Ref.LoadingScreen.SetInfo("Player accepted, preparing match...");
             Debug.Log($"[OnlineManager] Match accepted by other player: {dataSnapshot}");
             Accepted = true;
 
@@ -131,6 +139,7 @@ public class OnlineManager : MonoBehaviour
         }
         if (dataSnapshot.Key == "accepted" && MyId != Guid.Parse(dataSnapshot.GetValue<string>()))
         {
+            Ref.LoadingScreen.SetInfo("Player rejected, going back...");
             Debug.Log($"[OnlineManager] Match rejected by other player: {dataSnapshot}");
 
             FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("room").ChildAdded -= ManageAddedToState;
@@ -148,7 +157,7 @@ public class OnlineManager : MonoBehaviour
             FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("state").ValueChanged -= ManageStateChangedFromGuest;
 
             Ref.ChessManager.PreparePieces(hostPieces.GetValue<string>(), false);
-            LoadingScreen.SetActive(false);
+            Ref.LoadingScreen.Toggle(false);
 
             FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("moves").ChildAdded += ReceiveCommand;
         }
@@ -158,11 +167,14 @@ public class OnlineManager : MonoBehaviour
     {
         if (dataSnapshot.GetValue<string>() == null)
             return;
+
+        Ref.LoadingScreen.SetInfo("Starting match...");
+
         FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("guest").Child("pieces").ValueChanged -= ManageGuestSendsInventory;
         await FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("state").SetValueAsync(2);
 
         Ref.ChessManager.PreparePieces(dataSnapshot.GetValue<string>(), true);
-        LoadingScreen.SetActive(false);
+        Ref.LoadingScreen.Toggle(false);
 
         FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("moves").ChildAdded += ReceiveCommand;
 
@@ -174,5 +186,6 @@ public class OnlineManager : MonoBehaviour
         await FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("moves").SetValueAsync(0);
         await FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("guest").Child("id").SetValueAsync(MyId.ToString());
         await FirebaseDatabase.DefaultInstance.GetReference("matches").Child(MatchId.ToString()).Child("guest").Child("pieces").SetValueAsync(Ref.ChessManager.GetMyInventoryData());
+        Ref.LoadingScreen.SetInfo("Joining match...");
     }
 }

@@ -12,6 +12,7 @@ public class ChessManager : MonoBehaviour
     public InventoryData WhiteData, BlackData;
     public SaveData saveData;
     public string OpponentName;
+    public InventoryData MyData { get { return Side ? WhiteData : BlackData; }  }
 
     public List<Piece> OrgPieces = new();
 
@@ -213,7 +214,9 @@ public class ChessManager : MonoBehaviour
 
     public PotionData GetPotionByIndex(bool side, int potionInd)
     {
+        print("Trying to get potion " + potionInd + " for side " + side);
         var inventory = side ? WhiteData : BlackData;
+        print(string.Join(", ", inventory.Potions));
         return inventory.Potions.Where(p => p.Position == potionInd).First();
     }
     public void RemovePotionAtIndex(bool side, int potionInd)

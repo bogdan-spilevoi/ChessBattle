@@ -47,6 +47,9 @@ public class Ref : MonoBehaviour
     public Look look;
     public static Look Look { get { return Instance.look; } }
 
+    public LoadingScreen loadingScreen;
+    public static LoadingScreen LoadingScreen { get { return Instance.loadingScreen; } }
+
 
     private void Awake()
     {

@@ -36,11 +36,13 @@ public class BattleUI : MonoBehaviour
 
         S_P1.maxValue = BattleManager.ActivePlayer1.MaxHealth;
         S_P1.value = BattleManager.ActivePlayer1.Health;
+        S_P1.fillRect.GetComponent<Image>().color = GameColors.GetColorBySide(ChessManager.Side);
 
         S_P2.maxValue = BattleManager.ActivePlayer2.MaxHealth;
         S_P2.value = BattleManager.ActivePlayer2.Health;
+        S_P2.fillRect.GetComponent<Image>().color = GameColors.GetColorBySide(!ChessManager.Side);
 
-        
+
         MovesUI.ClearObjects();
         for (int i = 0; i < BattleManager.ActivePlayer1.Moves.Count; i++)
         {
@@ -51,7 +53,7 @@ public class BattleUI : MonoBehaviour
             MovesUI.Add(g);         
         }
 
-        foreach(var potion in Ref.ChessManager.WhiteData.Potions)
+        foreach(var potion in Ref.ChessManager.MyData.Potions)
         {
             PotionSlotsUI[potion.Position].Create(potion);
         }
