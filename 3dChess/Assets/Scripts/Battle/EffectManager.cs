@@ -68,13 +68,41 @@ public class EffectManager : MonoBehaviour
         Helper.ActionAfterTime(hitEffectDuration, () => { Destroy(newParticleSystem.gameObject); });       
     }
 
-    public void DeliverEffect(MoveType t, bool side, int rounds, float action)
+    public void DeliverEffect(Effect.Type type, bool side, int rounds, float action)
     {
-        (Effect.Type, bool) et = t switch { MoveType.Defense => (Effect.Type.Defense, side), MoveType.Weaken => (Effect.Type.Weaken, !side), MoveType.Slow => (Effect.Type.Slow, !side), MoveType.Poison => (Effect.Type.Poison, !side), MoveType.Evasion => (Effect.Type.Evasion, side) };
+        var effectList = side ? Player1 : Player2;
+        var list = side ? P1List : P2List;
+        Effect e = new(type, rounds, action, !side);
+        var elem = list.Find(ef => ef.type == e.type);
+        if (elem != null)
+        {
+            list.Remove(elem);
+            effectList.RemoveEffect(elem);
+            effectList.AddEffect(e);
+            list.Add(e);
+        }
+        else
+        {
+            effectList.AddEffect(e);
+            list.Add(e);
+        }
+        effectList.UpdateEffects();
+    }
+
+    public void DeliverEffect(MoveType t, bool attackingSide, int rounds, float action)
+    {
+        (Effect.Type, bool) et = t switch { 
+            MoveType.Defense => (Effect.Type.Defense, attackingSide), 
+            MoveType.Weaken => (Effect.Type.Weaken, !attackingSide), 
+            MoveType.Slow => (Effect.Type.Slow, !attackingSide), 
+            MoveType.Poison => (Effect.Type.Poison, !attackingSide), 
+            MoveType.Evasion => (Effect.Type.Evasion, attackingSide) 
+        };
+
         var effectList = et.Item2 ? Player1 : Player2;
         var list = et.Item2 ? P1List : P2List;
 
-        Effect e = new(et.Item1, rounds, action);
+        Effect e = new(et.Item1, rounds, action, !attackingSide);
 
         var elem = list.Find(ef => ef.type == e.type);
         if(elem != null)
@@ -103,5 +131,26 @@ public class EffectManager : MonoBehaviour
         text.color = c;
         text.gameObject.SetActive(true);
         Tween.LocalPosition(text.transform, text.transform.localPosition + new Vector3(0, 0.2f, 0), 1f, 0, Tween.EaseOut, completeCallback: () => { Destroy(text.gameObject); });
+    }
+
+    public void ClearBadForSide(bool side)
+    {
+        if (side)
+        {
+            var badEffects = P1List.Where(e => !e.IsPositive()).ToList();
+            Player1.RemoveEffects(badEffects.Select(e => e.type).ToList());
+            P1List = P1List.Where(e => e.IsPositive()).ToList();
+        }
+        else
+        {
+            var badEffects = P2List.Where(e => !e.IsPositive()).ToList();
+            Player2.RemoveEffects(badEffects.Select(e => e.type).ToList());
+            P2List = P2List.Where(e => e.IsPositive()).ToList();
+        }
+    }
+    public void ClearAll()
+    {
+        P1List.Clear();
+        P2List.Clear();
     }
 }

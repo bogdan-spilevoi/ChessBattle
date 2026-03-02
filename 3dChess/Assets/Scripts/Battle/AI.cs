@@ -8,6 +8,7 @@ public class AI : MonoBehaviour
     public Coroutine ThinkBattleMove;
     public Coroutine ThinkChessMove;
     public ChessEngine engine;
+    public bool TestMode = false;
 
     public void CreateBattle()
     {
@@ -26,13 +27,15 @@ public class AI : MonoBehaviour
         {
             yield return new WaitUntil(() => Ref.BattleManager.Turn % 2 == 1);
             yield return _waitForSeconds2;
-            Debug.LogError("Ai is making a move");
+            Debug.LogError("Ai is making a move " + Ref.BattleManager.Turn);
             Ref.BattleManager.PrepareUseMove(Ref.BattleManager.ActivePlayer2.Moves[Random.Range(0, Ref.BattleManager.ActivePlayer2.Moves.Count)], false);
         }     
     }
 
     public void CreateChess()
     {
+        if (TestMode)
+            return;
         engine.StartEngine();
         ThinkChessMove = StartCoroutine(MakeChessMove());
     }

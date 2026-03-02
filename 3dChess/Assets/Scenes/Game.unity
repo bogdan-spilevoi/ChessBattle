@@ -8848,7 +8848,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 40
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - storm
@@ -8857,7 +8857,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 40
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - bronze
@@ -8870,7 +8870,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 41
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - stone
@@ -8879,7 +8879,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 44
-    Count: 10
+    Count: 12
   - Variants:
     - rust
     - bronze
@@ -8889,7 +8889,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 43
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - stone
@@ -8899,7 +8899,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 45
-    Count: 10
+    Count: 12
   - Variants:
     - bronze
     - stone
@@ -8909,7 +8909,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 45
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - stone
@@ -8919,7 +8919,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 0
     Action: 47
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - storm
@@ -8928,7 +8928,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 50
-    Count: 8
+    Count: 10
   - Variants:
     - storm
     - radiant
@@ -8940,7 +8940,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
-    Count: 8
+    Count: 10
   - Variants:
     - frost
     - stone
@@ -8949,7 +8949,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
-    Count: 8
+    Count: 10
   - Variants:
     - storm
     - radiant
@@ -8958,7 +8958,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
-    Count: 8
+    Count: 10
   - Variants:
     - radiant
     - aqua
@@ -8967,7 +8967,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
-    Count: 8
+    Count: 10
   - Variants:
     - inferno
     - storm
@@ -8976,7 +8976,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 1
     Action: 52
-    Count: 8
+    Count: 10
   - Variants:
     - void
     - inferno
@@ -8985,7 +8985,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 53
-    Count: 6
+    Count: 8
   - Variants:
     - frost
     - void
@@ -8994,7 +8994,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 54
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - storm
@@ -9003,7 +9003,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 55
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - inferno
@@ -9012,7 +9012,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 2
     Action: 55
-    Count: 6
+    Count: 8
   - Variants:
     - inferno
     - radiant
@@ -9021,7 +9021,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 3
     Action: 60
-    Count: 4
+    Count: 6
   - Variants:
     - storm
     - inferno
@@ -9030,7 +9030,7 @@ MonoBehaviour:
     Type: 0
     Rarity: 3
     Action: 70
-    Count: 4
+    Count: 6
   - Variants:
     - basic
     - terra
@@ -9042,7 +9042,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 30
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - stone
@@ -9053,7 +9053,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 32
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - frost
@@ -9063,7 +9063,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 34
-    Count: 10
+    Count: 12
   - Variants:
     - rust
     - bronze
@@ -9073,7 +9073,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 28
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - radiant
@@ -9082,7 +9082,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 35
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - aqua
@@ -9092,7 +9092,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 0
     Action: 36
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - aqua
@@ -9103,7 +9103,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 40
-    Count: 8
+    Count: 10
   - Variants:
     - inferno
     - bronze
@@ -9113,7 +9113,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 42
-    Count: 8
+    Count: 10
   - Variants:
     - radiant
     - aqua
@@ -9122,7 +9122,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 44
-    Count: 8
+    Count: 10
   - Variants:
     - aqua
     - radiant
@@ -9131,7 +9131,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 1
     Action: 46
-    Count: 8
+    Count: 10
   - Variants:
     - void
     - aqua
@@ -9140,7 +9140,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 52
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - aqua
@@ -9149,7 +9149,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 55
-    Count: 6
+    Count: 8
   - Variants:
     - terra
     - stone
@@ -9159,7 +9159,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 50
-    Count: 6
+    Count: 8
   - Variants:
     - inferno
     - storm
@@ -9168,7 +9168,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 2
     Action: 58
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - storm
@@ -9178,7 +9178,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 3
     Action: 70
-    Count: 4
+    Count: 6
   - Variants:
     - void
     - terra
@@ -9188,7 +9188,7 @@ MonoBehaviour:
     Type: 1
     Rarity: 3
     Action: 65
-    Count: 4
+    Count: 6
   - Variants:
     - basic
     - bronze
@@ -9200,7 +9200,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - radiant
@@ -9210,7 +9210,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 15
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - stone
@@ -9221,7 +9221,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 16
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - bronze
@@ -9231,7 +9231,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 18
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - stone
@@ -9241,7 +9241,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - radiant
@@ -9251,7 +9251,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 0
     Action: 16
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - stone
@@ -9262,7 +9262,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 22
-    Count: 8
+    Count: 10
   - Variants:
     - aqua
     - radiant
@@ -9271,7 +9271,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 22
-    Count: 8
+    Count: 10
   - Variants:
     - storm
     - bronze
@@ -9282,7 +9282,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 23
-    Count: 8
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -9293,7 +9293,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 1
     Action: 24
-    Count: 8
+    Count: 10
   - Variants:
     - frost
     - terra
@@ -9302,7 +9302,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 35
-    Count: 6
+    Count: 8
   - Variants:
     - terra
     - stone
@@ -9311,7 +9311,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 32
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - aqua
@@ -9321,7 +9321,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 33
-    Count: 6
+    Count: 8
   - Variants:
     - storm
     - bronze
@@ -9331,7 +9331,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 2
     Action: 32
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - storm
@@ -9341,7 +9341,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 3
     Action: 42
-    Count: 4
+    Count: 6
   - Variants:
     - void
     - frost
@@ -9351,7 +9351,7 @@ MonoBehaviour:
     Type: 3
     Rarity: 3
     Action: 45
-    Count: 4
+    Count: 6
   - Variants:
     - basic
     - storm
@@ -9363,7 +9363,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - bronze
     - rust
@@ -9372,7 +9372,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 13
-    Count: 10
+    Count: 12
   - Variants:
     - radiant
     - basic
@@ -9381,7 +9381,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 11
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - frost
@@ -9390,7 +9390,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - stone
@@ -9399,7 +9399,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 10
-    Count: 10
+    Count: 12
   - Variants:
     - storm
     - inferno
@@ -9408,7 +9408,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - radiant
     - storm
@@ -9418,7 +9418,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - inferno
     - storm
@@ -9427,7 +9427,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 19
-    Count: 8
+    Count: 10
   - Variants:
     - storm
     - radiant
@@ -9437,7 +9437,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 20
-    Count: 8
+    Count: 10
   - Variants:
     - void
     - rust
@@ -9447,7 +9447,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 1
     Action: 17
-    Count: 8
+    Count: 10
   - Variants:
     - void
     - storm
@@ -9456,7 +9456,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - inferno
     - radiant
@@ -9465,7 +9465,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 23
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - aqua
@@ -9474,7 +9474,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 24
-    Count: 6
+    Count: 8
   - Variants:
     - frost
     - aqua
@@ -9484,7 +9484,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - storm
@@ -9494,7 +9494,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 3
     Action: 28
-    Count: 4
+    Count: 6
   - Variants:
     - void
     - inferno
@@ -9504,7 +9504,7 @@ MonoBehaviour:
     Type: 6
     Rarity: 3
     Action: 26
-    Count: 4
+    Count: 6
   - Variants:
     - bronze
     - stone
@@ -9516,7 +9516,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - void
@@ -9526,7 +9526,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - aqua
@@ -9535,7 +9535,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: 13
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - stone
@@ -9544,7 +9544,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - rust
     - bronze
@@ -9553,7 +9553,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: 11
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - radiant
@@ -9562,7 +9562,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 0
     Action: 10
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - aqua
@@ -9571,7 +9571,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - terra
     - stone
@@ -9581,7 +9581,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: 19
-    Count: 8
+    Count: 10
   - Variants:
     - frost
     - void
@@ -9590,7 +9590,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - storm
     - inferno
@@ -9599,7 +9599,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 1
     Action: 17
-    Count: 8
+    Count: 10
   - Variants:
     - frost
     - terra
@@ -9609,7 +9609,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - rust
@@ -9619,7 +9619,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: 23
-    Count: 6
+    Count: 8
   - Variants:
     - inferno
     - terra
@@ -9628,7 +9628,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - aqua
     - storm
@@ -9637,7 +9637,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 2
     Action: 21
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - radiant
@@ -9646,7 +9646,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 3
     Action: 28
-    Count: 4
+    Count: 6
   - Variants:
     - frost
     - aqua
@@ -9656,7 +9656,7 @@ MonoBehaviour:
     Type: 5
     Rarity: 3
     Action: 26
-    Count: 4
+    Count: 6
   - Variants:
     - rust
     - bronze
@@ -9665,7 +9665,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 11
-    Count: 10
+    Count: 12
   - Variants:
     - rust
     - bronze
@@ -9675,7 +9675,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 11
-    Count: 10
+    Count: 12
   - Variants:
     - terra
     - stone
@@ -9685,7 +9685,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - frost
     - stone
@@ -9695,7 +9695,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 13
-    Count: 10
+    Count: 12
   - Variants:
     - storm
     - bronze
@@ -9704,7 +9704,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - basic
@@ -9714,7 +9714,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - inferno
@@ -9725,7 +9725,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - inferno
     - rust
@@ -9734,7 +9734,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 19
-    Count: 8
+    Count: 10
   - Variants:
     - frost
     - void
@@ -9744,7 +9744,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - aqua
     - void
@@ -9753,7 +9753,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - frost
     - void
@@ -9762,7 +9762,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - frost
@@ -9772,7 +9772,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 23
-    Count: 6
+    Count: 8
   - Variants:
     - terra
     - stone
@@ -9782,7 +9782,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - radiant
     - aqua
@@ -9791,7 +9791,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 2
     Action: 24
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - frost
@@ -9800,7 +9800,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 3
     Action: 28
-    Count: 4
+    Count: 6
   - Variants:
     - void
     - radiant
@@ -9810,7 +9810,7 @@ MonoBehaviour:
     Type: 4
     Rarity: 3
     Action: 26
-    Count: 4
+    Count: 6
   - Variants:
     - basic
     - void
@@ -9820,7 +9820,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 10
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - rust
@@ -9829,7 +9829,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 11
-    Count: 10
+    Count: 12
   - Variants:
     - storm
     - rust
@@ -9839,7 +9839,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 12
-    Count: 10
+    Count: 12
   - Variants:
     - basic
     - rust
@@ -9849,7 +9849,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 13
-    Count: 10
+    Count: 12
   - Variants:
     - void
     - rust
@@ -9860,7 +9860,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - void
@@ -9871,7 +9871,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 0
     Action: 14
-    Count: 10
+    Count: 12
   - Variants:
     - aqua
     - frost
@@ -9880,7 +9880,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 16
-    Count: 8
+    Count: 10
   - Variants:
     - terra
     - void
@@ -9890,7 +9890,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 16
-    Count: 8
+    Count: 10
   - Variants:
     - stone
     - rust
@@ -9903,7 +9903,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 18
-    Count: 8
+    Count: 10
   - Variants:
     - inferno
     - void
@@ -9913,7 +9913,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 1
     Action: 19
-    Count: 8
+    Count: 10
   - Variants:
     - rust
     - void
@@ -9923,7 +9923,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - inferno
@@ -9932,7 +9932,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - inferno
     - void
@@ -9941,7 +9941,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 22
-    Count: 6
+    Count: 8
   - Variants:
     - storm
     - void
@@ -9951,7 +9951,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 2
     Action: 23
-    Count: 6
+    Count: 8
   - Variants:
     - void
     - storm
@@ -9961,7 +9961,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 3
     Action: 25
-    Count: 4
+    Count: 6
   - Variants:
     - void
     - rust
@@ -9971,7 +9971,7 @@ MonoBehaviour:
     Type: 2
     Rarity: 3
     Action: 28
-    Count: 4
+    Count: 6
 --- !u!1 &458288810
 GameObject:
   m_ObjectHideFlags: 0
@@ -18527,7 +18527,7 @@ MonoBehaviour:
   - PieceIndex: 0
     Position: 10
     Level: 1
-    MoveIndexes: 02000000
+    MoveIndexes: 0200000064000000
   Potions: 00000000
   ChallengeText: Hey! I've bough this new piece, wanna play?
   DefeatedText: I dont like this game anymore...

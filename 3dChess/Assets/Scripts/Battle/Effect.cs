@@ -15,19 +15,36 @@ public class Effect
         Weaken,
         Evasion,
         Slow,
-        Poison
+        Poison,
+        Exp
     }
 
-    public Effect(Type type, int rounds, float action)
+    public Effect(Type type, int rounds, float action, bool affectedSide)
     {
         this.type = type;
         this.rounds = rounds;
         this.action = action;
+        AffectedSide = affectedSide;
     }
 
     public Type type;
     public int rounds;
     public float action;
+    public bool AffectedSide;
 
     public Action OnTurnPass;
+
+    public bool IsPositive()
+    {
+        return type switch
+        {
+            Type.Defense => true,
+            Type.Weaken => false,
+            Type.Evasion => true,
+            Type.Slow => false,
+            Type.Poison => false,
+            Type.Exp => true,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
 }

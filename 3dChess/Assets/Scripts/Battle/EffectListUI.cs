@@ -37,6 +37,13 @@ public class EffectListUI : MonoBehaviour
         }
     }
 
+    public void RemoveEffects(List<Effect.Type> types)
+    {
+        var toDelete = AllEffectsUI.Where(e => types.Contains(e.thisEffect.type)).ToList();
+        AllEffectsUI = AllEffectsUI.Where(e => !types.Contains(e.thisEffect.type)).ToList();
+        toDelete.ClearObjects();
+    }
+
     public void UpdateEffects()
     {
         AllEffectsUI.ForEach(e => 

@@ -110,7 +110,11 @@ public abstract class Piece : Entity
 
     private IEnumerator OnMouseDownCor()
     {
-        if(side != ChessManager.Side || !ChessManager.IsMyTurn()) yield break;
+        if(ChessManager.Local && Ref.AI.TestMode)
+        { 
+            
+        }
+        else { if (side != ChessManager.Side || !ChessManager.IsMyTurn()) yield break; }
         if (animaiton) yield break;
 
         animaiton = true;

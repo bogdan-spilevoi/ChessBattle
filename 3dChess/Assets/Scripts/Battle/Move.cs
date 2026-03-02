@@ -28,7 +28,7 @@ public class Move
 
     public int MaxCount {  get {  return RarityToMoveCount(Rarity); } }
     public static int MoveIndToLvlRequired(int i) => i switch { 0 => 0, 1 => 7, 2 => 15, 3 => 20, _ => 0 };
-    public static int RarityToMoveCount(MoveRarity rarity) => rarity switch { MoveRarity.Common => 10, MoveRarity.Rare => 8, MoveRarity.Epic => 6, MoveRarity.Legendary => 4, _ => 10 };
+    public static int RarityToMoveCount(MoveRarity rarity) => rarity switch { MoveRarity.Common => 12, MoveRarity.Rare => 10, MoveRarity.Epic => 8, MoveRarity.Legendary => 6, _ => 10 };
 
 }
 

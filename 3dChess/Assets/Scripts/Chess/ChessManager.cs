@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +26,12 @@ public class ChessManager : MonoBehaviour
 
     public static bool Side = true;
 
+    [Header("Debug")]
+    public bool debLocal;
+    public bool debSide;
+    public int debTurn;
+
+
     private void Start()
     {
         if(Local)
@@ -34,6 +41,13 @@ public class ChessManager : MonoBehaviour
             Turn = 0;
             Ref.AI.CreateChess();
         }
+    }
+
+    private void Update()
+    {
+        debLocal = Local;
+        debSide = Side;
+        debTurn = Turn;
     }
 
     //Match preparation
@@ -228,6 +242,11 @@ public class ChessManager : MonoBehaviour
     public static bool IsMyTurn()
     {
         return Side == (Turn % 2 == 0);
+    }
+
+    public static bool IsPlayerTurn(bool side)
+    {
+        return side == (Turn % 2 == 0);
     }
 
     public static void IncreaseTurn()

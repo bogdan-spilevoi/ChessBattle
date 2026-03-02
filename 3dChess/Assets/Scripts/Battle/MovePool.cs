@@ -193,8 +193,16 @@ new Move("Miasma Veil",       "A dense, toxic shroud that relentlessly drains.",
 
     public static Move GetMoveByIndex(string variant, int index)
     {
-        var movesForVariant = Pool.Where(m => m.Variants.Contains(variant) || m.Variants.Contains("basic")).ToList();
-        if (index < 0 || index >= movesForVariant.Count) return null;
+        var movesForVariant = Pool;        
+        if (index < 0 || index >= movesForVariant.Count) 
+        { 
+            Debug.LogWarning($"Requested move index {index} is out of bounds for variant '{variant}'. Returning null.");
+            return null; 
+        }
+        if (!movesForVariant[index].Variants.Contains(variant))
+        {
+            return null;
+        }
         return movesForVariant[index];
     }
     public static Move GetRandomMove(string variant, EntityData.Type type, int moveInd)

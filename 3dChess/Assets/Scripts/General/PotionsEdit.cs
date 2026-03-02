@@ -81,7 +81,7 @@ public class PotionsEdit : MonoBehaviour
     {
         if (InventorySlots[pos].PotionGraphic == null)
             return;
-
+        InventorySlots[pos].PotionGraphic.thisData.Position = -1;
         Destroy(InventorySlots[pos].PotionGraphic.gameObject);
         InventorySlots[pos] = new(InventorySlots[pos].SlotImage, null);
     }

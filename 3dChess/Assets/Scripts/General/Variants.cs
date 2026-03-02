@@ -101,6 +101,7 @@ public class Variants : MonoBehaviour
     {
         new PotionData("Heal", -1),
         new PotionData("Cleanse", -1),
+        new PotionData("Exp", -1),
     };
 
     public static EntityData GetPieceByIndex(int index)
