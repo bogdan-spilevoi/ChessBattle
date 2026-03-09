@@ -74,7 +74,7 @@ public class Pawn : Piece
                 break;
         }
 
-        List<(int, int)> attack = new() { (1, -1), (1, 1) };
+        List<(int, int)> attack = new() { (side ? 1 : -1, -1), (side ? 1 : -1, 1) };
         foreach (var attackPos in attack)
         {
             int x = tile.x + attackPos.Item1;

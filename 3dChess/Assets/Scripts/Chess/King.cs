@@ -13,10 +13,10 @@ public class King : Piece
 
         var allOppositePiecesAttacks = FindObjectsOfType<Piece>().Where(p => p.side != side && p.gameObject.activeInHierarchy && p.GetType() != typeof(King)).ToList();
         List<Tile> attackTiles = new();
-        foreach(var p in allOppositePiecesAttacks)
+        /*foreach(var p in allOppositePiecesAttacks)
         {
             attackTiles.AddRange(p.GetCurrentAttackTiles(Ref.ManageTiles.GetTile(Ref.ManageTiles.GetUnderTile(p.transform.position))));
-        }
+        }*/
 
         foreach (var newPos in pos)
         {
@@ -39,10 +39,10 @@ public class King : Piece
 
         var allOppositePiecesAttacks = FindObjectsOfType<Piece>().Where(p => p.side != side && p.gameObject.activeInHierarchy && p.GetType() != typeof(King)).ToList();
         List<Tile> attackTiles = new();
-        foreach (var p in allOppositePiecesAttacks)
+        /*foreach (var p in allOppositePiecesAttacks)
         {
             attackTiles.AddRange(p.GetCurrentAttackTiles(Ref.ManageTiles.GetTile(Ref.ManageTiles.GetUnderTile(p.transform.position))));
-        }
+        }*/
 
         foreach (var newPos in pos)
         {
@@ -65,10 +65,10 @@ public class King : Piece
 
         var allOppositePiecesAttacks = FindObjectsOfType<Piece>().Where(p => p.side != side && p.gameObject.activeInHierarchy && p.GetType() != typeof(King)).ToList();
         List<Tile> attackTiles = new();
-        foreach (var p in allOppositePiecesAttacks)
+        /*foreach (var p in allOppositePiecesAttacks)
         {
             attackTiles.AddRange(p.GetCurrentAttackTiles(Ref.ManageTiles.GetTile(Ref.ManageTiles.GetUnderTile(p.transform.position))));
-        }
+        }*/
 
         foreach (var newPos in pos)
         {

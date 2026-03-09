@@ -50,6 +50,9 @@ public class Ref : MonoBehaviour
     public LoadingScreen loadingScreen;
     public static LoadingScreen LoadingScreen { get { return Instance.loadingScreen; } }
 
+    public OpponentMoveGraphic opponentMoveGraphic;
+    public static OpponentMoveGraphic OpponentMoveGraphic { get { return Instance.opponentMoveGraphic; } }
+
 
     private void Awake()
     {

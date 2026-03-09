@@ -142,6 +142,11 @@ public class PlayerBehaviour : MonoBehaviour
             });
     }
 
+    public bool HasPieceTypeInLayout(EntityData.Type type)
+    {
+        return PiecesInventory.Any(p => p.PieceType == type && p.Position != -1);
+    }
+
     public void ResetCamera()
     {
         Tween.LocalPosition(Camera.transform, InitialCameraPos, 0.5f, 0, Tween.EaseOut);

@@ -17,6 +17,7 @@ public class TrainerSpeak : MonoBehaviour
     [Header("Others")]
     public Trainer thisTrainer;
     public Action OnBattle;
+    public bool ValidationCooldown;
 
     public void Create(Trainer trainer, Action OnBattle, bool optional = true)
     {
@@ -48,6 +49,9 @@ public class TrainerSpeak : MonoBehaviour
         });
 
         B_Battle.onClick.AddListener(() => {
+            if (!ValidateBattle())
+                return;
+
             GameRef.PlayerBehaviour.SaveManager.SaveGame();
             Active = false;
             Movement.IsPaused = false;
@@ -65,5 +69,24 @@ public class TrainerSpeak : MonoBehaviour
         I_TrainerPic.GetComponent<RectTransform>().localPosition = new Vector2(
             I_TrainerPic.GetComponent<RectTransform>().localPosition.x,
             I_TrainerPic.GetComponent<RectTransform>().localPosition.y + (I_TrainerPic.GetComponent<RectTransform>().sizeDelta.y - initialHeight) / 2);
+    }
+
+    public bool ValidateBattle()
+    {
+        if(ValidationCooldown)
+            return false;
+
+        var hasKing = GameRef.PlayerBehaviour.HasPieceTypeInLayout(EntityData.Type.King);
+        if (!hasKing)
+        {
+            ValidationCooldown = true;
+            T_Dialogue.text = "You need a King in your Layout to battle me!";
+            this.ActionAfterTime(2, () => {
+                T_Dialogue.text = thisTrainer.Defeated ? thisTrainer.DefeatedText : thisTrainer.ChallengeText;
+                ValidationCooldown = false;
+            });
+            return false;
+        }
+        return true;
     }
 }

@@ -120,16 +120,16 @@ public class ChessManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    public void EndMatch(bool state)
+    public void EndMatch(bool winner)
     {
         saveData.InventoryData.Pieces = AllWhites;
         saveData.InventoryData.Potions = WhiteData.Potions;
         if (Local)
-            saveData.TrainerData.Find(t => t.Name == OpponentName).Defeated = state;
+            saveData.TrainerData.Find(t => t.Name == OpponentName).Defeated = winner;
 
         string json = JsonConvert.SerializeObject(saveData, Formatting.Indented);
         PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
-        if (state)
+        if (winner == Side)
         {
             ChessUI.WinUI();
         }

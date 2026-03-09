@@ -28,7 +28,7 @@ public class AI : MonoBehaviour
             yield return new WaitUntil(() => Ref.BattleManager.Turn % 2 == 1);
             yield return _waitForSeconds2;
             Debug.LogError("Ai is making a move " + Ref.BattleManager.Turn);
-            Ref.BattleManager.PrepareUseMove(Ref.BattleManager.ActivePlayer2.Moves[Random.Range(0, Ref.BattleManager.ActivePlayer2.Moves.Count)], false);
+            Ref.BattleManager.PrepareUseMove(Ref.BattleManager.ActiveBlackPlayer.Moves[Random.Range(0, Ref.BattleManager.ActiveBlackPlayer.Moves.Count)], false);
         }     
     }
 

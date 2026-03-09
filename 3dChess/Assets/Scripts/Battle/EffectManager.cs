@@ -11,7 +11,6 @@ public class EffectManager : MonoBehaviour
     public float hitEffectDuration;
     public List<Material> hitEffects = new();
     public ParticleSystem P_HitEffect;
-    public Transform Pos1, Pos2;
 
     [Header("Hit Text")]
     public GameObject BattleCam;
@@ -34,26 +33,29 @@ public class EffectManager : MonoBehaviour
 
     public void ManageAfterMove(bool sideThatDidMove)
     {
-        var list = sideThatDidMove ? P1List : P2List;
-        var listUI = sideThatDidMove ? Player1 : Player2;
+        print("Managing effects after move for side " + sideThatDidMove);
+        var list = sideThatDidMove == ChessManager.Side ? P1List : P2List;
+        var listUI = sideThatDidMove == ChessManager.Side ? Player1 : Player2;
+
+        print("Removing: " + (sideThatDidMove ? P1List.Where(e => e.rounds <= 1).Select(e => e.type).ToList() : P2List.Where(e => e.rounds <= 1).Select(e => e.type).ToList()));
 
         list.ForEach(e => { e.rounds--; });
-        if (sideThatDidMove)
+        if (sideThatDidMove == ChessManager.Side)
             P1List = list.Where(e => e.rounds > 0).ToList();
         else
             P2List = list.Where(e => e.rounds > 0).ToList();
         listUI.UpdateEffects();
     }
 
-    public float GetEffecttypeAction(bool side, Effect.Type type)
+    public float GetEffectTypeAction(bool side, Effect.Type type)
     {
-        var list = side ? P1List : P2List;
+        var list = side == ChessManager.Side ? P1List : P2List;
         return list.Find(e => e.type == type).action;
     }
 
     public bool HasEffect(bool side, Effect.Type type)
     {
-        var list = side ? P1List : P2List;
+        var list = side == ChessManager.Side ? P1List : P2List;
         return list.Any(e => e.type == type);
     }
 
@@ -62,18 +64,22 @@ public class EffectManager : MonoBehaviour
     {
         (int, bool) effectInfo = t switch { MoveType.Heal => (0, side), MoveType.Defense => (1, side), MoveType.Weaken => (2, !side), MoveType.Evasion => (3, side), MoveType.Slow => (4, !side), MoveType.Poison => (5, !side), _ => (-1, false) };
         var newParticleSystem = Instantiate(P_HitEffect);
-        newParticleSystem.gameObject.transform.position = effectInfo.Item2 ? Pos1.position : Pos2.position;
+
+        newParticleSystem.gameObject.transform.position = Ref.BattleManager.GetPos(ChessManager.Side == effectInfo.Item2).position;
         newParticleSystem.GetComponent<ParticleSystemRenderer>().material = hitEffects[effectInfo.Item1];
         newParticleSystem.Play();
+
         Helper.ActionAfterTime(hitEffectDuration, () => { Destroy(newParticleSystem.gameObject); });       
     }
 
     public void DeliverEffect(Effect.Type type, bool side, int rounds, float action)
     {
-        var effectList = side ? Player1 : Player2;
-        var list = side ? P1List : P2List;
+        var effectList = side == ChessManager.Side ? Player1 : Player2;
+        var list = side == ChessManager.Side ? P1List : P2List;
+
         Effect e = new(type, rounds, action, !side);
         var elem = list.Find(ef => ef.type == e.type);
+
         if (elem != null)
         {
             list.Remove(elem);
@@ -91,6 +97,7 @@ public class EffectManager : MonoBehaviour
 
     public void DeliverEffect(MoveType t, bool attackingSide, int rounds, float action)
     {
+        print("Delivering effect " + t + " from side " + attackingSide);
         (Effect.Type, bool) et = t switch { 
             MoveType.Defense => (Effect.Type.Defense, attackingSide), 
             MoveType.Weaken => (Effect.Type.Weaken, !attackingSide), 
@@ -99,8 +106,8 @@ public class EffectManager : MonoBehaviour
             MoveType.Evasion => (Effect.Type.Evasion, attackingSide) 
         };
 
-        var effectList = et.Item2 ? Player1 : Player2;
-        var list = et.Item2 ? P1List : P2List;
+        var effectList = et.Item2 == ChessManager.Side ? Player1 : Player2;
+        var list = et.Item2 == ChessManager.Side ? P1List : P2List;
 
         Effect e = new(et.Item1, rounds, action, !attackingSide);
 
@@ -124,7 +131,7 @@ public class EffectManager : MonoBehaviour
     public void TextAnimation(TMP_Text T_Text, bool side, string info, Color c, Vector3 add)
     {
         var text = Instantiate(T_Text, T_Text.gameObject.transform.parent);
-        text.transform.localPosition = (side ? Pos1.transform.localPosition : Pos2.transform.localPosition) + add + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
+        text.transform.localPosition = Ref.BattleManager.GetPos(ChessManager.Side == side).localPosition + add + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), 0);
         Vector3 direction = text.transform.position - BattleCam.transform.position;
         text.transform.rotation = Quaternion.LookRotation(direction);
         text.text = info;
@@ -135,6 +142,7 @@ public class EffectManager : MonoBehaviour
 
     public void ClearBadForSide(bool side)
     {
+        print("Clearing bad effects for side " + side);
         if (side)
         {
             var badEffects = P1List.Where(e => !e.IsPositive()).ToList();
@@ -150,6 +158,7 @@ public class EffectManager : MonoBehaviour
     }
     public void ClearAll()
     {
+        print("Clearing all effects");
         P1List.Clear();
         P2List.Clear();
     }

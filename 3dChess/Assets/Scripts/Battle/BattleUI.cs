@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class BattleUI : MonoBehaviour
 {
     public Slider S_P1, S_P2;
+    public Piece Me, Opp;
     public TMP_Text T_Name1, T_Name2, T_Lvl1, T_Lvl2, T_Health1, T_Health2;
 
     public BattleManager BattleManager;
@@ -28,28 +29,31 @@ public class BattleUI : MonoBehaviour
     {
         BattleManager = battleManager;
 
-        T_Name1.text = BattleManager.ActivePlayer1.Name == "" ? BattleManager.ActivePlayer1.GetType().ToString() : BattleManager.ActivePlayer1.Name;
-        T_Name2.text = BattleManager.ActivePlayer2.Name == "" ? BattleManager.ActivePlayer2.GetType().ToString() : BattleManager.ActivePlayer2.Name;
+        Me = BattleManager.GetActivePlayer(ChessManager.Side);
+        Opp = BattleManager.GetActivePlayer(!ChessManager.Side);
 
-        T_Lvl1.text = "lvl " +  BattleManager.ActivePlayer1.Level.ToString();
-        T_Lvl2.text = "lvl " + BattleManager.ActivePlayer2.Level.ToString();
+        T_Name1.text = Me.Name == "" ? Me.GetType().ToString() : Me.Name;
+        T_Name2.text = Opp.Name == "" ? Opp.GetType().ToString() : Opp.Name;
 
-        S_P1.maxValue = BattleManager.ActivePlayer1.MaxHealth;
-        S_P1.value = BattleManager.ActivePlayer1.Health;
+        T_Lvl1.text = "lvl " +  Me.Level.ToString();
+        T_Lvl2.text = "lvl " + Opp.Level.ToString();
+
+        S_P1.maxValue = Me.MaxHealth;
+        S_P1.value = Me.Health;
         S_P1.fillRect.GetComponent<Image>().color = GameColors.GetColorBySide(ChessManager.Side);
 
-        S_P2.maxValue = BattleManager.ActivePlayer2.MaxHealth;
-        S_P2.value = BattleManager.ActivePlayer2.Health;
+        S_P2.maxValue = Opp.MaxHealth;
+        S_P2.value = Opp.Health;
         S_P2.fillRect.GetComponent<Image>().color = GameColors.GetColorBySide(!ChessManager.Side);
 
 
         MovesUI.ClearObjects();
-        for (int i = 0; i < BattleManager.ActivePlayer1.Moves.Count; i++)
+        for (int i = 0; i < Me.Moves.Count; i++)
         {
-            var m = BattleManager.ActivePlayer1.Moves[i];
+            var m = Me.Moves[i];
             var g = Instantiate(OrgMove, OrgMove.transform.parent);
             g.gameObject.SetActive(true);
-            g.Create(m, Move.MoveIndToLvlRequired(i) > BattleManager.ActivePlayer1.Level);
+            g.Create(m, Move.MoveIndToLvlRequired(i) > Me.Level);
             MovesUI.Add(g);         
         }
 
@@ -57,28 +61,35 @@ public class BattleUI : MonoBehaviour
         {
             PotionSlotsUI[potion.Position].Create(potion);
         }
-        T_Health1.text = $"{BattleManager.ActivePlayer1.Health}/{BattleManager.ActivePlayer1.MaxHealth}";
-        T_Health2.text = $"{BattleManager.ActivePlayer2.Health}/{BattleManager.ActivePlayer2.MaxHealth}";
+        T_Health1.text = $"{Me.Health}/{Me.MaxHealth}";
+        T_Health2.text = $"{Opp.Health}/{Opp.MaxHealth}";
         UpdateUI();
     }
 
     public void UpdateHealth()
     {
-        int h1 = BattleManager.ActivePlayer1.Health, h2 = BattleManager.ActivePlayer2.Health;
-        T_Health2.text = $"{h2}/{BattleManager.ActivePlayer2.MaxHealth}";
-        T_Health1.text = $"{h1}/{BattleManager.ActivePlayer1.MaxHealth}";
-        Tween.Value(S_P1.value, BattleManager.ActivePlayer1.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
-        Tween.Value(S_P2.value, BattleManager.ActivePlayer2.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
+        int h1 = Me.Health, h2 = Opp.Health;
+
+        T_Health1.text = $"{h1}/{Me.MaxHealth}";
+        T_Health2.text = $"{h2}/{Opp.MaxHealth}";
+        
+        Tween.Value(S_P1.value, Me.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
+        Tween.Value(S_P2.value, Opp.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
+    }
+
+    public void ToggleOverlay(bool b)
+    {
+        PlayerUIOverlay.SetActive(b);
     }
 
     public void UpdateUI()
     {
-        bool b = BattleManager.Turn % 2 != 0;
+        bool b = BattleManager.Turn % 2 != (ChessManager.Side ? 0 : 1);
         PlayerUIOverlay.SetActive(b);
         AttackUI.SetActive(b);
         PotionsUI.SetActive(b);
         DialogueUI.SetActive(!b);
-        B_Attack.enabled = BattleManager.ActivePlayer1.AvialableMoves.Any(m => m.Count > 0);
+        B_Attack.enabled = Me.AvialableMoves.Any(m => m.Count > 0);
     }
 
     public void ToggleSwitchPiece(bool b)
@@ -86,7 +97,7 @@ public class BattleUI : MonoBehaviour
         Tab_SwitchPiece.SetActive(b);
         if (!b) return;
 
-        var pieces = Ref.BattleManager.player1Team.Where(p => !p.Value.Item2).ToList();
+        var pieces = Ref.BattleManager.GetTeam(ChessManager.Side).Where(p => !p.Value.Item2).ToList();
 
         SwitchPieces.ClearObjects();
         foreach (var p in pieces)

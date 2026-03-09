@@ -14,14 +14,30 @@ public class BattleManager : MonoBehaviour
     public EffectManager EffectManager;
     public Piece Original1, Original2;
 
-    public Piece ActivePlayer1 { get { return player1Team.Single(p => p.Value.Item2).Key; } }
-    public Piece ActivePlayer2 { get { return player2Team.Single(p => p.Value.Item2).Key; } }
+    public Piece ActiveWhitePlayer { get { return whiteTeam.Single(p => p.Value.Item2).Key; } }
+    public Piece ActiveBlackPlayer { get { return blackTeam.Single(p => p.Value.Item2).Key; } }
+    public Piece GetActivePlayer(bool side)
+    {
+        return side ? ActiveWhitePlayer : ActiveBlackPlayer;
+    }
 
-    public GameObject P1 { get { return player1Team.Single(p => p.Value.Item2).Value.Item1; } }
-    public GameObject P2 { get { return player2Team.Single(p => p.Value.Item2).Value.Item1; } }
 
-    public Dictionary<Piece, (GameObject, bool)> player1Team = new(), player2Team = new();
-    public Transform Pos1, Pos2, Pos1Behind, Pos2Behind;
+    public Dictionary<Piece, (GameObject, bool)> whiteTeam = new(), blackTeam = new();
+    public Dictionary<Piece, (GameObject, bool)> GetTeam(bool side)
+    {
+        return side ? whiteTeam : blackTeam;
+    }
+
+
+    public Transform PosLeft, PosRight, PosLeftBehind, PosRightBehind;
+    public Transform GetPos(bool side, bool behind = false)
+    {
+        if (side)
+            return behind ? PosLeftBehind : PosLeft;
+        else
+            return behind ? PosRightBehind : PosRight;
+    }
+
     public Tile contestedTile;
     public int Turn;
     public BattleResult Result = BattleResult.Empty;
@@ -40,41 +56,44 @@ public class BattleManager : MonoBehaviour
         Fleed = 2,
     }
 
-    public void StartBattle(Piece e1, Piece e2, Tile t, bool start)
+    public void StartBattle(Piece attacker, Piece defender, Tile t, bool start)
     {
-        Turn = start == ChessManager.Side ? 0 : 1;
+        Turn = attacker.side ? 0 : 1;
 
         Ref.AI.CreateBattle();  
-        Debug.LogError("Starting battle between " + e1.name + " and " + e2.name + " at tile " + t.x + "," + t.y + " at side " + start);
+        Debug.LogError("Starting battle between " + attacker.name + " and " + defender.name + " at tile " + t.x + "," + t.y + " at side " + start);
         
-        Original1 = e1;
-        Original2 = e2;
-        var player1 = e1.side == ChessManager.Side ? e1 : e2;
-        var player2 = e1.side == ChessManager.Side ? e2 : e1;
+        Original1 = attacker;
+        Original2 = defender;
+
+        var whiteStarterPiece = attacker.side == true ? attacker : defender;
+        var blackStarterPiece = attacker.side == true ? defender : attacker;
         contestedTile = t;   
 
-        var player1team = FindObjectsOfType<Piece>().Where(e => e.side == player1.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player1).ToList();
-        var player2team = FindObjectsOfType<Piece>().Where(e => e.side == player2.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != player2).ToList();
+        var whiteHelperTeam = FindObjectsOfType<Piece>().Where(e => e.side == whiteStarterPiece.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != whiteStarterPiece).ToList();
+        var blackHelperTeam = FindObjectsOfType<Piece>().Where(e => e.side == blackStarterPiece.side && e.GetCurrentHelpingTiles(e.currentTile).Contains(t) && e.gameObject.activeInHierarchy && e != blackStarterPiece).ToList();
 
-        player1Team.Clear();
-        player2Team.Clear();
+        whiteTeam.Clear();
+        blackTeam.Clear();
 
-        var P1 = CreateNewShowPiece(player1.gameObject, Pos1);
-        var P2 = CreateNewShowPiece(player2.gameObject, Pos2);    
+        print(string.Join(", ", whiteHelperTeam.Select(p => p.name)) + " vs " + string.Join(", ", blackHelperTeam.Select(p => p.name)));
 
-        foreach (var otherPiece in player1team)
+        var whiteShowPiece = CreateNewShowPiece(whiteStarterPiece.gameObject, GetPos(ChessManager.Side));
+        var blackShowPiece = CreateNewShowPiece(blackStarterPiece.gameObject, GetPos(!ChessManager.Side));    
+
+        foreach (var otherPiece in whiteHelperTeam)
         {
-            var newPiece = CreateNewShowPiece(otherPiece.gameObject, Pos1Behind);
-            player1Team.Add(otherPiece, (newPiece, false));
+            var newPiece = CreateNewShowPiece(otherPiece.gameObject, GetPos(ChessManager.Side, true));
+            whiteTeam.Add(otherPiece, (newPiece, false));
         }
-        foreach (var otherPiece in player2team)
+        foreach (var otherPiece in blackHelperTeam)
         {
-            var newPiece = CreateNewShowPiece(otherPiece.gameObject, Pos2Behind);
-            player2Team.Add(otherPiece, (newPiece, false));
+            var newPiece = CreateNewShowPiece(otherPiece.gameObject, GetPos(!ChessManager.Side, true));
+            blackTeam.Add(otherPiece, (newPiece, false));
         }
 
-        player1Team.Add(player1, (P1, true));
-        player2Team.Add(player2, (P2, true));
+        whiteTeam.Add(whiteStarterPiece, (whiteShowPiece, true));
+        blackTeam.Add(blackStarterPiece, (blackShowPiece, true));
 
         Ref.Camera.gameObject.SetActive(false);
         Ref.BattleCamera.gameObject.SetActive(true);
@@ -95,15 +114,15 @@ public class BattleManager : MonoBehaviour
         if(ChessManager.Local)
             Ref.AI.StopBattle();       
 
-        foreach(var p in player1Team.Concat(player2Team))
+        foreach(var p in whiteTeam.Concat(blackTeam))
         {
             p.Key.UpdateUI();
             p.Key.OnIncludedBattleEnd();
             p.Key.OnIncludedBattleEnd();
             Destroy(p.Value.Item1);
         }
-        player1Team.Clear();
-        player2Team.Clear();
+        whiteTeam.Clear();
+        blackTeam.Clear();
 
         EffectManager.ClearAll();
 
@@ -126,7 +145,7 @@ public class BattleManager : MonoBehaviour
     public void PrepareUsePotion(PotionData potionData, bool side)
     {     
         Ref.BattleUI.UpdateUI();
-        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        var player = GetActivePlayer(side);
         var pieceInd = Ref.ChessManager.GetPieceIndex(side, player);
         Ref.CommandManager.AddCommandLocal(new UsePotionCommand(side, pieceInd, potionData.Position));
     }
@@ -135,13 +154,19 @@ public class BattleManager : MonoBehaviour
     {
         IncreaseTurn();
         Ref.BattleUI.UpdateUI();
-        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        var player = GetActivePlayer(side);
         var potion = Ref.ChessManager.GetPotionByIndex(side, potionInd);
-        StartCoroutine(ProcessPotionCor(player, potion, ChessManager.Side ? side : !side));
+        StartCoroutine(ProcessPotionCor(player, potion, side));
     }
 
     private IEnumerator ProcessPotionCor(Entity entity, PotionData potion, bool side)
     {
+        print("Processing potion " + potion.Name + " for player " + entity.Name + " at side " + side);
+        if (side != ChessManager.Side)
+        {
+            Ref.OpponentMoveGraphic.Create(potion);
+        }
+
         switch(potion.Name)
         {
             case "Heal":            
@@ -186,7 +211,7 @@ public class BattleManager : MonoBehaviour
     #region Attack
     public void PrepareUseMove(Move m, bool attackingSide)
     {
-        var player = attackingSide == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        var player = GetActivePlayer(attackingSide);
         print("Preparing move " + m.Name + " for player " + player.Name + " at side " + attackingSide);
         var pieceInd = Ref.ChessManager.GetPieceIndex(attackingSide, player);
         Ref.CommandManager.AddCommandLocal(new UseMoveCommand(attackingSide, pieceInd, player.GetMoveIndex(m), (uint)UnityEngine.Random.Range(int.MinValue, int.MaxValue)));
@@ -194,15 +219,15 @@ public class BattleManager : MonoBehaviour
 
     public void ProcessMove(bool attackingSide, int pieceInd, int moveIndex, Rng32 rng)
     {
-        var player = attackingSide == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        var player = GetActivePlayer(attackingSide);
         var move = player.GetMoveByIndex(moveIndex);
         ProcessMove(move, attackingSide, rng);
     }
 
     public void ProcessMove(Move m, bool attackingSide, Rng32 rng)
     {
-        var list0 = Turn % 2 == 0 ? player1Team : player2Team;
-        var list1 = Turn % 2 != 0 ? player1Team : player2Team;
+        var list0 = Turn % 2 == 0 ? whiteTeam : blackTeam;
+        var list1 = Turn % 2 != 0 ? whiteTeam : blackTeam;
 
         var attacker = list0.Single(p => p.Value.Item2);
         var defender = list1.Single(p => p.Value.Item2);
@@ -211,11 +236,16 @@ public class BattleManager : MonoBehaviour
 
         Ref.BattleUI.UpdateUI();
 
-        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, ChessManager.Side ? attackingSide : !attackingSide , rng));
+        StartCoroutine(ProcessMoveCor((attacker.Key, attacker.Value.Item1), (defender.Key, defender.Value.Item1), m, attackingSide, rng));
     }
 
     private IEnumerator ProcessMoveCor((Entity, GameObject) att, (Entity, GameObject) deff, Move m, bool attackingSide, Rng32 rng)
     {
+        if(attackingSide != ChessManager.Side)
+        {
+            Ref.OpponentMoveGraphic.Create(m);
+        }
+
         var attacker = att.Item1;
         var defender = deff.Item1;
         var attackerObj = att.Item2;
@@ -232,11 +262,11 @@ public class BattleManager : MonoBehaviour
                     print("Extra: " + (float)attacker.Attack * 2 / 100 * m.Action + " " + (int)((float)attacker.Attack * 2 / 100 * m.Action));
                     int damage = (int)m.Action + (int)((float)attacker.Attack * 2/100 * m.Action) + rng.RangeInt(0, attacker.HiddenStat);   
 
-                    int defenderDefensePercent = EffectManager.HasEffect(!attackingSide, Effect.Type.Defense) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Defense) : 0;
-                    int attackerWeakenPercent = EffectManager.HasEffect(attackingSide, Effect.Type.Weaken) ? (int)EffectManager.GetEffecttypeAction(attackingSide, Effect.Type.Weaken) : 0;
-                    int attackerSlow = EffectManager.HasEffect(attackingSide, Effect.Type.Slow) ? (int)EffectManager.GetEffecttypeAction(attackingSide, Effect.Type.Slow) : 0;
-                    int defenderEvasion = EffectManager.HasEffect(!attackingSide, Effect.Type.Evasion) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Evasion) : 0;
-                    int defenderExp = EffectManager.HasEffect(!attackingSide, Effect.Type.Exp) ? (int)EffectManager.GetEffecttypeAction(!attackingSide, Effect.Type.Exp) : 1;
+                    int defenderDefensePercent = EffectManager.HasEffect(!attackingSide, Effect.Type.Defense) ? (int)EffectManager.GetEffectTypeAction(!attackingSide, Effect.Type.Defense) : 0;
+                    int attackerWeakenPercent = EffectManager.HasEffect(attackingSide, Effect.Type.Weaken) ? (int)EffectManager.GetEffectTypeAction(attackingSide, Effect.Type.Weaken) : 0;
+                    int attackerSlow = EffectManager.HasEffect(attackingSide, Effect.Type.Slow) ? (int)EffectManager.GetEffectTypeAction(attackingSide, Effect.Type.Slow) : 0;
+                    int defenderEvasion = EffectManager.HasEffect(!attackingSide, Effect.Type.Evasion) ? (int)EffectManager.GetEffectTypeAction(!attackingSide, Effect.Type.Evasion) : 0;
+                    int defenderExp = EffectManager.HasEffect(!attackingSide, Effect.Type.Exp) ? (int)EffectManager.GetEffectTypeAction(!attackingSide, Effect.Type.Exp) : 1;
                     //print(defenderDefensePercent + " " + attackerWeakenPercent + " " + attackerSlow + " " + defenderEvasion + " " + defenderPoison);
 
                     int orgDamage = damage;
@@ -338,14 +368,14 @@ public class BattleManager : MonoBehaviour
 
     public void PrepareSwitchPiece(Piece e, bool side)
     {      
-        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        var player = GetActivePlayer(side);
         Ref.CommandManager.AddCommandLocal(new SwitchPieceCommand(side, Ref.ChessManager.GetPieceIndex(side, player), Ref.ChessManager.GetPieceIndex(side, e)));
     }
 
     public void SwitchPiece(bool side, int pieceInd, int newPieceInd)
     {
         IncreaseTurn();
-        var player = side == ChessManager.Side ? ActivePlayer1 : ActivePlayer2;
+        var player = GetActivePlayer(side);
         var piece = Ref.ChessManager.GetPieceByIndex(side, pieceInd);
         var newPiece = Ref.ChessManager.GetPieceByIndex(side, newPieceInd);
        SwitchPiece(newPiece, side);
@@ -357,8 +387,8 @@ public class BattleManager : MonoBehaviour
     }
 
     private IEnumerator SwitchPieceCor(Piece e, bool side)
-    {
-        var team = side == ChessManager.Side ? player1Team : player2Team;
+    {      
+        var team = side ? whiteTeam : blackTeam;
 
         var entry = team.Single(p => p.Value.Item2);
         team[entry.Key] = (entry.Value.Item1, false);
@@ -366,20 +396,18 @@ public class BattleManager : MonoBehaviour
         var newEntry = team.Single(p => p.Key == e);
         team[newEntry.Key] = (newEntry.Value.Item1, true);
 
-        var posToGoTo = side == ChessManager.Side ? Pos1Behind : Pos2Behind;
-        var posToGoBackTo = side == ChessManager.Side ? Pos1 : Pos2;
+        if (side != ChessManager.Side)
+        {
+            Ref.OpponentMoveGraphic.Create(entry.Key, newEntry.Key);
+        }
+
+        var posToGoTo = GetPos(ChessManager.Side == side, true);
+        var posToGoBackTo = GetPos(ChessManager.Side == side);
 
         Tween.Position(entry.Value.Item1.transform, posToGoTo.position, 0.5f, 0, Tween.EaseIn);
         yield return new WaitForSeconds(0.75f);
         Tween.Position(newEntry.Value.Item1.transform, posToGoBackTo.position, 0.5f, 0, Tween.EaseOut);
         yield return _waitForSeconds0_5;
-
-        int defenderPoison = EffectManager.HasEffect(!side, Effect.Type.Poison) ? (int)EffectManager.GetEffecttypeAction(!side, Effect.Type.Poison) : 0;
-        if (defenderPoison > 0)
-        {
-            ActivePlayer2.Health -= defenderPoison;
-            Helper.ActionAfterTime(0.2f, () => { EffectManager.TextAnimation(T_Animtation, !side, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f)); });
-        }
 
         EndOfTurn(side);
     }
@@ -394,7 +422,14 @@ public class BattleManager : MonoBehaviour
     public void FleeBattle(bool side)
     {
         Result = BattleResult.Fleed;
-        EndBattle();
+        Ref.BattleUI.ToggleOverlay(true);
+
+        if(side != ChessManager.Side)
+        {
+            Ref.OpponentMoveGraphic.Create();
+        }
+        
+        this.ActionAfterTime(2, () => EndBattle());
     }
 
     #endregion
@@ -409,6 +444,7 @@ public class BattleManager : MonoBehaviour
 
     public void EndOfTurn(bool sideEnding)
     {
+        print("Ending turn for " + sideEnding);
         ManagePoison(sideEnding);
         Ref.BattleUI.Create(this);
         OnTurnEnd?.Invoke((Turn - 1) % 2 == 0);
@@ -419,13 +455,13 @@ public class BattleManager : MonoBehaviour
     public void ManagePoison(bool attackingSide)
     {
         var sideReceiving = !attackingSide;
-        if(EffectManager.HasEffect(sideReceiving, Effect.Type.Poison) && ChessManager.IsPlayerTurn(ChessManager.Side))
+        print("managing posin for side " + sideReceiving + " " + EffectManager.HasEffect(sideReceiving, Effect.Type.Poison) + " ");
+        if(EffectManager.HasEffect(sideReceiving, Effect.Type.Poison))
         {
-            int defenderPoison = (int)EffectManager.GetEffecttypeAction(sideReceiving, Effect.Type.Poison);
-            if (sideReceiving)
-                ActivePlayer1.Health -= defenderPoison;
-            else
-                ActivePlayer2.Health -= defenderPoison;
+            int defenderPoison = (int)EffectManager.GetEffectTypeAction(sideReceiving, Effect.Type.Poison);
+
+            GetActivePlayer(sideReceiving).Health -= defenderPoison;
+
             EffectManager.TextAnimation(T_Animtation, sideReceiving, "-" + defenderPoison, Color.magenta, new(0, 0.2f, -0.15f));
             Ref.BattleUI.UpdateHealth();
         }
@@ -438,8 +474,10 @@ public class BattleManager : MonoBehaviour
             var defeatedPiece = Original1.Health <= 0 ? Original1 : Original2;
             var winningPiece = Original1.Health > 0 ? Original1 : Original2;
             bool sideOfDefeatedPiece = defeatedPiece.side;
+
             print("Side of defeated piece " + sideOfDefeatedPiece);
-            var winningTeam = sideOfDefeatedPiece == ChessManager.Side ? player2Team : player1Team;
+            var winningTeam = sideOfDefeatedPiece ? whiteTeam : blackTeam;
+
             Result = sideOfDefeatedPiece == ChessManager.Side ? BattleResult.WonSide0 : BattleResult.WonSide1;
 
             foreach (var pair in winningTeam)
