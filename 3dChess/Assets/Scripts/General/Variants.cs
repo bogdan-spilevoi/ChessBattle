@@ -104,6 +104,9 @@ public class Variants : MonoBehaviour
         new PotionData("Exp", -1),
     };
 
+
+    public static float HealFactor = 0.4f;
+
     public static EntityData GetPieceByIndex(int index)
     {
         if (index < 0 || index >= PiecesVariants.Count)

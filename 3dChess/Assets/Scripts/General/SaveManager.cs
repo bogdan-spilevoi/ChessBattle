@@ -12,6 +12,7 @@ public class SaveManager : MonoBehaviour
     private void Awake()
     {
         LoadGame();
+        Time.timeScale = 1;
     }
 
     public void SaveGame()
@@ -41,7 +42,7 @@ public class SaveManager : MonoBehaviour
         SaveData sv = JsonConvert.DeserializeObject<SaveData>(PlayerPrefs.GetString("save" + PlayerPrefs.GetString("currentSave")));
         if(sv != null)
         {
-            player.ChangePlayerPos(sv.Position);
+            player.ChangePlayerPos(sv.Position ?? new Vector3(26, 1.46521699f, 46));
             player.pieceFoundData = sv.PieceFoundData ?? new();
             var allTrainers = FindObjectsOfType<Trainer>().ToList();
 

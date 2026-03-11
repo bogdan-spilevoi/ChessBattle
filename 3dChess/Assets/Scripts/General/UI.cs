@@ -6,6 +6,17 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     public GameObject B_BattleTrainer;
+    public GameObject B_EnterHouse, B_ExitHouse;
+
+    public void ToggleEnterHouse(bool toggle)
+    {
+        B_EnterHouse.SetActive(toggle);
+    }
+
+    public void ToggleExitHouse(bool toggle)
+    {
+        B_ExitHouse.SetActive(toggle);
+    }
 
     public void ShowBattleTrainerButton(string trainerName)
     {

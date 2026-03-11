@@ -136,7 +136,7 @@ public class BattleManager : MonoBehaviour
         Destroy(newPiece.GetComponent<Piece>());
         Destroy(newPiece.transform.GetChild(0).gameObject);
         newPiece.transform.SetParent(transform);
-        newPiece.transform.position = new Vector3(pos.transform.position.x, y, pos.transform.position.z);
+        newPiece.transform.position = pos.transform.position;
         return newPiece;
     }
 

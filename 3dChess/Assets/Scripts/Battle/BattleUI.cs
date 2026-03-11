@@ -1,4 +1,5 @@
 using Pixelplacement;
+using Pixelplacement.TweenSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,14 @@ public class BattleUI : MonoBehaviour
     public List<SwitchPieceGraphic> SwitchPieces;
     public SwitchPieceGraphic OriginalPieceGraphic;
     
+    private List<TweenBase> TweenBaseList = new();
+    
 
     public void Create(BattleManager battleManager)
     {
+        TweenBaseList.ForEach(t => t.Stop());
+        TweenBaseList.Clear();
+
         BattleManager = battleManager;
 
         Me = BattleManager.GetActivePlayer(ChessManager.Side);
@@ -73,8 +79,10 @@ public class BattleUI : MonoBehaviour
         T_Health1.text = $"{h1}/{Me.MaxHealth}";
         T_Health2.text = $"{h2}/{Opp.MaxHealth}";
         
-        Tween.Value(S_P1.value, Me.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
-        Tween.Value(S_P2.value, Opp.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
+        var t1 = Tween.Value(S_P1.value, Me.Health, (val) => { S_P1.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P1.value = h1; } );
+        var t2 = Tween.Value(S_P2.value, Opp.Health, (val) => { S_P2.value = val; }, 0.5f, 0, Tween.EaseInOut, completeCallback: () => { S_P2.value = h2; } );
+        TweenBaseList.Add(t1);
+        TweenBaseList.Add(t2);
     }
 
     public void ToggleOverlay(bool b)
@@ -89,7 +97,7 @@ public class BattleUI : MonoBehaviour
         AttackUI.SetActive(b);
         PotionsUI.SetActive(b);
         DialogueUI.SetActive(!b);
-        B_Attack.enabled = Me.AvialableMoves.Any(m => m.Count > 0);
+        //B_Attack.enabled = Me.AvialableMoves.Any(m => m.Count > 0);
     }
 
     public void ToggleSwitchPiece(bool b)

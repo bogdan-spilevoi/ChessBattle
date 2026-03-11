@@ -18,6 +18,12 @@ public class GameRef : MonoBehaviour
     public PotionsEdit potionsEdit;
     public static PotionsEdit PotionsEdit { get { return Instance.potionsEdit; } }
 
+    public Canvas mainCanvas;
+    public static Canvas MainCanvas { get { return Instance.mainCanvas; } }
+
+    public UI ui;
+    public static UI UI { get { return Instance.ui; } }
+
     private void Awake()
     {
         if(Instance == null)

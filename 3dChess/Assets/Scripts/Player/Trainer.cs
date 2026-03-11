@@ -9,7 +9,7 @@ public class Trainer : MonoBehaviour
 {
     public string Name;
     public List<TrainerPieceInfo> Pieces;
-    public List<int> Potions;
+    public List<TrainerPotionInfo> Potions;
     [TextArea(10, 10)]
     public string ChallengeText, DefeatedText;
     public bool Defeated;
@@ -45,16 +45,20 @@ public class Trainer : MonoBehaviour
     {
         List<EntityData> pieces = new();
 
-        return new InventoryData() 
-        { 
+        return new InventoryData()
+        {
             Pieces = new(Pieces.Select((pieceInfo) => {
                 var p = Variants.GetPieceByIndex(pieceInfo.PieceIndex);
                 p.Moves = pieceInfo.MoveIndexes.Select(i => MovePool.GetMoveByIndex(p.Variant, i)).ToList();
                 p.Position = pieceInfo.Position;
                 p.Level = pieceInfo.Level;
                 return p;
-            })), 
-            Potions = new(Potions.Select(p => Variants.GetPotionByIndex(p)))
+            })),
+            Potions = new(Potions.Select(p => {
+                var potion = Variants.GetPotionByIndex(p.PotionIndex);
+                potion.Position = p.Position;
+                return potion;
+            }))
         };
     }
 }
@@ -66,4 +70,11 @@ public struct TrainerPieceInfo
     public int Position;
     public int Level;
     public List<int> MoveIndexes;
+}
+
+[Serializable]
+public struct TrainerPotionInfo
+{
+    public int PotionIndex;
+    public int Position;
 }

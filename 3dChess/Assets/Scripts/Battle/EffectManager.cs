@@ -37,8 +37,6 @@ public class EffectManager : MonoBehaviour
         var list = sideThatDidMove == ChessManager.Side ? P1List : P2List;
         var listUI = sideThatDidMove == ChessManager.Side ? Player1 : Player2;
 
-        print("Removing: " + (sideThatDidMove ? P1List.Where(e => e.rounds <= 1).Select(e => e.type).ToList() : P2List.Where(e => e.rounds <= 1).Select(e => e.type).ToList()));
-
         list.ForEach(e => { e.rounds--; });
         if (sideThatDidMove == ChessManager.Side)
             P1List = list.Where(e => e.rounds > 0).ToList();
@@ -140,6 +138,21 @@ public class EffectManager : MonoBehaviour
         Tween.LocalPosition(text.transform, text.transform.localPosition + new Vector3(0, 0.2f, 0), 1f, 0, Tween.EaseOut, completeCallback: () => { Destroy(text.gameObject); });
     }
 
+    public int GetEffectCount(bool side, bool? kind, Effect.Type? type)
+    {
+        var list = side ? P1List : P2List;
+
+        IEnumerable<Effect> query = list;
+
+        if (kind.HasValue)
+            query = query.Where(e => e.IsPositive() == kind.Value);
+
+        if (type.HasValue)
+            query = query.Where(e => e.type == type.Value);
+
+        return query.Count();
+    }
+
     public void ClearBadForSide(bool side)
     {
         print("Clearing bad effects for side " + side);
@@ -161,5 +174,7 @@ public class EffectManager : MonoBehaviour
         print("Clearing all effects");
         P1List.Clear();
         P2List.Clear();
+        Player1.ClearEffects();
+        Player2.ClearEffects();
     }
 }

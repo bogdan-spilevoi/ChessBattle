@@ -44,7 +44,7 @@ public class DraggableGraphic<T> : MonoBehaviour, IDragHandler, IEndDragHandler
             StartDragBasic();
         }
 
-        rectTransform.anchoredPosition += eventData.delta;
+        rectTransform.anchoredPosition += eventData.delta / GameRef.MainCanvas.scaleFactor; ;
     }
 
     public virtual void OnEndDrag(PointerEventData eventData) { }

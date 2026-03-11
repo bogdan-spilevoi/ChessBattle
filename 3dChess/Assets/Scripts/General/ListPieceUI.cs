@@ -65,7 +65,7 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            PieceGraphic.rectTransform.anchoredPosition += eventData.delta;
+            PieceGraphic.rectTransform.anchoredPosition += eventData.delta / GameRef.MainCanvas.scaleFactor;
         }
     }
 

@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements.Experimental;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerBehaviour : MonoBehaviour
 {
     public SaveManager SaveManager;
@@ -20,7 +21,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     [HideInInspector]
     public Trainer TrainerInRange;
-    public UI UI;
+    [HideInInspector]
+    public House HouseInRange;
     [HideInInspector]
     public LayoutEdit LayoutEdit;
 
@@ -47,7 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (TrainerInRange != null)
         {
-            UI.ShowBattleTrainerButton(TrainerInRange.Name);
+            GameRef.UI.ShowBattleTrainerButton(TrainerInRange.Name);
             if(Input.GetKeyDown(KeyCode.Space) && !Movement.IsPaused)
             {
                 TalkToNpc(TrainerInRange);
@@ -55,7 +57,13 @@ public class PlayerBehaviour : MonoBehaviour
         }
         else
         {
-            UI.HideBattleTrainerBUtton();
+            GameRef.UI.HideBattleTrainerBUtton();
+        }
+
+        GameRef.UI.ToggleEnterHouse(HouseInRange != null);
+        if(HouseInRange != null && Input.GetKeyDown(KeyCode.E) && !Movement.IsPaused)
+        {
+            HouseInRange.EnterHouse();
         }
     }
 
@@ -162,5 +170,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         potion = PotionInventory.FirstOrDefault(p => p.Position == pos);
         return potion != null;
+    }
+
+    public void TeleportTo(Vector3 pos, bool ignoreY = true)
+    {
+        if(ignoreY)
+        {
+            pos.y = transform.position.y;
+        }
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = pos;
+        GetComponent<CharacterController>().enabled = true;
     }
 }

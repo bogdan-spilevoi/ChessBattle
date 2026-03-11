@@ -44,6 +44,11 @@ public class EffectListUI : MonoBehaviour
         toDelete.ClearObjects();
     }
 
+    public void ClearEffects()
+    {
+        AllEffectsUI.ClearObjects();
+    }
+
     public void UpdateEffects()
     {
         AllEffectsUI.ForEach(e => 

@@ -43,7 +43,7 @@ public class ListPotionUI : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         else
         {
-            PotionGraphic.rectTransform.anchoredPosition += eventData.delta;
+            PotionGraphic.rectTransform.anchoredPosition += eventData.delta / GameRef.MainCanvas.scaleFactor; ;
         }
     }
 

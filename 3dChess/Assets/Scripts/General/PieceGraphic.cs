@@ -1,11 +1,12 @@
 using Pixelplacement;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
+using UnityEngine.UI;
 
 public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
 {
@@ -48,7 +49,7 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
             StartDrag();
         }
         
-        rectTransform.anchoredPosition += eventData.delta;
+        rectTransform.anchoredPosition += eventData.delta / GameRef.MainCanvas.scaleFactor;
     }
 
     public void OnEndDrag(PointerEventData eventData)
