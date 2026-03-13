@@ -65,7 +65,7 @@ public class PieceGraphic : MonoBehaviour, IDragHandler,IEndDragHandler
             GameRef.LayoutEdit.UpdateAllListPieces();
             return;
         }
-        var possibleOtherPieceInSquare = GameRef.LayoutEdit.player.PiecesInventory.Find(e => e.Position == pos && e != thisEntity && e.Position != -1);
+        var possibleOtherPieceInSquare = GameRef.PlayerBehaviour.PiecesInventory.Find(e => e.Position == pos && e != thisEntity && e.Position != -1);
 
         if (possibleOtherPieceInSquare != null)
         {

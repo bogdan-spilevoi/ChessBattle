@@ -25,9 +25,11 @@ public class CameraFollow : MonoBehaviour
     };
     private Camera cam;
     public float top, bottom;
+    public static bool Enabled = true;
 
     void Start()
     {
+        Enabled = true;
         Bounds = DefaultBounds;
         cam = GetComponent<Camera>();
     }
@@ -35,7 +37,7 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        if (House.InsideAnyHouse)
+        if (House.InsideAnyHouse || !Enabled)
         {
             return;
         }

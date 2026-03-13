@@ -46,15 +46,22 @@ public class House : MonoBehaviour
         }
     }
 
-    public void EnterHouse()
+    public void EnterHouse(bool teleport = true)
     {
         if(TeleportTo == null)
         {
             Debug.LogError("No teleport location set for house " + name);
             return;
         }
-        PlayerBeforeEnter = GameRef.PlayerBehaviour.transform.position;
-        GameRef.PlayerBehaviour.TeleportTo(TeleportTo.transform.position);
+        if(teleport)
+        {
+            PlayerBeforeEnter = GameRef.PlayerBehaviour.transform.position;
+            GameRef.PlayerBehaviour.TeleportTo(TeleportTo.transform.position);
+        }
+        else
+        {
+            PlayerBeforeEnter = Door.transform.position;
+        }
 
         InsideAnyHouse = true;
         GameRef.PlayerBehaviour.Camera.transform.position = FixedCameraPos;

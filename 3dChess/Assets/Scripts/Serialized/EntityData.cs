@@ -115,5 +115,10 @@ public class EntityData
         }
         return found ? ret : (Entity.Tresholds.Count, Entity.Tresholds.Count);
     }
+
+    public int GetHealthMissing()
+    {
+        return MaxHealth - Health;
+    }
 }
 

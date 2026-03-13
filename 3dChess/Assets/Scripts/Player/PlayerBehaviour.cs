@@ -84,11 +84,16 @@ public class PlayerBehaviour : MonoBehaviour
         {
             BoxBehaviour.PrepareBox();
         }
-
         if (other.CompareTag("test2"))
         {
             AddPotionToInventory(Variants.GetRandomPotion());
         }
+        if (other.CompareTag("hospital"))
+        {
+            GameRef.UI.ActivateTab(GameRef.UI.Tab_Hospital);
+            GameRef.HospitalEdit.RefreshListPiecesUI();
+        }
+
     }
 
     public EntityData AddPieceToInventory(EntityData e)
@@ -129,6 +134,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void SpeakWithNpc(Trainer trainer)
     {
+        CameraFollow.Enabled = false;
+        SaveCameraPos();
         var camerPos = (transform.position + trainer.transform.position) / 2 + new Vector3(0, 4, -5);
         Quaternion targetRotation = InitialCameraRotation * Quaternion.Euler(-15f, 0f, 0f);
 
@@ -142,6 +149,7 @@ public class PlayerBehaviour : MonoBehaviour
         GameRef.TrainerSpeak.Create(trainer,
             () =>
             {
+                this.ActionAfterTime(0.5f, () => { CameraFollow.Enabled = true; Movement.IsPaused = false; });
                 print("AA\n" + JsonConvert.SerializeObject(trainer.GetInventory()));
                 PlayerPrefsExtentions.SetBool("online", false);
                 PlayerPrefs.SetString("trainer", JsonConvert.SerializeObject(trainer.GetInventory(), Formatting.Indented));
@@ -155,10 +163,17 @@ public class PlayerBehaviour : MonoBehaviour
         return PiecesInventory.Any(p => p.PieceType == type && p.Position != -1);
     }
 
+    public void SaveCameraPos()
+    {
+        InitialCameraPos = Camera.transform.localPosition;
+        InitialCameraRotation = Camera.transform.rotation;
+    }
+
     public void ResetCamera()
     {
         Tween.LocalPosition(Camera.transform, InitialCameraPos, 0.5f, 0, Tween.EaseOut);
         Tween.Rotation(Camera.transform, InitialCameraRotation, 0.5f, 0, Tween.EaseOut);
+        this.ActionAfterTime(0.5f, () => { CameraFollow.Enabled = true; Movement.IsPaused = false; });
     }
 
     public List<PotionData> GetPotionsByName(string name)
@@ -181,5 +196,10 @@ public class PlayerBehaviour : MonoBehaviour
         GetComponent<CharacterController>().enabled = false;
         transform.position = pos;
         GetComponent<CharacterController>().enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        SaveManager.SaveGame();
     }
 }

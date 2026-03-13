@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class LayoutEdit : MonoBehaviour
 {
-    public PlayerBehaviour player;
     public GameObject LayoutParent;
     public GameObject ListPieceParent;
 
@@ -34,7 +33,7 @@ public class LayoutEdit : MonoBehaviour
 
     private void Start()
     {
-        player.LayoutEdit = this;
+        GameRef.PlayerBehaviour.LayoutEdit = this;
 
         
         PrepareSort();
@@ -51,8 +50,7 @@ public class LayoutEdit : MonoBehaviour
     }
 
     public void OnSortMethodChange(int option)
-    {
-      
+    {    
         PlayerPrefs.SetInt("sortMethod", option);
         RefreshListPiecesUI(option);
     }
@@ -75,14 +73,14 @@ public class LayoutEdit : MonoBehaviour
 
     public void PlacePieces()
     {
-        foreach(var p in player.PiecesInventory)
+        foreach(var p in GameRef.PlayerBehaviour.PiecesInventory)
         {
             var newListPiece = Instantiate(OrgListPiece, ListPieceParent.transform);
             newListPiece.gameObject.SetActive(true);
             newListPiece.Create(p);
             ListPiecesUI.Add(newListPiece);
 
-            if (p.Position == -1) continue;
+            if (p.Position <= -1) continue;
             if(p.Health <= 0)
             {
                 p.Position = -1;
@@ -99,7 +97,7 @@ public class LayoutEdit : MonoBehaviour
         }
         RefreshListPiecesUI();
         UpdateLimit();
-        player.SaveManager.SaveGame();
+        GameRef.PlayerBehaviour.SaveManager.SaveGame();
         FinishedSetup = true;
     }
 
@@ -123,7 +121,7 @@ public class LayoutEdit : MonoBehaviour
             _ => Comparer<EntityData>.Create((a, b) => b.Exp.CompareTo(a.Exp)),
         };
 
-        foreach (var p in player.PiecesInventory.OrderBy(kvp => kvp, comparer))
+        foreach (var p in GameRef.PlayerBehaviour.PiecesInventory.OrderBy(kvp => kvp, comparer))
         {
             var newListPiece = Instantiate(OrgListPiece, ListPieceParent.transform);
             newListPiece.gameObject.SetActive(true);
@@ -204,7 +202,7 @@ public class LayoutEdit : MonoBehaviour
         }
 
         Tab_Layout.Deactivate();
-        player.SaveManager.SaveGame();
+        GameRef.PlayerBehaviour.SaveManager.SaveGame();
     }
 
 

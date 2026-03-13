@@ -43,8 +43,8 @@ public class TrainerSpeak : MonoBehaviour
         {
             TrainerSpeakUI.Deactivate();
             thisTrainer.EndSpeak();
+
             GameRef.PlayerBehaviour.ResetCamera();
-            Movement.IsPaused = false;
             Active = false;
         });
 

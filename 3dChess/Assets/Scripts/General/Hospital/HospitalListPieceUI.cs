@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
+public class HospitalListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public Image Icon;
     public TMP_Text T_Name, T_Type, T_Level;
     public Slider S_Health;
     public EntityData thisEntity;
-    public PieceGraphic PieceGraphic;
+    public PieceGraphicHospital PieceGraphic;
     public GameObject Overlay;
     private float fitTo = 60;
-    private UnityEngine.UI.Outline Outline;
-    public GameObject HospitalOverlay;
+    public TMP_Text T_OverlayReason;
 
 
 
@@ -30,42 +28,38 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
         T_Level.text = "lvl " + thisEntity.Level;
         S_Health.maxValue = thisEntity.MaxHealth;
         S_Health.value = thisEntity.Health;
-        if (S_Health.value == 0 || thisEntity.Position < -1)
+
+        if (thisEntity.Position != -1 || thisEntity.Health == thisEntity.MaxHealth)
             Overlay.SetActive(true);
-        HospitalOverlay.SetActive(thisEntity.Position < -1);
+
+        if (thisEntity.Position > -1)
+            T_OverlayReason.text = "In Layout";
+        if (thisEntity.Position < -1)
+            T_OverlayReason.text = "Healing";
+        if (thisEntity.Health == thisEntity.MaxHealth)
+            T_OverlayReason.text = "Healthy";
 
         GetComponent<Button>().onClick.RemoveAllListeners();
         GetComponent<Button>().onClick.AddListener(() => {
             FindObjectOfType<ViewPiece>().OpenViewPiece(thisEntity);
         });
 
-        Outline = GetComponent<UnityEngine.UI.Outline>();
         if (S_Health.value == 0)
         {
             S_Health.fillRect.GetComponent<Image>().color = Color.red;
         }
 
         GetIcon();
-        UpdateOutline();
-    }
-
-    public void UpdateOutline()
-    {
-        Outline.enabled = thisEntity.Position > -1 && thisEntity.Health > 0;
-        Overlay.SetActive(thisEntity.Position < -1);
-        HospitalOverlay.SetActive(thisEntity.Position < -1);
     }
 
 
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (thisEntity.Health <= 0) return;
-        if (thisEntity.Position != -1) return;
-        if (GameRef.LayoutEdit.PiecesOnBoard >= GameRef.LayoutEdit.Limit) return;
-        if(PieceGraphic == null)
+        if (thisEntity.Position != -1 || thisEntity.Health == thisEntity.MaxHealth) return;
+        if (PieceGraphic == null)
         {
-            PieceGraphic = GameRef.LayoutEdit.CreatePieceGraphic(eventData.position, thisEntity);
+            PieceGraphic = GameRef.HospitalEdit.CreatePieceGraphic(eventData.position, thisEntity);
         }
         else
         {
@@ -75,7 +69,7 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(PieceGraphic != null)
+        if (PieceGraphic != null)
         {
             PieceGraphic.OnEndDrag(eventData);
             PieceGraphic = null;
@@ -87,5 +81,10 @@ public class ListPieceUI : MonoBehaviour, IDragHandler, IEndDragHandler
 
         Icon.sprite = mySprite != null ? mySprite : Resources.Load<Sprite>($"Icons/{thisEntity.PieceType}/basic");
         Icon.Fit(fitTo);
+    }
+
+    public void UpdateHealth()
+    {
+        S_Health.value = thisEntity.Health;
     }
 }

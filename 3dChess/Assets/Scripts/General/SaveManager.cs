@@ -27,10 +27,12 @@ public class SaveManager : MonoBehaviour
         };
         sv.Position = player.transform.position;
         sv.PieceFoundData = player.pieceFoundData;
+        sv.HouseIndex = GameRef.HouseManager.GetCurentHouseIndex();
 
         string json = JsonConvert.SerializeObject(sv, Formatting.Indented);
         print(json);
         PlayerPrefs.SetString("save" + PlayerPrefs.GetString("currentSave"), json);
+
     }
     public SaveData GetData()
     {
@@ -52,10 +54,15 @@ public class SaveManager : MonoBehaviour
                 if (trainer == null) continue;
                 t.Create(trainer);
             }
+
+            if (sv.HouseIndex.HasValue && sv.HouseIndex != -1)
+            {
+                GameRef.HouseManager.GetHousebyIndex(sv.HouseIndex.Value).EnterHouse(false);
+            }
         }
         player.PiecesInventory = sv == null ? new() : sv.InventoryData.Pieces;
         player.PotionInventory = sv == null ? new() : sv.InventoryData.Potions;
         player.PiecesInventory ??= new();
-        player.pieceFoundData ??= new();
+        player.pieceFoundData ??= new();      
     }
 }

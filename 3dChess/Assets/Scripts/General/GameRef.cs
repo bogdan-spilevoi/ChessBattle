@@ -24,6 +24,15 @@ public class GameRef : MonoBehaviour
     public UI ui;
     public static UI UI { get { return Instance.ui; } }
 
+    public HouseManager houseManager;
+    public static HouseManager HouseManager { get { return Instance.houseManager; } }
+
+    public SearchableManager searchableManager;
+    public static SearchableManager SearchableManager { get { return Instance.searchableManager; } }
+
+    public HospitalEdit hospitalEdit;
+    public static HospitalEdit HospitalEdit { get { return Instance.hospitalEdit; } }
+
     private void Awake()
     {
         if(Instance == null)

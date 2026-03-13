@@ -9,7 +9,7 @@ public class ViewPiece : MonoBehaviour
     [Header("Logistics")]
     public Camera Basic;
     public Camera Piece;
-    public GameObject Tab_Basic, Tab_Piece;
+    public CanvasGroup Tab_Basic, Tab_Piece;
     private EntityData thisEntity;
     public bool State;
 
@@ -55,10 +55,10 @@ public class ViewPiece : MonoBehaviour
         thisEntity = e;
         GetIcon();
         Basic.gameObject.SetActive(false);
-        Tab_Basic.gameObject.SetActive(false);
+        Tab_Basic.Deactivate();
 
         Piece.gameObject.SetActive(true);
-        Tab_Piece.gameObject.SetActive(true);
+        Tab_Piece.Activate();
 
         T_Name.text = e.Name;
         T_Type.text = e.Variant.ToUpper() + " <b>" + e.PieceType.ToString() + "</b>";
@@ -80,7 +80,7 @@ public class ViewPiece : MonoBehaviour
         CurrentMoves.Clear();
 
         OriginalMoveUI.transform.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
-        print(e.Moves.Count);
+
         for(int i = 0; i < e.Moves.Count; i++)
         {
             var m = e.Moves[i];
@@ -117,10 +117,10 @@ public class ViewPiece : MonoBehaviour
     {
         Movement.IsPaused = false;
         Basic.gameObject.SetActive(true);
-        Tab_Basic.gameObject.SetActive(true);
+        Tab_Basic.Activate();
 
         Piece.gameObject.SetActive(false);
-        Tab_Piece.gameObject.SetActive(false);
+        Tab_Piece.Deactivate();
         State = false;
     }
 

@@ -8,4 +8,5 @@ public class SaveData
     public List<TrainerData> TrainerData;
     public Vector3Data Position;
     public PieceFoundData PieceFoundData;
+    public int? HouseIndex;
 }
